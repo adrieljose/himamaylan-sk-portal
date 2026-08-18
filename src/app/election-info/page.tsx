@@ -189,7 +189,7 @@ export default function ElectionInfoPage() {
                       className="p-6 rounded-xl bg-white border border-slate-200 shadow-card hover:shadow-card-hover transition-all duration-300 space-y-3 hover:-translate-y-0.5"
                     >
                       <div className="w-12 h-12 rounded-lg bg-comelec-blue-900 text-comelec-gold-400 flex items-center justify-center shadow-sm">
-                        <Icon size={24} aria-hidden="true" />
+                        <Icon size={24} weight="fill" aria-hidden="true" />
                       </div>
                       <h3 className="font-semibold text-slate-900 text-base">{duty.title}</h3>
                       <p className="text-xs text-slate-600 leading-relaxed font-normal">{duty.description}</p>
