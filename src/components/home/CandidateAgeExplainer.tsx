@@ -63,13 +63,13 @@ export function CandidateAgeExplainer() {
                 <span className="text-xs text-slate-400 font-mono">RA 10742 Sec. 10</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-2">
-                18 to 24 Years Old on Election Day
+                Strictly 18 to 24 Years Old on Election Day
               </h3>
               <p className="text-xs text-comelec-gold-300 font-mono mb-4">
-                Born between November 3, 2001 and November 2, 2008
+                Born between November 2, 2002 and November 2, 2008
               </p>
               <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                You must have reached your 18th birthday on or before November 2, 2026, and must NOT have reached your 25th birthday on Election Day. If you turn 25 on or before Nov 2, 2026, you are ineligible to file a COC for SK office.
+                You must have reached your 18th birthday on or before November 2, 2026, and must <strong>strictly not be more than 24 years of age</strong> on Election Day. Candidates must not exceed 24 years (being 24 years and 1 day old or older disqualifies candidacy).
               </p>
             </div>
 

@@ -150,10 +150,14 @@ export function calculateAgeOnElectionDay(dobInput: Date | string): AgeBreakdown
   return { years, months, days, totalDays };
 }
 
-export function getAgeCategory(years: number): AgeCategory {
+export function getAgeCategory(years: number, months: number = 0, days: number = 0): AgeCategory {
   if (years < 15) return "BELOW_SK";
   if (years >= 15 && years < 18) return "VOTER_ONLY";
-  if (years >= 18 && years <= 24) return "BOTH";
+  if (years >= 18 && years < 24) return "BOTH";
+  if (years === 24) {
+    if (months === 0 && days === 0) return "BOTH";
+    return "VOTER_ABOVE_CANDIDATE";
+  }
   if (years >= 25 && years <= 30) return "VOTER_ABOVE_CANDIDATE";
   return "ABOVE_SK";
 }
@@ -176,7 +180,7 @@ export function getCategoryLabel(category: AgeCategory): string {
 export function calculateExactAge(month: number, day: number, year: number): ExactAgeResult {
   const dob = new Date(year, month - 1, day);
   const ageBreakdown = calculateAgeOnElectionDay(dob);
-  const category = getAgeCategory(ageBreakdown.years);
+  const category = getAgeCategory(ageBreakdown.years, ageBreakdown.months, ageBreakdown.days);
   const categoryLabel = getCategoryLabel(category);
 
   return {
@@ -217,7 +221,7 @@ export function checkSKVoterEligibility(years: number) {
   };
 }
 
-export function checkSKCandidateEligibility(years: number) {
+export function checkSKCandidateEligibility(years: number, months: number = 0, days: number = 0) {
   if (years < 18) {
     return {
       eligible: false,
@@ -228,12 +232,12 @@ export function checkSKCandidateEligibility(years: number) {
       maxAge: 24,
     };
   }
-  if (years > 24) {
+  if (years > 24 || (years === 24 && (months > 0 || days > 0))) {
     return {
       eligible: false,
       status: "above" as const,
-      label: "Outside Applicable Range (25 or older)",
-      description: "Candidates must not be 25 years old or older on November 2, 2026.",
+      label: "Outside Applicable Range (Exceeds 24 Years Old)",
+      description: "Candidates must be strictly not more than 24 years of age on November 2, 2026 (cannot be 24 and 1 day or older).",
       minAge: 18,
       maxAge: 24,
     };
@@ -242,7 +246,7 @@ export function checkSKCandidateEligibility(years: number) {
     eligible: true,
     status: "within" as const,
     label: "Within Statutory Candidate Age Range",
-    description: "Meets the candidate age criteria (18–24 years old on Election Day).",
+    description: "Meets the candidate age criteria (strictly 18–24 years old on Election Day).",
     minAge: 18,
     maxAge: 24,
   };
@@ -251,10 +255,12 @@ export function checkSKCandidateEligibility(years: number) {
 export function checkEligibility(month: number, day: number, year: number): EligibilityResult {
   const age = calculateExactAge(month, day, year);
   const years = age.years;
+  const months = age.months;
+  const days = age.days;
   const category = age.category;
 
   const isVoterEligible = years >= 15 && years <= 30;
-  const isCandidateEligible = years >= 18 && years <= 24;
+  const isCandidateEligible = years >= 18 && (years < 24 || (years === 24 && months === 0 && days === 0));
 
   let voterEligibility: EligibilityStatusDetails;
   if (years < 15) {
@@ -291,17 +297,25 @@ export function checkEligibility(month: number, day: number, year: number): Elig
       reason: `You will be ${years} years old on November 2, 2026. Candidates for SK Chairperson and SK Kagawad must be at least 18 years of age.`,
       legalCitation: "RA 10742 Section 10(b) (Qualifications of SK Officials)",
     };
+  } else if (years === 24 && (months > 0 || days > 0)) {
+    const excessDesc = months > 0 ? `${months} month${months > 1 ? "s" : ""} and ${days} day${days > 1 ? "s" : ""}` : `${days} day${days > 1 ? "s" : ""}`;
+    candidateEligibility = {
+      status: "ineligible",
+      headline: "Ineligible for SK Candidate (Exceeds 24 Years Old)",
+      reason: `On November 2, 2026, you will be 24 years and ${excessDesc} old. Under Section 10(b) of RA 10742, candidates must be strictly 'not more than 24 years of age' on Election Day. Exceeding 24 years (e.g. 24 and 1 day) disqualifies candidacy.`,
+      legalCitation: "RA 10742 Section 10(b) & RA 11768 Section 5",
+    };
   } else if (years > 24) {
     candidateEligibility = {
       status: "ineligible",
       headline: "Ineligible for SK Candidate (25 or Older)",
-      reason: `You will be ${years} years old on November 2, 2026. Candidates must be not more than 24 years old on election day.`,
+      reason: `You will be ${years} years old on November 2, 2026. Candidates must strictly be not more than 24 years of age on election day.`,
       legalCitation: "RA 10742 Section 10(b) & RA 11768 Section 5",
     };
   } else {
     candidateEligibility = {
       status: "eligible",
-      headline: "Age-Qualified for SK Official",
+      headline: years === 24 ? "Age-Qualified for SK Official (Strict 24-Year Limit)" : "Age-Qualified for SK Official",
       reason: `You will be ${years} years old on November 2, 2026, meeting the statutory 18–24 age window for SK Chairperson and SK Member.`,
       legalCitation: "RA 10742 Section 10 & RA 11768 Section 5",
     };

@@ -61,9 +61,9 @@ export default function QualificationsPage() {
   const candidateRequirements = [
     {
       title: "Candidate Age Standard",
-      standard: "At least 18 but not more than 24 years old on November 2, 2026",
+      standard: "At least 18 but strictly not more than 24 years old on November 2, 2026",
       statute: "RA 10742 Section 10(b)",
-      details: "Must have reached 18th birthday on or before Nov 2, 2026 and must not have turned 25 years old on or before Nov 2, 2026.",
+      details: "Must have reached 18th birthday on or before Nov 2, 2026 and must strictly not be more than 24 years of age on Election Day (exceeding 24 years, such as being 24 years and 1 day old, is overage).",
     },
     {
       title: "Barangay Residency Duration",

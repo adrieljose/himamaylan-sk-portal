@@ -25,7 +25,14 @@ export const FAQS: FAQItem[] = [
     category: "Candidacy",
     question: "What is the SK candidate age range?",
     answer:
-      "To run for SK Chairperson or SK Member (Kagawad), an applicant must be at least eighteen (18) but not more than twenty-four (24) years of age on the day of the election (November 2, 2026). Candidates must be fully 18 and must not have turned 25 on or before November 2, 2026.",
+      "To run for SK Chairperson or SK Member (Kagawad), an applicant must be at least eighteen (18) but strictly not more than twenty-four (24) years of age on the day of the election (November 2, 2026). Candidates must be at least 18 and strictly not older than 24 years old (exceeding 24 years, such as being 24 years and 1 day old, is considered overage under RA 10742).",
+  },
+  {
+    id: "can-i-run-if-24-and-1-day",
+    category: "Candidacy",
+    question: "Can I run for SK if I am 24 years and 1 day old on Election Day?",
+    answer:
+      "No. Under Section 10(b) of Republic Act No. 10742, SK candidates must strictly be 'not more than twenty-four (24) years of age on the day of the elections.' If you have passed your 24th birthday and are 24 years and 1 day old (or older) on November 2, 2026, you exceed the statutory age limit for candidates. However, you remain fully eligible to vote in the SK election as an SK voter (which covers youth up to 30 years of age).",
   },
   {
     id: "age-basis-election-day",
@@ -46,7 +53,7 @@ export const FAQS: FAQItem[] = [
     category: "Age Calculation",
     question: "What if I turn 25 on or before Election Day?",
     answer:
-      "If you reach the age of 25 on or before November 2, 2026, you will be outside the statutory age limit for SK candidates (18–24). However, you remain fully eligible to vote as an SK voter because SK voting eligibility continues up to age 30 on Election Day.",
+      "If you reach the age of 25 on or before November 2, 2026, you are outside the statutory age limit for SK candidates (18–24). However, you remain fully eligible to vote as an SK voter because SK voting eligibility continues up to age 30 on Election Day.",
   },
   {
     id: "age-alone-eligibility",
