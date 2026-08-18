@@ -94,7 +94,7 @@ export function Navigation() {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 flex-wrap">
+            <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 flex-nowrap shrink-0">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -102,14 +102,14 @@ export function Navigation() {
                     key={link.href}
                     href={link.href}
                     prefetch={true}
-                    className={`relative text-xs xl:text-sm font-semibold px-2.5 py-1.5 rounded-lg transition-colors select-none ${isActive
+                    className={`relative text-xs xl:text-[13px] 2xl:text-sm font-semibold px-2 xl:px-2.5 py-1.5 rounded-lg transition-colors select-none whitespace-nowrap ${isActive
                       ? "text-blue-900 bg-blue-50 font-bold"
                       : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
                       }`}
                   >
                     {link.label}
                     {isActive && (
-                      <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-blue-600 rounded-full" />
+                      <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-blue-600 rounded-full" />
                     )}
                   </Link>
                 );
@@ -117,11 +117,11 @@ export function Navigation() {
             </div>
 
             {/* Single CTA Intent in Nav */}
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="hidden 2xl:flex items-center gap-2 shrink-0">
               <Link
                 href="/checker"
                 prefetch={true}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs sm:text-sm font-semibold shadow-sm transition-all border border-blue-500"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs sm:text-sm font-semibold shadow-sm transition-all border border-blue-500 whitespace-nowrap"
               >
                 <Sparkle size={16} weight="fill" className="text-gold-300" aria-hidden="true" />
                 <span>Check My Eligibility</span>
