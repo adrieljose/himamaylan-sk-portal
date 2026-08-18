@@ -38,17 +38,17 @@ export function Navigation() {
   return (
     <header className="sticky top-0 z-50 w-full font-sans transition-all duration-200">
       {/* Official Republic of the Philippines Banner */}
-      <div className="bg-blue-950 text-slate-200 text-xs border-b border-blue-900 select-none py-1.5 px-4">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-xs tracking-wider uppercase">
+      <div className="bg-blue-950 text-slate-200 text-xs border-b border-blue-900 select-none py-1.5 px-3 sm:px-4">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2 text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs tracking-wider uppercase">
             <span className="text-gold-300 font-bold">Republic of the Philippines</span>
             <span className="text-slate-500 hidden sm:inline">•</span>
             <span className="text-slate-300 hidden sm:inline">Himamaylan City, Negros Occidental</span>
           </div>
 
-          <div className="flex items-center gap-2 text-xs text-slate-300 ml-auto">
-            <span className="flex items-center gap-1.5 bg-blue-900/90 text-gold-300 px-2.5 py-0.5 rounded-full border border-blue-800 font-medium">
-              <Calendar size={14} weight="fill" className="text-gold-400" aria-hidden="true" />
+          <div className="flex items-center justify-center sm:justify-end text-[11px] sm:text-xs text-slate-300">
+            <span className="inline-flex items-center gap-1.5 bg-blue-900/90 text-gold-300 px-2.5 py-0.5 rounded-full border border-blue-800 font-medium">
+              <Calendar size={13} weight="fill" className="text-gold-400 shrink-0" aria-hidden="true" />
               <span>Election Day: <strong className="text-white font-semibold">Nov 2, 2026</strong></span>
             </span>
           </div>
