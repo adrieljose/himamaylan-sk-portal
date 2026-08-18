@@ -176,6 +176,8 @@ export function Navigation() {
           </div>
         </div>
       )}
+
+      <div className="h-1 sm:h-1.5 w-full bg-gradient-to-r from-amber-600 via-comelec-gold-400 to-amber-600 shadow-xs" />
     </header>
   );
 }

@@ -10,8 +10,10 @@ import { MapPin, Phone, Envelope, Calendar, ShieldCheck, ArrowSquareOut } from "
 
 export function Footer() {
   return (
-    <footer className="bg-blue-950 text-blue-100 border-t border-blue-900 pt-12 pb-8 font-sans">
-      <Container size="xl">
+    <footer className="bg-blue-950 text-blue-100 font-sans">
+      <div className="h-1 sm:h-1.5 w-full bg-gradient-to-r from-amber-600 via-comelec-gold-400 to-amber-600 shadow-xs" />
+      <div className="pt-12 pb-8">
+        <Container size="xl">
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-10 border-b border-blue-900/80">
 
@@ -130,6 +132,7 @@ export function Footer() {
           </div>
         </div>
       </Container>
+      </div>
     </footer>
   );
 }
