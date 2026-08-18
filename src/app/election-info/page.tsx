@@ -79,7 +79,7 @@ export default function ElectionInfoPage() {
 
   return (
     <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
-      {/* Breadcrumb */}
+
       <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
@@ -93,7 +93,6 @@ export default function ElectionInfoPage() {
         </Container>
       </div>
 
-      {/* Hero Header */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border-b border-comelec-blue-800 relative overflow-hidden">
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
@@ -112,13 +111,11 @@ export default function ElectionInfoPage() {
         </Container>
       </section>
 
-      {/* Content Area */}
       <div className="py-12 sm:py-16 flex-1">
         <Container size="xl">
           <div className="space-y-12 max-w-5xl mx-auto">
             <DisclaimerBanner />
 
-            {/* SECTION 1: WHAT IS THE SYNCHRONIZED ELECTION */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-comelec-blue-700 font-semibold text-xs uppercase tracking-wider">
@@ -169,7 +166,6 @@ export default function ElectionInfoPage() {
               </div>
             </div>
 
-            {/* SECTION 2: SK DUTIES & RESPONSIBILITIES */}
             <div className="space-y-6">
               <div className="text-center max-w-2xl mx-auto space-y-2">
                 <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900">
@@ -199,7 +195,6 @@ export default function ElectionInfoPage() {
               </div>
             </div>
 
-            {/* SECTION 3: ELECTION CALENDAR & TIMELINE */}
             <div className="p-7 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-card space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
                 <div>
@@ -270,7 +265,6 @@ export default function ElectionInfoPage() {
               </div>
             </div>
 
-            {/* SECTION 4: VOTER REGISTRATION & CANDIDATE FILING GUIDANCE */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="rounded-xl bg-white p-7 border border-slate-200 shadow-card space-y-3">
                 <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 inline-block font-semibold text-xs uppercase tracking-wider">

@@ -99,7 +99,7 @@ export default function QualificationsPage() {
 
   return (
     <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
-      {/* Breadcrumbs */}
+
       <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
@@ -113,7 +113,6 @@ export default function QualificationsPage() {
         </Container>
       </div>
 
-      {/* Hero Header */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border-b border-comelec-blue-800 relative overflow-hidden">
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
@@ -132,13 +131,11 @@ export default function QualificationsPage() {
         </Container>
       </section>
 
-      {/* Main Content Area */}
       <div className="py-12 sm:py-16 flex-1">
         <Container size="xl">
           <div className="space-y-12 max-w-5xl mx-auto">
             <DisclaimerBanner />
 
-            {/* Quick Action Checker CTA Card */}
             <div className="rounded-xl bg-gradient-to-br from-comelec-blue-950 via-comelec-blue-900 to-slate-950 p-6 sm:p-8 text-white border border-comelec-blue-700/60 shadow-floating flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="space-y-1 text-center md:text-left">
                 <h3 className="text-xl sm:text-2xl font-semibold text-white">
@@ -155,7 +152,6 @@ export default function QualificationsPage() {
               </Link>
             </div>
 
-            {/* SECTION 1: SK VOTER QUALIFICATIONS */}
             <div className="space-y-6">
               <div className="border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2 text-comelec-blue-700 font-semibold text-xs uppercase tracking-wider">
@@ -196,7 +192,6 @@ export default function QualificationsPage() {
               </div>
             </div>
 
-            {/* SECTION 2: SK CANDIDATE QUALIFICATIONS */}
             <div className="space-y-6 pt-6">
               <div className="border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2 text-comelec-gold-700 font-semibold text-xs uppercase tracking-wider">
@@ -237,7 +232,6 @@ export default function QualificationsPage() {
               </div>
             </div>
 
-            {/* SECTION 3: ANTI-DYNASTY DEEP DIVE */}
             <div className="p-7 sm:p-8 rounded-xl bg-white border-2 border-slate-300 shadow-card space-y-4">
               <div className="flex items-start gap-3.5">
                 <div className="p-3 rounded-lg bg-rose-100 text-rose-800 shrink-0">
@@ -274,7 +268,6 @@ export default function QualificationsPage() {
               </div>
             </div>
 
-            {/* Footer Navigation Buttons */}
             <div className="pt-4 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200">
               <Link href="/references" className="text-xs font-semibold text-comelec-blue-700 hover:underline">
                 ← View Statutory Reference Documents

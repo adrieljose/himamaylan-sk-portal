@@ -31,9 +31,8 @@ export function VoterAgeExplainer() {
           </Link>
         </div>
 
-        {/* 6-Cell Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Cell 1: 15–30 Youth Voter Scope */}
+
           <div className="rounded-xl p-6 sm:p-7 border border-slate-200 bg-slate-50/70 hover:bg-slate-50 flex flex-col justify-between transition-all duration-200 shadow-card hover:shadow-card-hover">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -54,7 +53,6 @@ export function VoterAgeExplainer() {
             </div>
           </div>
 
-          {/* Cell 2: 18–24 Candidate Threshold */}
           <div className="rounded-xl p-6 sm:p-7 border-2 border-emerald-300 bg-emerald-50/50 hover:bg-emerald-50/70 flex flex-col justify-between transition-all duration-200 shadow-card hover:shadow-card-hover">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -75,7 +73,6 @@ export function VoterAgeExplainer() {
             </div>
           </div>
 
-          {/* Cell 3: 15–17 Special Youth Voter */}
           <div className="rounded-xl p-6 sm:p-7 border border-slate-200 bg-slate-50/70 hover:bg-slate-50 flex flex-col justify-between transition-all duration-200 shadow-card hover:shadow-card-hover">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -96,7 +93,6 @@ export function VoterAgeExplainer() {
             </div>
           </div>
 
-          {/* Cell 4: 18–30 Dual Ballot Rights */}
           <div className="rounded-xl p-6 sm:p-7 border border-slate-200 bg-slate-50/70 hover:bg-slate-50 flex flex-col justify-between transition-all duration-200 shadow-card hover:shadow-card-hover">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -117,7 +113,6 @@ export function VoterAgeExplainer() {
             </div>
           </div>
 
-          {/* Cell 5: Anti-Dynasty Prohibitions */}
           <div className="rounded-xl p-6 sm:p-7 border border-amber-200 bg-amber-50/40 hover:bg-amber-50/60 flex flex-col justify-between transition-all duration-200 shadow-card hover:shadow-card-hover">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -138,7 +133,6 @@ export function VoterAgeExplainer() {
             </div>
           </div>
 
-          {/* Cell 6: Himamaylan City Jurisdiction */}
           <div className="rounded-xl p-6 sm:p-7 border border-comelec-blue-200 bg-comelec-blue-50/40 hover:bg-comelec-blue-50/60 flex flex-col justify-between transition-all duration-200 shadow-card hover:shadow-card-hover">
             <div className="space-y-3">
               <div className="flex items-center justify-between">

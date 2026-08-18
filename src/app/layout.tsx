@@ -66,7 +66,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="min-h-[100dvh] flex flex-col font-sans overflow-x-clip bg-white text-slate-900 selection:bg-amber-100 selection:text-slate-950">
-        {/* Skip to Main Content Link for WCAG AAA Accessibility */}
+
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 px-4 py-2 bg-blue-900 text-white rounded-lg font-bold shadow-lg ring-2 ring-white"

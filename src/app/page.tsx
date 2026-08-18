@@ -12,31 +12,23 @@ import { QuickLinks } from "@/components/home/QuickLinks";
 export default function HomePage() {
   return (
     <div className="flex-1 flex flex-col font-sans">
-      {/* 1. Official Hero Section */}
+
       <Hero />
 
-      {/* 2. Official Election Gold Countdown Banner */}
       <ElectionDateBanner />
 
-      {/* 3. Live Centerpiece Interactive Calculator */}
       <QuickCheckerEmbed />
 
-      {/* 4. How It Works 3-Step Process */}
       <HowItWorks />
 
-      {/* 5. Voter Age & Dual Ballot Explainer */}
       <VoterAgeExplainer />
 
-      {/* 6. Candidate Age & Anti-Dynasty Explainer */}
       <CandidateAgeExplainer />
 
-      {/* 7. Official Election Bulletins & Advisories */}
       <AnnouncementsBanner />
 
-      {/* 8. Official COMELEC Registered Voters Infographic */}
       <VoterInfographicSection />
 
-      {/* 9. Civic Resources Quick Navigation Grid */}
       <QuickLinks />
     </div>
   );

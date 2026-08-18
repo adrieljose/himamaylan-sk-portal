@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
-      {/* Breadcrumb */}
+
       <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
@@ -37,7 +37,6 @@ export default function ContactPage() {
         </Container>
       </div>
 
-      {/* Hero Header */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border-b border-comelec-blue-800 relative overflow-hidden">
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
@@ -56,13 +55,12 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      {/* Main Content Area */}
       <div className="py-12 sm:py-16 flex-1">
         <Container size="xl">
           <div className="space-y-12 max-w-5xl mx-auto">
-            {/* Top 3 Quick Info Cards */}
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Location Card */}
+
               <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-3">
                 <div className="w-12 h-12 rounded-lg bg-comelec-blue-900 text-comelec-gold-400 flex items-center justify-center shadow-sm">
                   <MapPin size={24} weight="fill" aria-hidden="true" />
@@ -77,7 +75,6 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              {/* Office Hours Card */}
               <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-3">
                 <div className="w-12 h-12 rounded-lg bg-comelec-blue-900 text-comelec-gold-400 flex items-center justify-center shadow-sm">
                   <Clock size={24} aria-hidden="true" weight="fill" />
@@ -94,7 +91,6 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Direct Telephone Card */}
               <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-3">
                 <div className="w-12 h-12 rounded-lg bg-comelec-blue-900 text-comelec-gold-400 flex items-center justify-center shadow-sm">
                   <Phone size={24} weight="fill" aria-hidden="true" />
@@ -111,9 +107,8 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Map & Email Channels Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Map Embed Section */}
+
               <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-4 flex flex-col justify-between">
                 <div className="space-y-1.5">
                   <h3 className="text-xl font-semibold text-slate-900">
@@ -124,7 +119,6 @@ export default function ContactPage() {
                   </p>
                 </div>
 
-                {/* Interactive Map Iframe */}
                 <div className="w-full h-72 sm:h-80 rounded-lg overflow-hidden border border-slate-200 relative bg-slate-100 shadow-inner">
                   <iframe
                     title="Himamaylan City Hall Compound Map"
@@ -152,7 +146,6 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Email & Official Portals Section */}
               <div className="space-y-6">
                 <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-4">
                   <h3 className="text-xl font-semibold text-slate-900">
@@ -205,7 +198,6 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* In-Person Verification Advisory */}
             <div className="p-6 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-950 flex items-start gap-3.5 shadow-sm">
               <WarningCircle size={20} weight="fill" aria-hidden="true" className="text-blue-700 shrink-0 mt-0.5" />
               <div>

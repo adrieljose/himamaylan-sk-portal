@@ -38,7 +38,7 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 w-full font-sans transition-all duration-200">
-      {/* Official Republic of the Philippines Banner */}
+
       <div className="bg-blue-950 text-slate-200 text-xs border-b border-blue-900 select-none py-1.5 px-3 sm:px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2 text-center sm:text-left">
           <div className="flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs tracking-wider uppercase">
@@ -56,7 +56,6 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Main Nav Bar (Max height ≤ 72px) */}
       <nav
         className={`w-full transition-all duration-200 h-16 sm:h-[72px] flex items-center border-b ${scrolled
           ? "bg-white/95 backdrop-blur-md shadow-card border-slate-200"
@@ -66,7 +65,7 @@ export function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
           <div className="flex items-center justify-between gap-3">
-            {/* COMELEC & Himamaylan Brand Identity */}
+
             <Link
               href="/"
               prefetch={true}
@@ -93,7 +92,6 @@ export function Navigation() {
               </div>
             </Link>
 
-            {/* Desktop Navigation Links */}
             <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 flex-nowrap shrink-0">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
@@ -116,7 +114,6 @@ export function Navigation() {
               })}
             </div>
 
-            {/* Single CTA Intent in Nav */}
             <div className="hidden 2xl:flex items-center gap-2 shrink-0">
               <Link
                 href="/checker"
@@ -128,7 +125,6 @@ export function Navigation() {
               </Link>
             </div>
 
-            {/* Mobile Menu Toggle */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -146,7 +142,6 @@ export function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-slate-200 shadow-floating p-4 space-y-2">
           {navLinks.map((link) => {

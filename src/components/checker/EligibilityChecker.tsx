@@ -36,14 +36,12 @@ import {
 export function EligibilityChecker() {
   const searchParams = useSearchParams();
 
-  // State
   const [month, setMonth] = useState<number>(11);
   const [day, setDay] = useState<number>(2);
-  const [year, setYear] = useState<number>(2005); // Default to a prime 21-year-old on Nov 2, 2026
+  const [year, setYear] = useState<number>(2005); 
   const [selectedBarangay, setSelectedBarangay] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"summary" | "timeline" | "questionnaire" | "barangay">("summary");
 
-  // Read URL search params on mount
   useEffect(() => {
     const dobParam = searchParams.get("dob");
     const bgyParam = searchParams.get("barangay");
@@ -62,11 +60,9 @@ export function EligibilityChecker() {
     }
   }, [searchParams]);
 
-  // Validation
   const validation = validateDateOfBirth(month, day, year);
   const isValid = validation.isValid;
 
-  // Calculation (guaranteed safe fallback if invalid)
   const ageResult = isValid
     ? calculateExactAge(month, day, year)
     : calculateExactAge(11, 2, 2005);
@@ -90,10 +86,10 @@ export function EligibilityChecker() {
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
-      {/* Centerpiece Double-Bezel Card */}
+
       <div className="bezel-outer">
         <div className="bezel-inner p-6 sm:p-10 space-y-8">
-          {/* Card Title & Authority Eyebrow */}
+
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
             <div>
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-comelec-blue-700 bg-comelec-blue-50 px-3 py-1 rounded-full border border-comelec-blue-200/80 mb-2">
@@ -118,10 +114,8 @@ export function EligibilityChecker() {
             </div>
           </div>
 
-          {/* Prominent Statutory Notice & Dual Ballot Explainer */}
           <CheckerNoticeBox />
 
-          {/* Date of Birth Input Component */}
           <DateInput
             month={month}
             day={day}
@@ -138,7 +132,6 @@ export function EligibilityChecker() {
             errorMessage={validation.errorMessage}
           />
 
-          {/* Results Area (When Date is Valid) */}
           <AnimatePresence mode="wait">
             {isValid && (
               <motion.div
@@ -149,7 +142,7 @@ export function EligibilityChecker() {
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-8 pt-4 border-t border-slate-100"
               >
-                {/* 1. Large Animated Age Breakdown */}
+
                 <AgeDisplay
                   years={ageResult.years}
                   months={ageResult.months}
@@ -159,7 +152,6 @@ export function EligibilityChecker() {
                   categoryLabel={ageResult.categoryLabel}
                 />
 
-                {/* 2. Dual Status Cards (Voter & Candidate) */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <EligibilityCard
                     type="voter"
@@ -178,7 +170,6 @@ export function EligibilityChecker() {
                   />
                 </div>
 
-                {/* 3. Personalized Civic Advice Banner */}
                 <PersonalizedMessage
                   category={ageResult.category}
                   headline={advice.headline}
@@ -187,7 +178,6 @@ export function EligibilityChecker() {
                   statutoryNote={advice.statutoryNote}
                 />
 
-                {/* 4. Interactive Tabs for In-Depth Exploration */}
                 <div className="space-y-4 pt-2">
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-2">
                     <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl">
@@ -240,7 +230,6 @@ export function EligibilityChecker() {
                       </button>
                     </div>
 
-                    {/* Share Action */}
                     <div className="flex items-center gap-2">
                       <ShareResult
                         dobString={dobIso}
@@ -252,7 +241,6 @@ export function EligibilityChecker() {
                     </div>
                   </div>
 
-                  {/* Tab Contents — all panels pre-rendered; CSS toggles visibility for instant switching */}
                   <div className="pt-2">
                     <div style={{ display: activeTab === "summary" ? "block" : "none" }}>
                       <EligibilitySummary
@@ -284,7 +272,6 @@ export function EligibilityChecker() {
         </div>
       </div>
 
-      {/* 8 Official Boundary Test Scenarios */}
       <ExampleScenarios onSelectScenario={handleSelectScenario} />
     </div>
   );

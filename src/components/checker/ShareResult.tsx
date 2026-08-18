@@ -33,7 +33,7 @@ export function ShareResult({
         await navigator.share({ title, text, url });
         return;
       } catch {
-        // Fallback to clipboard
+
       }
     }
 

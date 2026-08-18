@@ -48,14 +48,14 @@
     overflow-x: clip;
   }
 
-  /* Universal high-visibility accessibility focus indicator */
+  
   :focus-visible {
     outline: 2px solid #1244c8 !important;
     outline-offset: 2px !important;
   }
 }
 
-/* Subtle civic grid pattern */
+
 .civic-grid-pattern {
   background-size: 36px 36px;
   background-image: 
@@ -63,7 +63,7 @@
     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
 
-/* Input Error Shake Animation */
+
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   20%, 60% { transform: translateX(-4px); }
@@ -74,7 +74,7 @@
   animation: shake 300ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-/* Subtle COMELEC Logo Float */
+
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
@@ -84,7 +84,7 @@
   animation: float 3s ease-in-out infinite;
 }
 
-/* Accessibility Reduced Motion Rule */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -96,7 +96,7 @@
   }
 }
 
-/* Print Stylesheet for Official SK Checker Result Slip */
+
 @media print {
   nav,
   footer,

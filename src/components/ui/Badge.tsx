@@ -22,7 +22,7 @@ export function Badge({
   className,
   ...props
 }: BadgeProps) {
-  // Normalize legacy variant names
+
   const normalizedVariant =
     variant === "success"
       ? "eligible"

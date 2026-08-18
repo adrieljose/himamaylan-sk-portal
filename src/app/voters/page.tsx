@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function VotersPage() {
   return (
     <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
-      {/* Breadcrumbs */}
+
       <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
@@ -38,7 +38,6 @@ export default function VotersPage() {
         </Container>
       </div>
 
-      {/* Hero Header */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border-b border-comelec-blue-800 relative overflow-hidden">
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
@@ -74,7 +73,6 @@ export default function VotersPage() {
         </Container>
       </section>
 
-      {/* Main Infographics Component */}
       <main id="main-infographics" className="flex-1">
         <VoterInfographicSection />
       </main>

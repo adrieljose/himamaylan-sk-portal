@@ -8,7 +8,7 @@ import {
   getDaysInMonth,
 } from "date-fns";
 
-export const ELECTION_DATE = new Date(2026, 10, 2); // Month is 0-indexed: 10 is November -> November 2, 2026
+export const ELECTION_DATE = new Date(2026, 10, 2); 
 export const ELECTION_DATE_STRING = "2026-11-02";
 export const ELECTION_DATE_DISPLAY = "November 2, 2026";
 
@@ -77,9 +77,6 @@ export interface DateValidationResult {
   errorMessage?: string;
 }
 
-/**
- * Validates month, day, and year combination
- */
 export function validateDateOfBirth(month: number, day: number, year: number): DateValidationResult {
   if (month < 1 || month > 12) {
     return { isValid: false, errorMessage: "Invalid month selected." };
@@ -88,7 +85,6 @@ export function validateDateOfBirth(month: number, day: number, year: number): D
     return { isValid: false, errorMessage: "Birth year must be between 1900 and 2026." };
   }
 
-  // Check days in that specific month and year (leap year aware)
   const tempDate = new Date(year, month - 1, 1);
   const maxDays = getDaysInMonth(tempDate);
 
@@ -110,17 +106,11 @@ export function validateDateOfBirth(month: number, day: number, year: number): D
   return { isValid: true };
 }
 
-/**
- * Format DOB for human display: "November 2, 2005"
- */
 export function formatDateOfBirth(month: number, day: number, year: number): string {
   const monthName = MONTH_NAMES[month - 1] || "";
   return `${monthName} ${day}, ${year}`;
 }
 
-/**
- * Parses YYYY-MM-DD string into month, day, year
- */
 export function parseDateString(dobString: string): { month: number; day: number; year: number } | null {
   if (!dobString) return null;
   const parts = dobString.split("-");
@@ -132,9 +122,6 @@ export function parseDateString(dobString: string): { month: number; day: number
   return { month, day, year };
 }
 
-/**
- * Calculates exact age breakdown (years, months, days) on November 2, 2026.
- */
 export function calculateAgeOnElectionDay(dobInput: Date | string): AgeBreakdown {
   const dob = typeof dobInput === "string" ? new Date(dobInput) : dobInput;
   if (!isValid(dob)) {
@@ -148,15 +135,12 @@ export function calculateAgeOnElectionDay(dobInput: Date | string): AgeBreakdown
     return { years: 0, months: 0, days: 0, totalDays: 0 };
   }
 
-  // Exact years
   const years = differenceInYears(electionDayNormalized, birthDayNormalized);
 
-  // Exact months remainder
   const dateAfterYears = new Date(birthDayNormalized);
   dateAfterYears.setFullYear(birthDayNormalized.getFullYear() + years);
   const months = differenceInMonths(electionDayNormalized, dateAfterYears);
 
-  // Exact days remainder
   const dateAfterMonths = new Date(dateAfterYears);
   dateAfterMonths.setMonth(dateAfterYears.getMonth() + months);
   const days = differenceInDays(electionDayNormalized, dateAfterMonths);
@@ -166,9 +150,6 @@ export function calculateAgeOnElectionDay(dobInput: Date | string): AgeBreakdown
   return { years, months, days, totalDays };
 }
 
-/**
- * Categorizes age on election day
- */
 export function getAgeCategory(years: number): AgeCategory {
   if (years < 15) return "BELOW_SK";
   if (years >= 15 && years < 18) return "VOTER_ONLY";
@@ -177,9 +158,6 @@ export function getAgeCategory(years: number): AgeCategory {
   return "ABOVE_SK";
 }
 
-/**
- * Returns human-readable label for age category
- */
 export function getCategoryLabel(category: AgeCategory): string {
   switch (category) {
     case "BELOW_SK":
@@ -195,9 +173,6 @@ export function getCategoryLabel(category: AgeCategory): string {
   }
 }
 
-/**
- * Calculates exact age result with category metadata
- */
 export function calculateExactAge(month: number, day: number, year: number): ExactAgeResult {
   const dob = new Date(year, month - 1, day);
   const ageBreakdown = calculateAgeOnElectionDay(dob);
@@ -211,9 +186,6 @@ export function calculateExactAge(month: number, day: number, year: number): Exa
   };
 }
 
-/**
- * Evaluates SK Voter Eligibility (15 to 30 years old on Election Day)
- */
 export function checkSKVoterEligibility(years: number) {
   if (years < 15) {
     return {
@@ -245,9 +217,6 @@ export function checkSKVoterEligibility(years: number) {
   };
 }
 
-/**
- * Evaluates SK Candidate Eligibility (18 to 24 years old on Election Day)
- */
 export function checkSKCandidateEligibility(years: number) {
   if (years < 18) {
     return {
@@ -279,9 +248,6 @@ export function checkSKCandidateEligibility(years: number) {
   };
 }
 
-/**
- * Evaluates full status for dual cards
- */
 export function checkEligibility(month: number, day: number, year: number): EligibilityResult {
   const age = calculateExactAge(month, day, year);
   const years = age.years;
@@ -350,9 +316,6 @@ export function checkEligibility(month: number, day: number, year: number): Elig
   };
 }
 
-/**
- * Returns customized advice and next steps
- */
 export function getPersonalizedAdvice(category: AgeCategory, years: number): PersonalizedAdvice {
   switch (category) {
     case "BELOW_SK":
@@ -418,9 +381,6 @@ export function getPersonalizedAdvice(category: AgeCategory, years: number): Per
   }
 }
 
-/**
- * Returns human-readable contextual message for each age category
- */
 export function getPersonalizedMessage(years: number): string {
   if (years < 15) {
     return "You are below the applicable SK youth age range for the 2026 elections. On Election Day, you must be at least 15 years old to vote in the Sangguniang Kabataan.";
@@ -469,9 +429,6 @@ export interface EligibilityEvaluation {
   shortSummary: string;
 }
 
-/**
- * Complete evaluation helper combining all logic
- */
 export function evaluateEligibility(dobInput: Date | string): EligibilityEvaluation {
   const dob = typeof dobInput === "string" ? new Date(dobInput) : dobInput;
   const age = calculateAgeOnElectionDay(dob);
@@ -521,9 +478,6 @@ export function evaluateEligibility(dobInput: Date | string): EligibilityEvaluat
   };
 }
 
-/**
- * 8 Official boundary examples for fast test-drives
- */
 export interface BoundaryScenario {
   label: string;
   targetAge: number;
@@ -684,39 +638,32 @@ export function evaluateQuestionnaire(
 ): QuestionnaireEvaluationResult {
   const blockers: string[] = [];
 
-  // Age checks
   if (calculatedAge < 15) {
     blockers.push("Under 15 years old on Election Day (Ineligible for SK voting)");
   } else if (calculatedAge > 30) {
     blockers.push("Over 30 years old on Election Day (Ineligible for SK voting; regular voter only)");
   }
 
-  // Citizenship
   if (answers.isCitizen === false) {
     blockers.push("Must be a Filipino citizen (Required for voter and candidate eligibility)");
   }
 
-  // Voter residency (6 months)
   if (answers.isResidentSixMonths === false) {
     blockers.push("Must have resided in the barangay for at least 6 months prior to the election");
   }
 
-  // Candidate residency (1 year)
   if (answers.isResidentOneYear === false && calculatedAge >= 18 && calculatedAge <= 24) {
     blockers.push("Candidates must reside in the barangay for at least 1 full year preceding the election");
   }
 
-  // Literacy (Candidates)
   if (answers.isLiterate === false && calculatedAge >= 18 && calculatedAge <= 24) {
     blockers.push("Candidates must be able to read and write in Filipino, English, or the local dialect");
   }
 
-  // Registered Voter (Candidates)
   if (answers.isRegisteredVoter === false && calculatedAge >= 18 && calculatedAge <= 24) {
     blockers.push("Candidates must be registered voters of the Katipunan ng Kabataan");
   }
 
-  // Anti-Dynasty conflict (Candidates)
   if (answers.hasDynastyConflict === true && calculatedAge >= 18 && calculatedAge <= 24) {
     blockers.push("Anti-Dynasty Prohibition: Related within 2nd civil degree to an incumbent city or barangay official");
   }

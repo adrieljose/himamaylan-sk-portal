@@ -69,7 +69,6 @@ export function DisclaimerBanner({
     );
   }
 
-  // default: inline
   return (
     <div
       className={clsx(

@@ -58,7 +58,7 @@ export function EligibilityCard({
   return (
     <div className={clsx("rounded-2xl border p-6 sm:p-7 shadow-card space-y-5 flex flex-col justify-between transition-all duration-200 hover:shadow-lg", style.cardBg)}>
       <div className="space-y-4">
-        {/* Header */}
+
         <div className="flex items-center justify-between gap-2 border-b border-black/5 pb-3.5">
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-comelec-blue-900 text-comelec-gold-300 shadow-xs">
@@ -79,7 +79,6 @@ export function EligibilityCard({
           </div>
         </div>
 
-        {/* Status Headline with Icon */}
         <div className="flex items-start gap-3.5 pt-1">
           {style.icon}
           <div className="space-y-1.5 flex-1">
@@ -93,7 +92,6 @@ export function EligibilityCard({
         </div>
       </div>
 
-      {/* Footer Legal Citation & Mandatory Disclaimer Micro-text */}
       <div className="pt-3.5 border-t border-black/5 space-y-1.5 text-xs">
         <div className="text-comelec-blue-950 font-semibold flex items-center gap-1.5 flex-wrap">
           <span className="text-slate-500 text-xs uppercase font-semibold tracking-wider">Statutory Basis:</span>

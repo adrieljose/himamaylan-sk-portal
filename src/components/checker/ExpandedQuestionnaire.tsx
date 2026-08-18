@@ -48,7 +48,7 @@ export function ExpandedQuestionnaire({ calculatedAge }: ExpandedQuestionnairePr
 
   return (
     <div className="rounded-xl bg-white p-6 sm:p-8 border border-slate-200 shadow-card space-y-6">
-      {/* Questionnaire Header */}
+
       <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-100">
         <div>
           <span className="text-xs font-semibold uppercase tracking-wider text-comelec-blue-700 block">
@@ -80,7 +80,6 @@ export function ExpandedQuestionnaire({ calculatedAge }: ExpandedQuestionnairePr
         Age is only the primary threshold. Under Republic Act No. 10742 (as amended by RA 11768), youth voters and prospective SK officials must meet citizenship, residency, literacy, registration, and anti-dynasty requirements.
       </p>
 
-      {/* Questions List */}
       <div className="space-y-4">
         {QUESTIONNAIRE_CRITERIA.map((q, idx) => {
           const currentVal = answers[q.id as keyof QuestionnaireAnswers];
@@ -113,7 +112,6 @@ export function ExpandedQuestionnaire({ calculatedAge }: ExpandedQuestionnairePr
                   </p>
                 </div>
 
-                {/* Yes/No Toggle */}
                 <div className="flex items-center gap-2 pl-7 sm:pl-0 shrink-0">
                   <button
                     type="button"
@@ -144,7 +142,6 @@ export function ExpandedQuestionnaire({ calculatedAge }: ExpandedQuestionnairePr
         })}
       </div>
 
-      {/* Comprehensive Evaluation Results */}
       <AnimatePresence>
         {isComplete && (
           <motion.div

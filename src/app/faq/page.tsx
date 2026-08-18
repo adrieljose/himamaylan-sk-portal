@@ -33,7 +33,7 @@ export default function FAQPage() {
 
   return (
     <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
-      {/* Breadcrumbs */}
+
       <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
@@ -47,7 +47,6 @@ export default function FAQPage() {
         </Container>
       </div>
 
-      {/* Hero Header */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border-b border-comelec-blue-800 relative overflow-hidden">
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
@@ -66,11 +65,10 @@ export default function FAQPage() {
         </Container>
       </section>
 
-      {/* Content Area */}
       <div className="py-12 sm:py-16 flex-1">
         <Container size="xl">
           <div className="space-y-8 max-w-4xl mx-auto">
-            {/* Search and Category Filters */}
+
             <div className="p-6 sm:p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-4">
               <div className="relative w-full">
                 <label htmlFor="faq-search-input" className="sr-only">Search FAQ questions</label>
@@ -106,7 +104,6 @@ export default function FAQPage() {
               </div>
             </div>
 
-            {/* Accordion FAQ Display */}
             {filteredFaqs.length > 0 ? (
               <Accordion>
                 {filteredFaqs.map((faq, idx) => (
@@ -145,7 +142,6 @@ export default function FAQPage() {
               </div>
             )}
 
-            {/* Support Callout Box */}
             <div className="p-8 rounded-xl bg-gradient-to-br from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border border-comelec-blue-700/60 shadow-floating space-y-4">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="space-y-2 text-center md:text-left">

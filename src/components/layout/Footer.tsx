@@ -12,9 +12,9 @@ export function Footer() {
   return (
     <footer className="bg-blue-950 text-blue-100 border-t border-blue-900 pt-12 pb-8 font-sans">
       <Container size="xl">
-        {/* 3-Column Grid on Desktop */}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-10 border-b border-blue-900/80">
-          {/* Column 1: Official COMELEC Agency Branding */}
+
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-blue-900 p-1 flex items-center justify-center border border-blue-800 shrink-0">
@@ -39,7 +39,6 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Column 2: Quick Links */}
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
               Electoral Information
@@ -83,7 +82,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact Details & Office Location */}
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
               Election Office Directory
@@ -111,7 +109,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Full Legal Disclaimer Snippet */}
         <div className="pt-6 space-y-4 text-xs text-blue-300/80">
           <div className="p-4 rounded-xl bg-blue-900/40 border border-blue-900 text-xs leading-relaxed space-y-1">
             <p className="font-semibold text-blue-200">Official Statutory Notice:</p>

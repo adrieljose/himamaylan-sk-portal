@@ -8,7 +8,7 @@ export interface AgeRangeTimelineProps {
 }
 
 export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
-  // Scale spans from Age 12 to Age 34 for a comprehensive 22-year window
+
   const minScale = 12;
   const maxScale = 34;
 
@@ -17,7 +17,6 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
     return ((clamped - minScale) / (maxScale - minScale)) * 100;
   }, [currentAge]);
 
-  // Determine user bracket
   const bracketInfo = useMemo(() => {
     if (currentAge < 15) {
       return {
@@ -61,7 +60,7 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
 
   return (
     <div className="p-6 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-card space-y-7 @container">
-      {/* Header with Title and Current Status */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
         <div>
           <div className="flex items-center gap-2">
@@ -79,9 +78,8 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
         </div>
       </div>
 
-      {/* Main Interactive Spectrum Container */}
       <div className="space-y-6 pt-2">
-        {/* Floating Indicator Pin */}
+
         <div className="relative w-full h-8">
           <div
             className="absolute bottom-0 -ml-16 sm:-ml-20 transition-all duration-500 ease-out z-20 flex flex-col items-center pointer-events-none"
@@ -95,9 +93,8 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
           </div>
         </div>
 
-        {/* The Visual Color-Coded Spectrum Bar */}
         <div className="relative w-full h-10 rounded-xl overflow-hidden bg-slate-200 flex border-2 border-slate-300 shadow-inner">
-          {/* Zone 1: Under 15 (< 15) */}
+
           <div
             style={{ width: `${((15 - minScale) / (maxScale - minScale)) * 100}%` }}
             className="h-full bg-slate-200/90 flex flex-col items-center justify-center text-xs font-semibold text-slate-500 border-r border-slate-300 select-none"
@@ -107,7 +104,6 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
             <span className="text-xs text-slate-400 hidden @sm:inline">Below SK</span>
           </div>
 
-          {/* Zone 2: 15 to 17 (Youth Voter Only) */}
           <div
             style={{ width: `${((18 - 15) / (maxScale - minScale)) * 100}%` }}
             className={`h-full flex flex-col items-center justify-center text-xs font-semibold border-r border-blue-300 select-none transition-colors ${
@@ -121,7 +117,6 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
             <span className="text-xs text-blue-600 hidden @sm:inline font-semibold">Voter Only</span>
           </div>
 
-          {/* Zone 3: 18 to 24 (Golden Highlight Zone - Both Voter & Candidate) */}
           <div
             style={{ width: `${((25 - 18) / (maxScale - minScale)) * 100}%` }}
             className={`h-full flex flex-col items-center justify-center border-r border-amber-600 select-none transition-all shadow-inner ${
@@ -140,7 +135,6 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
             </span>
           </div>
 
-          {/* Zone 4: 25 to 30 (Senior Youth Voter) */}
           <div
             style={{ width: `${((31 - 25) / (maxScale - minScale)) * 100}%` }}
             className={`h-full flex flex-col items-center justify-center text-xs font-semibold border-r border-slate-300 select-none transition-colors ${
@@ -154,7 +148,6 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
             <span className="text-xs text-blue-600 hidden @sm:inline font-semibold">Voter Only</span>
           </div>
 
-          {/* Zone 5: 31+ (Regular Voter) */}
           <div
             style={{ width: `${((maxScale - 31) / (maxScale - minScale)) * 100}%` }}
             className="h-full bg-slate-200/90 flex flex-col items-center justify-center text-xs font-semibold text-slate-500 select-none"
@@ -165,7 +158,6 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
           </div>
         </div>
 
-        {/* Graduation Tick Scale */}
         <div className="relative w-full text-xs font-mono font-semibold text-slate-500 h-5">
           <span
             className="absolute -translate-x-1/2"
@@ -193,9 +185,8 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
           </span>
         </div>
 
-        {/* Dual Statutory Span Comparison Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-          {/* Bracket 1: SK Voter */}
+
           <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-white border border-blue-200/80 shadow-xs space-y-2">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-blue-950">
@@ -211,7 +202,6 @@ export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
             </p>
           </div>
 
-          {/* Bracket 2: SK Candidate */}
           <div className="p-4 rounded-xl bg-gradient-to-br from-amber-50/80 to-white border border-amber-200/80 shadow-xs space-y-2">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-950">

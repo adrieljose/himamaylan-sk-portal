@@ -25,7 +25,7 @@ export function AgeDisplay({
   const [displayYears, setDisplayYears] = useState(years);
 
   useEffect(() => {
-    // Respect reduced motion
+
     const prefersReducedMotion =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -69,18 +69,17 @@ export function AgeDisplay({
 
   return (
     <div className="p-6 sm:p-9 rounded-2xl bg-gradient-to-b from-slate-900 via-comelec-blue-950 to-slate-950 text-white border border-comelec-blue-800 text-center space-y-6 shadow-floating relative overflow-hidden">
-      {/* Background civic radial light */}
+
       <div className="absolute inset-0 civic-grid-pattern opacity-20 pointer-events-none" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-36 bg-comelec-blue-500/20 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 space-y-5">
-        {/* Header Tag */}
+
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-comelec-gold-300 text-xs font-semibold uppercase tracking-wider border border-white/15 shadow-inner-glow">
           <Calendar size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
           <span>Statutory Age on Election Day: Nov 2, 2026</span>
         </div>
 
-        {/* Hero Digital Counter */}
         <div className="space-y-1.5">
           <div className="text-6xl sm:text-8xl font-extrabold text-white font-mono tracking-tight flex items-baseline justify-center gap-2">
             <span className="bg-gradient-to-b from-white via-slate-100 to-slate-300 bg-clip-text text-transparent drop-shadow-sm">
@@ -96,7 +95,6 @@ export function AgeDisplay({
           </div>
         </div>
 
-        {/* 3 Metric Pills */}
         <div className="grid grid-cols-3 gap-2 max-w-md mx-auto pt-1 font-mono text-xs">
           <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-center">
             <span className="text-xs text-slate-400 uppercase tracking-wider block font-sans">Years</span>
@@ -112,7 +110,6 @@ export function AgeDisplay({
           </div>
         </div>
 
-        {/* Classification Badge Pill */}
         <div className="pt-2">
           <Badge variant={getBadgeVariant(category)} size="lg">
             {categoryLabel}

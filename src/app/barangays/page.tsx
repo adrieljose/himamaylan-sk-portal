@@ -52,7 +52,7 @@ export default function BarangaysPage() {
 
   return (
     <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
-      {/* Breadcrumbs */}
+
       <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
@@ -66,7 +66,6 @@ export default function BarangaysPage() {
         </Container>
       </div>
 
-      {/* Hero Header */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border-b border-comelec-blue-800 relative overflow-hidden">
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
@@ -95,14 +94,13 @@ export default function BarangaysPage() {
         </Container>
       </section>
 
-      {/* Main Directory Area */}
       <div id="barangay-directory" className="py-12 sm:py-16">
         <Container size="xl">
           <div className="space-y-8">
-            {/* Search & Filter Controls */}
+
             <div className="p-6 sm:p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-5">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                {/* Search Bar */}
+
                 <div className="relative w-full sm:max-w-md">
                   <label htmlFor="barangay-directory-search" className="sr-only">Search barangays</label>
                   <input
@@ -116,13 +114,11 @@ export default function BarangaysPage() {
                   <MagnifyingGlass size={16} aria-hidden="true" className="text-slate-400 absolute left-4 top-4" weight="fill" />
                 </div>
 
-                {/* Counter */}
                 <div className="text-xs font-semibold text-slate-700 bg-slate-100 px-4 py-2 rounded-full border border-slate-200 shrink-0">
                   Showing <span className="text-comelec-blue-700 font-bold">{filteredBarangays.length}</span> of 19 Barangays
                 </div>
               </div>
 
-              {/* District Filter Tabs */}
               <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100">
                 <span className="text-xs font-medium text-slate-500 mr-2 flex items-center gap-1">
                   <Compass size={16} aria-hidden="true" weight="fill" /> Filter District:
@@ -143,7 +139,6 @@ export default function BarangaysPage() {
               </div>
             </div>
 
-            {/* Barangay Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredBarangays.map((b) => (
                 <div
@@ -204,7 +199,6 @@ export default function BarangaysPage() {
         </Container>
       </div>
 
-      {/* Official COMELEC Voter Demographics Infographics Callout */}
       <section className="border-t border-slate-200 bg-white py-12">
         <Container size="xl">
           <div className="rounded-2xl bg-gradient-to-br from-comelec-blue-950 via-comelec-blue-900 to-slate-950 p-8 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-card">

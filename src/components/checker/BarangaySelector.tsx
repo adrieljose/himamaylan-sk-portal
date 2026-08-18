@@ -32,7 +32,6 @@ export function BarangaySelector({ selectedBarangay, onSelect }: BarangaySelecto
         </span>
       </div>
 
-      {/* Search Input */}
       <div className="relative">
         <label htmlFor="barangay-search-input" className="sr-only">Filter barangays</label>
         <MagnifyingGlass size={16} aria-hidden="true" className="text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" weight="fill" />
@@ -46,7 +45,6 @@ export function BarangaySelector({ selectedBarangay, onSelect }: BarangaySelecto
         />
       </div>
 
-      {/* Barangay Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 max-h-56 overflow-y-auto pr-1">
         {filteredBarangays.map((b) => {
           const isSelected = selectedBarangay === b.name;
@@ -72,7 +70,6 @@ export function BarangaySelector({ selectedBarangay, onSelect }: BarangaySelecto
         })}
       </div>
 
-      {/* Selected Barangay Details View */}
       {selectedBarangay && (
         <div className="p-4 rounded-lg bg-comelec-blue-50 border border-comelec-blue-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-comelec-blue-900">
           <div className="flex items-center gap-2">

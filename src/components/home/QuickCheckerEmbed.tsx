@@ -26,7 +26,7 @@ export function QuickCheckerEmbed() {
   const router = useRouter();
   const [month, setMonth] = useState(11);
   const [day, setDay] = useState(2);
-  const [year, setYear] = useState(2005); // Defaults to age 21
+  const [year, setYear] = useState(2005); 
   const [selectedBarangay, setSelectedBarangay] = useState<string>("");
 
   const validation = useMemo(() => validateDateOfBirth(month, day, year), [month, day, year]);
@@ -72,10 +72,9 @@ export function QuickCheckerEmbed() {
           </p>
         </div>
 
-        {/* Double Bezel Hardware Container */}
         <div className="bezel-outer shadow-floating">
           <div className="bezel-inner p-6 sm:p-9 space-y-6">
-            {/* Header with Live Status Eyebrow */}
+
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -100,10 +99,8 @@ export function QuickCheckerEmbed() {
 
             </div>
 
-            {/* Prominent Advisory & Dual Ballot Note */}
             <CheckerNoticeBox />
 
-            {/* Date Inputs Form */}
             <form onSubmit={handleLaunchFullChecker} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                 <div>
@@ -161,7 +158,6 @@ export function QuickCheckerEmbed() {
                 </div>
               </div>
 
-              {/* Optional Barangay Selection */}
               <div>
                 <label htmlFor="quick-barangay-select" className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1">
                   <MapPin size={16} aria-hidden="true" className="text-comelec-blue-700" weight="fill" />
@@ -182,7 +178,6 @@ export function QuickCheckerEmbed() {
                 </select>
               </div>
 
-              {/* Real-time Computed Result Preview Card */}
               {isValid && (
                 <div className="p-5 sm:p-6 rounded-xl bg-gradient-to-br from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border border-comelec-blue-800 shadow-card space-y-4">
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
@@ -203,7 +198,6 @@ export function QuickCheckerEmbed() {
                     </span>
                   </div>
 
-                  {/* Dual Status Indicators */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="p-3.5 rounded-lg bg-white/10 border border-white/10 flex items-start gap-2.5">
                       {eligibility.isVoterEligible ? (
@@ -240,7 +234,6 @@ export function QuickCheckerEmbed() {
                 </div>
               )}
 
-              {/* Action Button */}
               <button
                 type="submit"
                 className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-comelec-gold-400 via-comelec-gold-500 to-amber-500 text-slate-950 font-bold text-sm sm:text-base shadow-card hover:shadow-glow-gold transition-all duration-200 flex items-center justify-center gap-2.5 group active:scale-[0.99] cursor-pointer border border-comelec-gold-300 min-h-[48px]"

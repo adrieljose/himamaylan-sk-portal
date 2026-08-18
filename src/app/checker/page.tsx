@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function CheckerPage() {
   return (
     <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
-      {/* Breadcrumb Navigation */}
+
       <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
@@ -31,7 +31,6 @@ export default function CheckerPage() {
         </Container>
       </div>
 
-      {/* Page Title & Civic Header */}
       <section className="bg-gradient-to-b from-comelec-blue-950 to-comelec-blue-900 text-white py-12 sm:py-16 border-b border-comelec-blue-800 relative overflow-hidden">
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
@@ -50,7 +49,6 @@ export default function CheckerPage() {
         </Container>
       </section>
 
-      {/* Main Checker Mount */}
       <section className="py-10 sm:py-14 flex-1">
         <Container size="xl">
           <Suspense

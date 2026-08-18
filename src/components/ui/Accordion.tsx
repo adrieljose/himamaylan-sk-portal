@@ -42,7 +42,6 @@ export function AccordionItem({
           </h3>
         </div>
 
-        {/* Plus rotates 45 deg to become an X */}
         <div
           className={clsx(
             "w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700 shrink-0 transition-transform duration-300",

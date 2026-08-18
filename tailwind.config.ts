@@ -75,9 +75,9 @@ const config: Config = {
         mono: ["var(--font-mono)", "Geist Mono", "monospace"],
       },
       borderRadius: {
-        card: "0.75rem",  /* 12px - cards */
-        input: "0.5rem",  /* 8px - inputs & buttons */
-        badge: "9999px",  /* full - status badges only */
+        card: "0.75rem",  
+        input: "0.5rem",  
+        badge: "9999px",  
       },
       boxShadow: {
         subtle: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",

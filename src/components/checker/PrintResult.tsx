@@ -32,7 +32,7 @@ export function PrintResult({
 
   return (
     <>
-      {/* Screen Trigger Button */}
+
       <button
         type="button"
         onClick={handlePrint}
@@ -43,7 +43,6 @@ export function PrintResult({
         <span>Print Result</span>
       </button>
 
-      {/* Print Layout Document (Hidden on screen, visible during window.print()) */}
       <div className="hidden print:block print-container p-6 bg-white text-black font-serif">
         <div className="print-certificate-warning">
           SK AGE & ELIGIBILITY GUIDE RESULT — NOT AN OFFICIAL CERTIFICATE

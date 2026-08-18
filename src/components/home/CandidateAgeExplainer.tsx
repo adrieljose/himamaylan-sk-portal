@@ -52,9 +52,8 @@ export function CandidateAgeExplainer() {
           </Link>
         </div>
 
-        {/* Dual Bento Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-          {/* Card 1: Age Window (18–24) */}
+
           <div className="rounded-xl bg-gradient-to-br from-comelec-blue-950 to-slate-950 p-7 sm:p-8 border border-comelec-blue-700/60 shadow-floating flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between gap-2 mb-4">
@@ -82,7 +81,6 @@ export function CandidateAgeExplainer() {
             </div>
           </div>
 
-          {/* Card 2: Essential Non-Age Qualifications */}
           <div className="rounded-xl bg-slate-950/80 p-7 sm:p-8 border border-slate-800 shadow-card flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between gap-2 mb-4">

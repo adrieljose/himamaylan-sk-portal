@@ -39,7 +39,7 @@ export function DateInput({
 
   return (
     <div className="space-y-5">
-      {/* Quick Age Presets */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2">
         <div className="flex items-center gap-2">
           <CalendarBlank size={16} weight="fill" aria-hidden="true" className="text-blue-600" />
@@ -73,7 +73,6 @@ export function DateInput({
         </div>
       </div>
 
-      {/* Date Dropdowns Grid (min height 48px / h-12) */}
       <div
         className={clsx(
           "grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-xl border transition-all duration-200",
@@ -82,7 +81,7 @@ export function DateInput({
             : "bg-surface-subtle border-slate-200"
         )}
       >
-        {/* Month Input with Explicit Label */}
+
         <div>
           <label
             htmlFor="birth-month"
@@ -104,7 +103,6 @@ export function DateInput({
           </select>
         </div>
 
-        {/* Day Input with Explicit Label */}
         <div>
           <label
             htmlFor="birth-day"
@@ -126,7 +124,6 @@ export function DateInput({
           </select>
         </div>
 
-        {/* Year Input with Explicit Label */}
         <div>
           <label
             htmlFor="birth-year"
@@ -149,7 +146,6 @@ export function DateInput({
         </div>
       </div>
 
-      {/* Inline Validation / Error Message with role="alert" */}
       {!isValid && (
         <div
           role="alert"

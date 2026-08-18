@@ -29,7 +29,6 @@ export function VoterInfographicSection() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState<"rank" | "alpha" | "lowest" | "youthPercent">("rank");
 
-  // Filtered and sorted barangays
   const processedBarangays = useMemo(() => {
     let list = [...BARANGAY_VOTER_STATS];
 
@@ -53,7 +52,7 @@ export function VoterInfographicSection() {
         return pctB - pctA;
       });
     } else {
-      // Default: highest to lowest for current mode
+
       list.sort((a, b) => {
         const valA = viewMode === "overall" ? a.totalVoters : viewMode === "sk" ? a.skVoters : a.regularVoters;
         const valB = viewMode === "overall" ? b.totalVoters : viewMode === "sk" ? b.skVoters : b.regularVoters;
@@ -74,7 +73,7 @@ export function VoterInfographicSection() {
     <section id="voter-infographics" className="py-12 sm:py-16 bg-slate-50 border-t border-slate-200/80 font-sans">
       <Container size="xl">
         <div className="space-y-8">
-          {/* Header Banner */}
+
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-6">
             <div className="space-y-2 max-w-2xl">
               <div className="flex items-center gap-2 text-xs font-semibold text-comelec-blue-700 uppercase tracking-wider">
@@ -94,7 +93,6 @@ export function VoterInfographicSection() {
               </p>
             </div>
 
-            {/* View Mode Selector Tabs */}
             <div className="flex items-center p-1 rounded-xl bg-slate-200/80 border border-slate-300/80 self-start md:self-auto shrink-0 shadow-inner">
               <button
                 type="button"
@@ -132,9 +130,8 @@ export function VoterInfographicSection() {
             </div>
           </div>
 
-          {/* Main Top Infographic Summary Grid */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-            {/* Main Total Big Stat Box */}
+
             <div className="md:col-span-5 lg:col-span-4 bg-gradient-to-br from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white rounded-2xl p-6 sm:p-7 shadow-card border border-comelec-blue-800 space-y-6 flex flex-col justify-between relative overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-comelec-gold-400/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -167,7 +164,6 @@ export function VoterInfographicSection() {
                 </p>
               </div>
 
-              {/* Age Bracket Distribution Breakdown Chips */}
               <div className="space-y-2.5 pt-4 border-t border-white/10 relative z-10 text-xs">
                 <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-300 block">
                   Demographic Breakdown
@@ -264,9 +260,8 @@ export function VoterInfographicSection() {
               </div>
             </div>
 
-            {/* Metric KPI Cards (Highest, Lowest, Average, Ratio, Pareto) */}
             <div className="md:col-span-7 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {/* Highest Barangay Card */}
+
               <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between">
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase font-bold text-emerald-700 tracking-wider flex items-center gap-1.5">
@@ -293,7 +288,6 @@ export function VoterInfographicSection() {
                 </p>
               </div>
 
-              {/* Lowest Barangay Card */}
               <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between">
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase font-bold text-rose-700 tracking-wider flex items-center gap-1.5">
@@ -320,7 +314,6 @@ export function VoterInfographicSection() {
                 </p>
               </div>
 
-              {/* Average Per Barangay */}
               <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3 flex flex-col justify-between">
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase font-bold text-comelec-blue-700 tracking-wider flex items-center gap-1.5">
@@ -347,7 +340,6 @@ export function VoterInfographicSection() {
                 </p>
               </div>
 
-              {/* Disparity Ratio Card */}
               <div className="p-5 rounded-xl bg-slate-900 text-white shadow-sm space-y-2 sm:col-span-2 lg:col-span-2 flex flex-col justify-between">
                 <div className="flex items-center gap-2 text-xs font-semibold text-comelec-gold-400 uppercase tracking-wider">
                   <Sparkle size={16} weight="fill" />
@@ -367,7 +359,6 @@ export function VoterInfographicSection() {
                 </div>
               </div>
 
-              {/* Pareto Concentration Card */}
               <div className="p-5 rounded-xl bg-comelec-blue-900 text-white shadow-sm space-y-2 flex flex-col justify-between">
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-comelec-gold-300 uppercase tracking-wider">
                   <ShieldCheck size={16} weight="fill" />
@@ -380,9 +371,8 @@ export function VoterInfographicSection() {
             </div>
           </div>
 
-          {/* Barangay Ranking Horizontal Stacked Bar Chart */}
           <div className="bg-white rounded-2xl border border-slate-200 shadow-card p-6 sm:p-8 space-y-6">
-            {/* Chart Controls & Legend */}
+
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-5">
               <div className="space-y-1">
                 <h3 className="text-lg sm:text-xl font-bold text-slate-950">
@@ -393,9 +383,8 @@ export function VoterInfographicSection() {
                 </p>
               </div>
 
-              {/* Legend & Search Box */}
               <div className="flex flex-wrap items-center gap-3">
-                {/* Search Bar */}
+
                 <div className="relative w-full sm:w-56">
                   <MagnifyingGlass
                     size={16}
@@ -412,7 +401,6 @@ export function VoterInfographicSection() {
                   />
                 </div>
 
-                {/* Sort dropdown */}
                 <select
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value as any)}
@@ -426,7 +414,6 @@ export function VoterInfographicSection() {
               </div>
             </div>
 
-            {/* Visual Color Legend Bar */}
             <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-150">
               <span className="text-slate-400 uppercase text-[11px] font-bold tracking-wider">Legend:</span>
               {(viewMode === "overall" || viewMode === "sk") && (
@@ -447,7 +434,6 @@ export function VoterInfographicSection() {
               )}
             </div>
 
-            {/* List of 19 Barangays with Stacked Bars */}
             <div className="space-y-4 pt-2">
               {processedBarangays.map((b, index) => {
                 const totalInMode =
@@ -457,10 +443,8 @@ export function VoterInfographicSection() {
                     ? b.skVoters
                     : b.regularVoters;
 
-                // Width percentage relative to highest barangay (Aguisan)
                 const barWidthPct = (totalInMode / maxBarValue) * 100;
 
-                // Segments percentages inside this barangay
                 const p15to17 = totalInMode > 0 ? (b.age15to17 / totalInMode) * 100 : 0;
                 const p18to30 = totalInMode > 0 ? (b.age18to30 / totalInMode) * 100 : 0;
                 const p31above = totalInMode > 0 ? (b.age31above / totalInMode) * 100 : 0;
@@ -478,7 +462,7 @@ export function VoterInfographicSection() {
                       </div>
 
                       <div className="flex items-center gap-3">
-                        {/* Segment Breakdown pill */}
+
                         <div className="hidden sm:flex items-center gap-2 text-[11px] font-mono text-slate-500">
                           {viewMode !== "regular" && (
                             <span className="text-amber-700">15–17: {b.age15to17.toLocaleString()}</span>
@@ -495,13 +479,12 @@ export function VoterInfographicSection() {
                       </div>
                     </div>
 
-                    {/* Proportional Stacked Horizontal Bar */}
                     <div className="w-full bg-slate-100 rounded-full h-3 sm:h-3.5 overflow-hidden flex shadow-inner">
                       <div
                         className="h-full flex transition-all duration-500 rounded-full overflow-hidden"
                         style={{ width: `${barWidthPct}%` }}
                       >
-                        {/* 15-17 Segment (Amber) */}
+
                         {viewMode !== "regular" && (
                           <div
                             style={{ width: `${p15to17}%` }}
@@ -510,14 +493,12 @@ export function VoterInfographicSection() {
                           />
                         )}
 
-                        {/* 18-30 Segment (Emerald) */}
                         <div
                           style={{ width: `${p18to30}%` }}
                           className="h-full bg-emerald-600 transition-all hover:opacity-90"
                           title={`${b.barangay} Ages 18-30: ${b.age18to30} (${p18to30.toFixed(1)}%)`}
                         />
 
-                        {/* 31+ Segment (Navy) */}
                         {viewMode !== "sk" && (
                           <div
                             style={{ width: `${p31above}%` }}
@@ -532,7 +513,6 @@ export function VoterInfographicSection() {
               })}
             </div>
 
-            {/* Official Data Source Footer Tag */}
             <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
               <span className="flex items-center gap-1.5">
                 <Info size={16} weight="fill" className="text-comelec-blue-700" />

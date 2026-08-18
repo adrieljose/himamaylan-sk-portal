@@ -6,7 +6,7 @@ import { Info, ShieldWarning, FileText, CheckCircle, WarningCircle } from "@phos
 export function CheckerNoticeBox() {
   return (
     <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 via-amber-50/70 to-orange-50/60 p-5 sm:p-7 shadow-sm space-y-5 text-slate-800">
-      {/* Top Banner: Not Official Voter List Disclaimer */}
+
       <div className="flex items-start gap-3.5 sm:gap-4">
         <div className="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center shrink-0 shadow-sm mt-0.5">
           <ShieldWarning size={24} weight="fill" aria-hidden="true" />
@@ -30,7 +30,6 @@ export function CheckerNoticeBox() {
         </div>
       </div>
 
-      {/* Dual Ballot Highlight Card (Ages 18 to 30 / 30 Years Old) */}
       <div className="rounded-xl bg-white border border-amber-200/90 p-4 sm:p-5 shadow-inner space-y-3">
         <div className="flex items-center gap-2.5 text-comelec-blue-900">
           <FileText size={20} weight="fill" className="text-comelec-blue-700 shrink-0" aria-hidden="true" />
@@ -44,7 +43,7 @@ export function CheckerNoticeBox() {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-          {/* Ballot 1 */}
+
           <div className="p-3.5 rounded-lg bg-comelec-blue-50/80 border border-comelec-blue-200 flex items-start gap-2.5">
             <span className="w-6 h-6 rounded-full bg-comelec-blue-700 text-white text-xs font-bold flex items-center justify-center shrink-0">
               1
@@ -59,7 +58,6 @@ export function CheckerNoticeBox() {
             </div>
           </div>
 
-          {/* Ballot 2 */}
           <div className="p-3.5 rounded-lg bg-emerald-50/80 border border-emerald-200 flex items-start gap-2.5">
             <span className="w-6 h-6 rounded-full bg-emerald-700 text-white text-xs font-bold flex items-center justify-center shrink-0">
               2

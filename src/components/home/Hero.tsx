@@ -43,14 +43,14 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white pt-20 pb-16 sm:pt-28 sm:pb-24 border-b border-comelec-blue-800">
-      {/* Background radial glow orbs & grid */}
+
       <div className="absolute inset-0 civic-grid-pattern opacity-40 pointer-events-none" />
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-comelec-blue-500/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-20 right-10 w-[400px] h-[400px] bg-comelec-gold-500/10 rounded-full blur-[100px] pointer-events-none" />
 
       <Container size="xl" className="relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Official Commission Eyebrow Badge */}
+
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs sm:text-sm font-semibold text-slate-200 shadow-inner-glow">
             <span className="text-comelec-gold-300 font-bold uppercase tracking-wider text-xs">
               Official COMELEC Civic Portal
@@ -59,7 +59,6 @@ export function Hero() {
             <span>Himamaylan City, Negros Occidental</span>
           </div>
 
-          {/* Authority Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08]">
             Check Your SK Eligibility for the{" "}
             <span className="bg-gradient-to-r from-comelec-gold-300 via-comelec-gold-400 to-amber-300 bg-clip-text text-transparent underline decoration-comelec-gold-500/40 underline-offset-8">
@@ -67,12 +66,10 @@ export function Hero() {
             </span>
           </h1>
 
-          {/* Subtitle */}
           <p className="text-base sm:text-xl text-blue-100/90 max-w-2xl mx-auto leading-relaxed">
             Compute your exact statutory age on <strong>November 2, 2026</strong>. Instant verification for Sangguniang Kabataan voting (15–30) and youth leadership candidacy (18–24) in Himamaylan City.
           </p>
 
-          {/* Primary & Secondary CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link
               href="/checker"
@@ -94,7 +91,6 @@ export function Hero() {
             </Link>
           </div>
 
-          {/* 4 Stat Cards Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4 pt-8 text-left">
             {stats.map((item) => (
               <div

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default function DisclaimerPage() {
   return (
     <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
-      {/* Breadcrumb */}
+
       <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
@@ -39,7 +39,6 @@ export default function DisclaimerPage() {
         </Container>
       </div>
 
-      {/* Hero Header */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border-b border-comelec-blue-800 relative overflow-hidden">
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
@@ -58,11 +57,10 @@ export default function DisclaimerPage() {
         </Container>
       </section>
 
-      {/* Content Area */}
       <div className="py-12 sm:py-16 flex-1">
         <Container size="xl">
           <div className="max-w-4xl mx-auto space-y-8">
-            {/* SECTION 1: LEGAL DISCLAIMER */}
+
             <div className="p-8 sm:p-10 rounded-xl bg-white border border-amber-300 shadow-card space-y-5 relative overflow-hidden">
               <div className="flex items-center gap-2 text-amber-800 font-semibold text-xs uppercase tracking-wider bg-amber-50 px-3 py-1 rounded-full border border-amber-200 w-fit">
                 <Scales size={16} weight="fill" aria-hidden="true" className="text-amber-600" />
@@ -84,13 +82,11 @@ export default function DisclaimerPage() {
               </div>
             </div>
 
-            {/* SECTION 2: PRIVACY & DATA SAFEGUARDS */}
             <div className="p-8 sm:p-10 rounded-xl bg-white border border-slate-200 shadow-card space-y-6">
               <div className="flex items-center gap-2 text-comelec-blue-900 font-semibold text-xs uppercase tracking-wider bg-comelec-blue-50 px-3 py-1 rounded-full border border-comelec-blue-200 w-fit">
                 <Lock size={16} weight="fill" aria-hidden="true" className="text-comelec-blue-700" />
                 <span>Zero Data Collection Policy</span>
               </div>
-
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="p-5 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
@@ -135,7 +131,6 @@ export default function DisclaimerPage() {
               </div>
             </div>
 
-            {/* SECTION 3: CIVIC INTEGRITY */}
             <div className="p-8 sm:p-10 rounded-xl bg-white border border-slate-200 shadow-card space-y-4">
               <h2 className="text-xl sm:text-2xl font-semibold text-slate-900">
                 3. Civic Integrity &amp; Non-Partisan Commitment
@@ -145,7 +140,6 @@ export default function DisclaimerPage() {
               </p>
             </div>
 
-            {/* Bottom Actions */}
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200">
               <Link href="/references" className="text-xs font-semibold text-comelec-blue-700 hover:underline flex items-center gap-1.5">
                 <FileText size={16} aria-hidden="true" className="text-comelec-gold-500" weight="fill" />

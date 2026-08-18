@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function ReferencesPage() {
   return (
     <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
-      {/* Breadcrumb */}
+
       <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
@@ -37,7 +37,6 @@ export default function ReferencesPage() {
         </Container>
       </div>
 
-      {/* Hero Header */}
       <section className="py-12 sm:py-16 bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border-b border-comelec-blue-800 relative overflow-hidden">
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
@@ -56,11 +55,10 @@ export default function ReferencesPage() {
         </Container>
       </section>
 
-      {/* Main Content Area */}
       <div className="py-12 sm:py-16 flex-1">
         <Container size="xl">
           <div className="space-y-8 max-w-5xl mx-auto">
-            {/* Timestamp Strip */}
+
             <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
               <div className="flex items-center gap-2 text-slate-700 font-medium">
                 <CalendarBlank size={16} aria-hidden="true" className="text-comelec-blue-700" weight="fill" />
@@ -70,7 +68,6 @@ export default function ReferencesPage() {
               <span className="text-slate-500 font-mono text-xs">Official Gazette &amp; COMELEC Legal Repository</span>
             </div>
 
-            {/* Reference Cards */}
             <div className="space-y-6">
               {LEGAL_REFERENCES.map((ref) => (
                 <div
@@ -107,7 +104,6 @@ export default function ReferencesPage() {
                     {ref.summary}
                   </p>
 
-                  {/* Key Provisions */}
                   <div className="p-5 rounded-lg bg-slate-50 border border-slate-200/80 space-y-2.5">
                     <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-800">
                       Key Provisions for the 2026 Elections:
@@ -125,7 +121,6 @@ export default function ReferencesPage() {
               ))}
             </div>
 
-            {/* Bottom Callout */}
             <div className="p-6 sm:p-7 rounded-xl bg-amber-50 border-2 border-amber-200 text-xs sm:text-sm text-amber-950 space-y-2 shadow-sm">
               <h3 className="font-semibold text-amber-900 text-base">
                 Statutory Supremacy Clause

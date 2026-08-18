@@ -53,7 +53,6 @@ export function ElectionDateBanner() {
             </div>
           </div>
 
-          {/* Real-time Countdown Pills */}
           <div className="flex items-center gap-2 font-mono text-xs font-semibold">
             <div className="bg-slate-950 text-white px-2.5 py-1.5 rounded-lg shadow-xs text-center min-w-[54px]">
               <span className="block text-sm text-comelec-gold-400 font-mono font-bold">{timeLeft.days}</span>
