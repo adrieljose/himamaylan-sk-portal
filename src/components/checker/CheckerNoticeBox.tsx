@@ -16,15 +16,12 @@ export function CheckerNoticeBox() {
             <span className="text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-200 text-amber-950 border border-amber-300">
               Important Advisory
             </span>
-            <span className="text-xs font-bold text-amber-900">
-              Statutory Calculator Only • Not Official Voter List
-            </span>
           </div>
           <h3 className="text-base sm:text-lg font-bold text-slate-950 tracking-tight">
             This Checker is for Age &amp; Qualification Verification Only
           </h3>
           <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-            This tool computes your exact age and evaluates statutory eligibility under <strong>Republic Act No. 10742</strong> (as amended by <strong>RA 11768</strong>). 
+            This tool computes your exact age and evaluates statutory eligibility under <strong>Republic Act No. 10742</strong> (as amended by <strong>RA 11768</strong>).
             <strong className="text-amber-950"> This is NOT the official COMELEC Certified List of Voters (CLOV) or Precinct Masterlist.</strong> To vote on Election Day (<strong>November 2, 2026</strong>), you must have an active voter registration record with the Office of the Election Officer — Himamaylan City COMELEC.
           </p>
         </div>
