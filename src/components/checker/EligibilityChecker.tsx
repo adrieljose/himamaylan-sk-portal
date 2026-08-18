@@ -20,7 +20,6 @@ import { EligibilityCard } from "./EligibilityCard";
 import { AgeRangeTimeline } from "./AgeRangeTimeline";
 import { PersonalizedMessage } from "./PersonalizedMessage";
 import { EligibilitySummary } from "./EligibilitySummary";
-import { ExampleScenarios } from "./ExampleScenarios";
 import { ExpandedQuestionnaire } from "./ExpandedQuestionnaire";
 import { BarangaySelector } from "./BarangaySelector";
 import { ShareResult } from "./ShareResult";
@@ -74,15 +73,6 @@ export function EligibilityChecker() {
   const advice = getPersonalizedAdvice(ageResult.category, ageResult.years);
 
   const dobIso = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-
-  const handleSelectScenario = (scenarioDob: string) => {
-    const parsed = parseDateString(scenarioDob);
-    if (parsed) {
-      setMonth(parsed.month);
-      setDay(parsed.day);
-      setYear(parsed.year);
-    }
-  };
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
@@ -271,8 +261,6 @@ export function EligibilityChecker() {
           </AnimatePresence>
         </div>
       </div>
-
-      <ExampleScenarios onSelectScenario={handleSelectScenario} />
     </div>
   );
 }
