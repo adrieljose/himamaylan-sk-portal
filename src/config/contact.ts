@@ -70,7 +70,7 @@ export const CONTACT_CONFIG: ElectionOfficeContact = {
   emails: [
     {
       label: "Himamaylan City Election Officer",
-      address: "himamaylan.election@comelec.gov.ph",
+      address: "negocc.himamaylancity@comelec.gov.ph",
     },
     {
       label: "Negros Occidental Provincial Election Supervisor",
