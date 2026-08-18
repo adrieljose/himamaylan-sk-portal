@@ -69,7 +69,10 @@ export default function BarangaysPage() {
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
           <div className="max-w-3xl space-y-3">
-
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-comelec-gold-300 border border-white/15 text-xs font-semibold uppercase tracking-wider">
+              <MapPin size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
+              <span>Himamaylan City Local Jurisdiction</span>
+            </span>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
               19 Official Barangays Directory
             </h1>
