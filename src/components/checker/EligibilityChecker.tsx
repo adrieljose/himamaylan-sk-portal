@@ -24,6 +24,7 @@ import { ExampleScenarios } from "./ExampleScenarios";
 import { ExpandedQuestionnaire } from "./ExpandedQuestionnaire";
 import { BarangaySelector } from "./BarangaySelector";
 import { ShareResult } from "./ShareResult";
+import { CheckerNoticeBox } from "./CheckerNoticeBox";
 import {
   calculateExactAge,
   checkEligibility,
@@ -116,6 +117,9 @@ export function EligibilityChecker() {
               </div>
             </div>
           </div>
+
+          {/* Prominent Statutory Notice & Dual Ballot Explainer */}
+          <CheckerNoticeBox />
 
           {/* Date of Birth Input Component */}
           <DateInput

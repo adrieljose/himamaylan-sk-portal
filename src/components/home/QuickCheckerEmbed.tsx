@@ -20,6 +20,7 @@ import {
   validateDateOfBirth,
 } from "@/lib/eligibility";
 import { HIMAMAYLAN_BARANGAYS } from "@/config/barangays";
+import { CheckerNoticeBox } from "../checker/CheckerNoticeBox";
 
 export function QuickCheckerEmbed() {
   const router = useRouter();
@@ -98,6 +99,9 @@ export function QuickCheckerEmbed() {
               </div>
 
             </div>
+
+            {/* Prominent Advisory & Dual Ballot Note */}
+            <CheckerNoticeBox />
 
             {/* Date Inputs Form */}
             <form onSubmit={handleLaunchFullChecker} className="space-y-6">

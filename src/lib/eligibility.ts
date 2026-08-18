@@ -306,10 +306,13 @@ export function checkEligibility(month: number, day: number, year: number): Elig
       legalCitation: "RA 10742 Section 7 & RA 11768 Section 2",
     };
   } else {
+    const isDualVoter = years >= 18 && years <= 30;
     voterEligibility = {
       status: "eligible",
-      headline: "Qualified SK Youth Voter",
-      reason: `You will be ${years} years old on November 2, 2026, satisfying the 15–30 age requirement for the Katipunan ng Kabataan.`,
+      headline: years === 30 ? "Qualified SK & Dual Voter (Age 30 - 2 Ballots)" : (isDualVoter ? "Qualified SK & Dual Voter (2 Ballots)" : "Qualified SK Youth Voter (1 Ballot)"),
+      reason: isDualVoter
+        ? `You will be ${years} years old on November 2, 2026. Since you are in the 18–30 bracket (including 30-year-olds on Election Day), you receive TWO (2) BALLOTS on Election Day: one (1) SK Youth Ballot and one (1) regular Barangay Council Ballot.`
+        : `You will be ${years} years old on November 2, 2026. As a youth voter aged 15–17, you will receive one (1) SK Youth Ballot.`,
       legalCitation: "RA 10742 Section 7 & RA 11768 Section 2",
     };
   }
