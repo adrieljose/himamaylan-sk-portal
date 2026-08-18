@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-blue-950: #06172e;
+  --color-blue-900: #0a2540;
+  --color-blue-800: #102e82;
+  --color-blue-700: #0f35a0;
+  --color-blue-600: #1244c8;
+  --color-blue-500: #1d5ee9;
+  --color-blue-100: #e0ebfe;
+  --color-blue-50:  #f0f5ff;
+
+  --color-gold-600: #bc7511;
+  --color-gold-500: #d99718;
+  --color-gold-400: #e6b024;
+  --color-gold-100: #faefd6;
+
+  --color-eligible: #16a34a;
+  --color-eligible-bg: #f0fdf4;
+  --color-ineligible: #dc2626;
+  --color-ineligible-bg: #fef2f2;
+  --color-boundary: #d97706;
+  --color-boundary-bg: #fffbeb;
+
+  --radius-card: 0.75rem;
+  --radius-input: 0.5rem;
+  --radius-badge: 9999px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans), system-ui, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    color: #0f172a;
+    overflow-x: clip;
+  }
+
+  /* Universal high-visibility accessibility focus indicator */
+  :focus-visible {
+    outline: 2px solid #1244c8 !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* Subtle civic grid pattern */
+.civic-grid-pattern {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Input Error Shake Animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 300ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Subtle COMELEC Logo Float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Accessibility Reduced Motion Rule */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Stylesheet for Official SK Checker Result Slip */
+@media print {
+  nav,
+  footer,
+  header,
+  .no-print,
+  button {
+    display: none !important;
+  }
+
+  body {
+    font-family: "Georgia", serif !important;
+    color: #000000 !important;
+    background: #ffffff !important;
+    font-size: 11pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-certificate-warning {
+    border: 2pt solid #000000 !important;
+    padding: 6pt 12pt !important;
+    font-size: 10pt !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    margin-bottom: 12pt !important;
+    display: block !important;
+  }
+}
