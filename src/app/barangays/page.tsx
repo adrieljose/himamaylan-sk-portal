@@ -69,10 +69,7 @@ export default function BarangaysPage() {
         <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
         <Container size="xl" className="relative z-10">
           <div className="max-w-3xl space-y-3">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-comelec-gold-300 border border-white/15 text-xs font-semibold uppercase tracking-wider">
-              <MapPin size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
-              <span>Himamaylan City Local Jurisdiction</span>
-            </span>
+
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
               19 Official Barangays Directory
             </h1>
@@ -120,11 +117,10 @@ export default function BarangaysPage() {
                     key={t}
                     type="button"
                     onClick={() => setSelectedType(t)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer min-h-[36px] ${
-                      selectedType === t
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer min-h-[36px] ${selectedType === t
                         ? "bg-comelec-blue-900 text-white shadow-sm ring-2 ring-comelec-gold-400"
                         : "bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
-                    }`}
+                      }`}
                   >
                     {t === "All" ? "All Barangays (19)" : t}
                   </button>
