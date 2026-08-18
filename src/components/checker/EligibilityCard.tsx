@@ -63,9 +63,9 @@ export function EligibilityCard({
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-comelec-blue-900 text-comelec-gold-300 shadow-xs">
               {isVoter ? (
-                <UserCheck size={16} weight="regular" aria-hidden="true" />
+                <UserCheck size={16} weight="fill" aria-hidden="true" />
               ) : (
-                <IdentificationCard size={16} weight="regular" aria-hidden="true" />
+                <IdentificationCard size={16} weight="fill" aria-hidden="true" />
               )}
             </div>
             <div>

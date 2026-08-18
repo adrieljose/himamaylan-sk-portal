@@ -78,7 +78,7 @@ export function Badge({
         return <Sparkle size={iconSize} weight="fill" className="text-amber-600 shrink-0" aria-hidden="true" />;
       case "info":
       default:
-        return <Info size={iconSize} weight="regular" className="text-blue-600 shrink-0" aria-hidden="true" />;
+        return <Info size={iconSize} weight="fill" className="text-blue-600 shrink-0" aria-hidden="true" />;
     }
   };
 

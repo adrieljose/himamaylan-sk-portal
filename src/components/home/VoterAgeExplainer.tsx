@@ -27,7 +27,7 @@ export function VoterAgeExplainer() {
             className="inline-flex items-center gap-2 text-sm font-semibold text-comelec-blue-800 hover:text-comelec-blue-600 group"
           >
             <span>Full Qualification Criteria</span>
-            <ArrowRight size={16} weight="bold" aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={16} weight="fill" aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
@@ -91,7 +91,7 @@ export function VoterAgeExplainer() {
               </p>
             </div>
             <div className="pt-4 border-t border-slate-200 mt-4 flex items-center gap-1.5 text-xs font-semibold text-comelec-blue-800">
-              <Info size={16} weight="regular" aria-hidden="true" />
+              <Info size={16} weight="fill" aria-hidden="true" />
               <span>1 Ballot (SK Only)</span>
             </div>
           </div>
@@ -133,7 +133,7 @@ export function VoterAgeExplainer() {
               </p>
             </div>
             <div className="pt-4 border-t border-amber-200 mt-4 flex items-center gap-1.5 text-xs font-semibold text-amber-900">
-              <Warning size={16} weight="regular" aria-hidden="true" />
+              <Warning size={16} weight="fill" aria-hidden="true" />
               <span>Checked on COC Filing</span>
             </div>
           </div>
@@ -154,7 +154,7 @@ export function VoterAgeExplainer() {
               </p>
             </div>
             <div className="pt-4 border-t border-comelec-blue-200 mt-4 flex items-center gap-1.5 text-xs font-semibold text-comelec-blue-900">
-              <Buildings size={16} weight="regular" aria-hidden="true" />
+              <Buildings size={16} weight="fill" aria-hidden="true" />
               <span>Office of the Election Officer</span>
             </div>
           </div>

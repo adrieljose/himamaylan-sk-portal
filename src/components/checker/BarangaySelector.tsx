@@ -35,7 +35,7 @@ export function BarangaySelector({ selectedBarangay, onSelect }: BarangaySelecto
       {/* Search Input */}
       <div className="relative">
         <label htmlFor="barangay-search-input" className="sr-only">Filter barangays</label>
-        <MagnifyingGlass size={16} aria-hidden="true" className="text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+        <MagnifyingGlass size={16} aria-hidden="true" className="text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" weight="fill" />
         <input
           id="barangay-search-input"
           type="text"
@@ -63,7 +63,7 @@ export function BarangaySelector({ selectedBarangay, onSelect }: BarangaySelecto
             >
               <span className="truncate">{b.name}</span>
               {isSelected ? (
-                <Check size={16} weight="bold" aria-hidden="true" className="text-comelec-gold-400 shrink-0" />
+                <Check size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400 shrink-0" />
               ) : (
                 <span className="text-xs text-slate-400 font-normal shrink-0">{b.type}</span>
               )}

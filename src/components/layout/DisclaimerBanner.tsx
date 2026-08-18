@@ -57,7 +57,7 @@ export function DisclaimerBanner({
         )}
       >
         <div className="flex items-start gap-2.5">
-          <Info size={16} aria-hidden="true" className="text-slate-500 shrink-0 mt-0.5" />
+          <Info size={16} aria-hidden="true" className="text-slate-500 shrink-0 mt-0.5" weight="fill" />
           <div>
             <span className="font-semibold text-slate-800">Civic Notice: </span>
             <span>

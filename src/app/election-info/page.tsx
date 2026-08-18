@@ -84,10 +84,10 @@ export default function ElectionInfoPage() {
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-comelec-blue-700 flex items-center gap-1 transition-colors text-slate-600 font-medium">
-              <House size={16} aria-hidden="true" />
+              <House size={16} aria-hidden="true" weight="fill" />
               <span>Home</span>
             </Link>
-            <CaretRight size={16} aria-hidden="true" className="text-slate-400" />
+            <CaretRight size={16} aria-hidden="true" className="text-slate-400" weight="fill" />
             <span className="text-comelec-blue-950 font-semibold">2026 Election Information</span>
           </nav>
         </Container>
@@ -122,7 +122,7 @@ export default function ElectionInfoPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-comelec-blue-700 font-semibold text-xs uppercase tracking-wider">
-                  <CheckSquareOffset size={16} aria-hidden="true" />
+                  <CheckSquareOffset size={16} aria-hidden="true" weight="fill" />
                   <span>National Civic Event</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900">
@@ -136,7 +136,7 @@ export default function ElectionInfoPage() {
                 </p>
                 <div className="pt-2 flex flex-wrap items-center gap-3">
                   <Link href="/checker">
-                    <Button variant="primary" size="md" icon={<ArrowRight size={16} weight="bold" />}>
+                    <Button variant="primary" size="md" icon={<ArrowRight size={16} weight="fill" />}>
                       Check My Eligibility
                     </Button>
                   </Link>
@@ -204,7 +204,7 @@ export default function ElectionInfoPage() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
                 <div>
                   <div className="flex items-center gap-2 text-comelec-blue-700 font-semibold text-xs uppercase tracking-wider">
-                    <CalendarBlank size={16} aria-hidden="true" />
+                    <CalendarBlank size={16} aria-hidden="true" weight="fill" />
                     <span>Official BSKE Roadmap</span>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 mt-1">

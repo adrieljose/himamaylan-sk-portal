@@ -160,7 +160,7 @@ export function QuickCheckerEmbed() {
               {/* Optional Barangay Selection */}
               <div>
                 <label htmlFor="quick-barangay-select" className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1">
-                  <MapPin size={16} aria-hidden="true" className="text-comelec-blue-700" />
+                  <MapPin size={16} aria-hidden="true" className="text-comelec-blue-700" weight="fill" />
                   <span>Your Himamaylan Barangay (Optional)</span>
                 </label>
                 <select
@@ -241,9 +241,9 @@ export function QuickCheckerEmbed() {
                 type="submit"
                 className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-comelec-gold-400 via-comelec-gold-500 to-amber-500 text-slate-950 font-bold text-sm sm:text-base shadow-card hover:shadow-glow-gold transition-all duration-200 flex items-center justify-center gap-2.5 group active:scale-[0.99] cursor-pointer border border-comelec-gold-300 min-h-[48px]"
               >
-                <FileText size={20} weight="bold" aria-hidden="true" className="text-slate-950" />
+                <FileText size={20} weight="fill" aria-hidden="true" className="text-slate-950" />
                 <span>Check My Eligibility</span>
-                <ArrowRight size={16} weight="bold" aria-hidden="true" className="text-slate-950 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={16} weight="fill" aria-hidden="true" className="text-slate-950 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
           </div>

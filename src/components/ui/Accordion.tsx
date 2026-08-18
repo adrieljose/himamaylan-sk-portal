@@ -49,7 +49,7 @@ export function AccordionItem({
             isOpen && "rotate-45 bg-blue-100 text-blue-800"
           )}
         >
-          <Plus size={16} weight="bold" aria-hidden="true" />
+          <Plus size={16} weight="fill" aria-hidden="true" />
         </div>
       </button>
 

@@ -8,13 +8,13 @@ export function HowItWorks() {
   const steps = [
     {
       num: "01",
-      icon: <CalendarBlank size={24} weight="regular" aria-hidden="true" className="text-comelec-blue-600" />,
+      icon: <CalendarBlank size={24} weight="fill" aria-hidden="true" className="text-comelec-blue-600" />,
       title: "Input Your Date of Birth",
       desc: "Select your month, day, and year of birth. All computations execute 100% locally in your browser with zero private data transmitted.",
     },
     {
       num: "02",
-      icon: <Cpu size={24} weight="regular" aria-hidden="true" className="text-comelec-gold-500" />,
+      icon: <Cpu size={24} weight="fill" aria-hidden="true" className="text-comelec-gold-500" />,
       title: "Exact Cutoff Computation",
       desc: "Our engine determines your precise age in years, months, and days on November 2, 2026 under Republic Act No. 10742 & RA 11768.",
     },

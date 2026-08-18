@@ -48,7 +48,7 @@ export function CandidateAgeExplainer() {
             className="inline-flex items-center gap-2 text-sm font-semibold text-comelec-gold-300 hover:text-comelec-gold-200 group"
           >
             <span>View Complete Candidate Rules</span>
-            <ArrowRight size={16} weight="bold" aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={16} weight="fill" aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 

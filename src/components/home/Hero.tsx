@@ -19,25 +19,25 @@ export function Hero() {
       label: "Election Day",
       value: "Nov 2, 2026",
       desc: "Synchronized Cutoff",
-      icon: <CalendarBlank size={16} aria-hidden="true" className="text-comelec-gold-400" />,
+      icon: <CalendarBlank size={16} aria-hidden="true" className="text-comelec-gold-400" weight="fill" />,
     },
     {
       label: "SK Youth Voter",
       value: "15 to 30 yrs",
       desc: "Katipunan ng Kabataan",
-      icon: <Users size={16} aria-hidden="true" className="text-sky-400" />,
+      icon: <Users size={16} aria-hidden="true" className="text-sky-400" weight="fill" />,
     },
     {
       label: "SK Candidate",
       value: "18 to 24 yrs",
       desc: "Chair & Kagawad",
-      icon: <Medal size={16} aria-hidden="true" className="text-emerald-400" />,
+      icon: <Medal size={16} aria-hidden="true" className="text-emerald-400" weight="fill" />,
     },
     {
       label: "Local Scope",
       value: "19 Barangays",
       desc: "Himamaylan City",
-      icon: <MapPin size={16} aria-hidden="true" className="text-rose-400" />,
+      icon: <MapPin size={16} aria-hidden="true" className="text-rose-400" weight="fill" />,
     },
   ];
 
@@ -81,7 +81,7 @@ export function Hero() {
               <Sparkle size={20} weight="fill" aria-hidden="true" className="text-slate-950" />
               <span>Check My Eligibility</span>
               <span className="w-6 h-6 rounded-full bg-slate-950/15 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                <ArrowRight size={16} weight="bold" aria-hidden="true" className="text-slate-950" />
+                <ArrowRight size={16} weight="fill" aria-hidden="true" className="text-slate-950" />
               </span>
             </Link>
 
@@ -89,7 +89,7 @@ export function Hero() {
               href="/qualifications"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg bg-white/10 hover:bg-white/15 text-white font-bold text-base border border-white/20 backdrop-blur-sm transition-all duration-200 active:scale-[0.98] min-h-[48px]"
             >
-              <ShieldCheck size={20} weight="regular" aria-hidden="true" className="text-comelec-gold-400" />
+              <ShieldCheck size={20} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
               <span>View Qualifications</span>
             </Link>
           </div>

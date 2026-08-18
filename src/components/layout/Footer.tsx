@@ -39,7 +39,7 @@ export function Footer() {
             </p>
 
             <div className="flex items-center gap-2 text-xs text-gold-300 font-semibold bg-blue-900/60 px-3 py-1.5 rounded-lg border border-blue-800/80 w-fit">
-              <Calendar size={16} weight="regular" aria-hidden="true" />
+              <Calendar size={16} weight="fill" aria-hidden="true" />
               <span>Target: Nov 2, 2026</span>
             </div>
           </div>
@@ -90,18 +90,18 @@ export function Footer() {
             </h3>
             <div className="space-y-2 text-xs text-blue-200 leading-relaxed">
               <div className="flex items-start gap-2">
-                <MapPin size={16} weight="regular" className="text-gold-400 shrink-0 mt-0.5" aria-hidden="true" />
+                <MapPin size={16} weight="fill" className="text-gold-400 shrink-0 mt-0.5" aria-hidden="true" />
                 <span>
                   {CONTACT_CONFIG.address.building}, {CONTACT_CONFIG.address.street},{" "}
                   {CONTACT_CONFIG.address.city}, {CONTACT_CONFIG.address.province}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone size={16} weight="regular" className="text-gold-400 shrink-0" aria-hidden="true" />
+                <Phone size={16} weight="fill" className="text-gold-400 shrink-0" aria-hidden="true" />
                 <span>{CONTACT_CONFIG.phones[0].number}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Envelope size={16} weight="regular" className="text-gold-400 shrink-0" aria-hidden="true" />
+                <Envelope size={16} weight="fill" className="text-gold-400 shrink-0" aria-hidden="true" />
                 <span>{CONTACT_CONFIG.emails[0].address}</span>
               </div>
               <div className="pt-2 text-xs text-blue-400 font-mono">

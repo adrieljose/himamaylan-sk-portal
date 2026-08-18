@@ -28,10 +28,10 @@ export default function ReferencesPage() {
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-comelec-blue-700 flex items-center gap-1 transition-colors text-slate-600 font-medium">
-              <House size={16} aria-hidden="true" />
+              <House size={16} aria-hidden="true" weight="fill" />
               <span>Home</span>
             </Link>
-            <CaretRight size={16} aria-hidden="true" className="text-slate-400" />
+            <CaretRight size={16} aria-hidden="true" className="text-slate-400" weight="fill" />
             <span className="text-comelec-blue-950 font-semibold">Official Statutory References</span>
           </nav>
         </Container>
@@ -63,7 +63,7 @@ export default function ReferencesPage() {
             {/* Timestamp Strip */}
             <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
               <div className="flex items-center gap-2 text-slate-700 font-medium">
-                <CalendarBlank size={16} aria-hidden="true" className="text-comelec-blue-700" />
+                <CalendarBlank size={16} aria-hidden="true" className="text-comelec-blue-700" weight="fill" />
                 <span>Information Certified &amp; Audited as of:</span>
                 <strong className="text-slate-900 font-semibold">{electionConfig.lastUpdated}</strong>
               </div>
@@ -99,7 +99,7 @@ export default function ReferencesPage() {
                       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-comelec-blue-50 text-comelec-blue-900 hover:bg-comelec-blue-100 font-semibold text-xs transition-colors shrink-0 border border-comelec-blue-200 min-h-[44px]"
                     >
                       <span>View Official Gazette</span>
-                      <ArrowSquareOut size={16} weight="bold" aria-hidden="true" />
+                      <ArrowSquareOut size={16} weight="fill" aria-hidden="true" />
                     </a>
                   </div>
 

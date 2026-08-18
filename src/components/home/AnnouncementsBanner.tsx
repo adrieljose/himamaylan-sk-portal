@@ -15,7 +15,7 @@ export function AnnouncementsBanner() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-lg bg-amber-100 text-amber-900 shadow-sm">
-                <Megaphone size={20} aria-hidden="true" className="text-amber-800" />
+                <Megaphone size={20} aria-hidden="true" className="text-amber-800" weight="fill" />
               </div>
               <div>
                 <h2 className="font-semibold text-slate-900 text-xl sm:text-2xl tracking-tight">
@@ -45,7 +45,7 @@ export function AnnouncementsBanner() {
                         {item.category}
                       </Badge>
                       <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                        <CalendarBlank size={16} aria-hidden="true" />
+                        <CalendarBlank size={16} aria-hidden="true" weight="fill" />
                         <span>{item.date}</span>
                       </div>
                     </div>
@@ -66,7 +66,7 @@ export function AnnouncementsBanner() {
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-comelec-blue-800 hover:text-comelec-blue-600 group"
                       >
                         <span>{item.linkText}</span>
-                        <ArrowRight size={16} weight="bold" aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight size={16} weight="fill" aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
                       </Link>
                     </div>
                   )}

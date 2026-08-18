@@ -48,7 +48,7 @@ export function Navigation() {
 
           <div className="flex items-center gap-2 text-xs text-slate-300 ml-auto">
             <span className="flex items-center gap-1.5 bg-blue-900/90 text-gold-300 px-2.5 py-0.5 rounded-full border border-blue-800 font-medium">
-              <Calendar size={14} weight="regular" className="text-gold-400" aria-hidden="true" />
+              <Calendar size={14} weight="fill" className="text-gold-400" aria-hidden="true" />
               <span>Election Day: <strong className="text-white font-semibold">Nov 2, 2026</strong></span>
             </span>
           </div>
@@ -136,9 +136,9 @@ export function Navigation() {
               aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? (
-                <X size={20} weight="regular" aria-hidden="true" />
+                <X size={20} weight="fill" aria-hidden="true" />
               ) : (
-                <List size={20} weight="regular" aria-hidden="true" />
+                <List size={20} weight="fill" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -162,7 +162,7 @@ export function Navigation() {
                   }`}
               >
                 <span>{link.label}</span>
-                <CaretRight size={16} weight="regular" className={isActive ? "text-gold-300" : "text-slate-400"} aria-hidden="true" />
+                <CaretRight size={16} weight="fill" className={isActive ? "text-gold-300" : "text-slate-400"} aria-hidden="true" />
               </Link>
             );
           })}

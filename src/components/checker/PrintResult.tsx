@@ -39,7 +39,7 @@ export function PrintResult({
         className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-subtle hover:bg-slate-100 text-slate-800 text-xs font-bold border border-slate-200 shadow-subtle transition-all cursor-pointer min-h-[44px]"
         title="Print official result summary slip"
       >
-        <Printer size={14} weight="bold" className="text-blue-700" />
+        <Printer size={14} weight="fill" className="text-blue-700" />
         <span>Print Result</span>
       </button>
 

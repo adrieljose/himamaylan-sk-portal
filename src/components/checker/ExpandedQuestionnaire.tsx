@@ -69,7 +69,7 @@ export function ExpandedQuestionnaire({ calculatedAge }: ExpandedQuestionnairePr
               onClick={handleReset}
               className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-slate-800 transition-colors p-2 cursor-pointer"
             >
-              <ArrowCounterClockwise size={14} weight="bold" aria-hidden="true" />
+              <ArrowCounterClockwise size={14} weight="fill" aria-hidden="true" />
               Reset
             </button>
           )}

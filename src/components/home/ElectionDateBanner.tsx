@@ -41,7 +41,7 @@ export function ElectionDateBanner() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left flex-wrap">
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <div className="p-2.5 rounded-lg bg-slate-950 text-comelec-gold-400 shrink-0 shadow-xs">
-              <CalendarBlank size={20} weight="regular" aria-hidden="true" />
+              <CalendarBlank size={20} weight="fill" aria-hidden="true" />
             </div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-wider text-slate-900">
@@ -77,7 +77,7 @@ export function ElectionDateBanner() {
               className="ml-2 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-slate-950 text-white hover:bg-slate-900 text-xs font-sans font-semibold transition-all shadow-xs min-h-[44px]"
             >
               <span>Check My Eligibility</span>
-              <ArrowRight size={16} weight="bold" aria-hidden="true" className="text-comelec-gold-400" />
+              <ArrowRight size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
             </Link>
           </div>
         </div>

@@ -22,10 +22,10 @@ export default function CheckerPage() {
               href="/"
               className="hover:text-comelec-blue-700 flex items-center gap-1 transition-colors font-medium text-slate-600"
             >
-              <House size={16} aria-hidden="true" />
+              <House size={16} aria-hidden="true" weight="fill" />
               <span>Home</span>
             </Link>
-            <CaretRight size={16} aria-hidden="true" className="text-slate-400" />
+            <CaretRight size={16} aria-hidden="true" className="text-slate-400" weight="fill" />
             <span className="text-comelec-blue-950 font-semibold">2026 SK Age &amp; Eligibility Checker</span>
           </nav>
         </Container>

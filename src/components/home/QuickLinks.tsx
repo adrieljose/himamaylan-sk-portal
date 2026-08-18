@@ -113,7 +113,7 @@ export function QuickLinks() {
                           : "bg-comelec-blue-50 text-comelec-blue-800 border border-comelec-blue-100"
                       }`}
                     >
-                      <Icon size={24} weight="regular" aria-hidden="true" />
+                      <Icon size={24} weight="fill" aria-hidden="true" />
                     </div>
                     <span
                       className={`text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full ${
@@ -135,7 +135,7 @@ export function QuickLinks() {
                       <span>{section.title}</span>
                       <ArrowUpRight
                         size={16}
-                        weight="bold"
+                        weight="fill"
                         aria-hidden="true"
                         className={`opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all ${
                           section.featured ? "text-comelec-gold-400" : "text-comelec-blue-700"

@@ -104,10 +104,10 @@ export default function QualificationsPage() {
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-comelec-blue-700 flex items-center gap-1 transition-colors text-slate-600 font-medium">
-              <House size={16} aria-hidden="true" />
+              <House size={16} aria-hidden="true" weight="fill" />
               <span>Home</span>
             </Link>
-            <CaretRight size={16} aria-hidden="true" className="text-slate-400" />
+            <CaretRight size={16} aria-hidden="true" className="text-slate-400" weight="fill" />
             <span className="text-comelec-blue-950 font-semibold">SK Qualifications Guide</span>
           </nav>
         </Container>
@@ -149,7 +149,7 @@ export default function QualificationsPage() {
                 </p>
               </div>
               <Link href="/checker" className="shrink-0">
-                <Button variant="gold" size="lg" icon={<ArrowRight size={16} weight="bold" />}>
+                <Button variant="gold" size="lg" icon={<ArrowRight size={16} weight="fill" />}>
                   Check My Eligibility
                 </Button>
               </Link>
@@ -159,7 +159,7 @@ export default function QualificationsPage() {
             <div className="space-y-6">
               <div className="border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2 text-comelec-blue-700 font-semibold text-xs uppercase tracking-wider">
-                  <UserCheck size={16} aria-hidden="true" />
+                  <UserCheck size={16} aria-hidden="true" weight="fill" />
                   <span>Katipunan ng Kabataan Electorate</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 mt-1">
@@ -200,7 +200,7 @@ export default function QualificationsPage() {
             <div className="space-y-6 pt-6">
               <div className="border-b border-slate-200 pb-4">
                 <div className="flex items-center gap-2 text-comelec-gold-700 font-semibold text-xs uppercase tracking-wider">
-                  <ShieldCheck size={16} aria-hidden="true" />
+                  <ShieldCheck size={16} aria-hidden="true" weight="fill" />
                   <span>Elective Office Candidacy</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 mt-1">
@@ -241,7 +241,7 @@ export default function QualificationsPage() {
             <div className="p-7 sm:p-8 rounded-xl bg-white border-2 border-slate-300 shadow-card space-y-4">
               <div className="flex items-start gap-3.5">
                 <div className="p-3 rounded-lg bg-rose-100 text-rose-800 shrink-0">
-                  <Warning size={24} aria-hidden="true" />
+                  <Warning size={24} aria-hidden="true" weight="fill" />
                 </div>
                 <div className="space-y-3">
                   <h3 className="text-xl sm:text-2xl font-semibold text-slate-900">
@@ -280,7 +280,7 @@ export default function QualificationsPage() {
                 ← View Statutory Reference Documents
               </Link>
               <Link href="/checker">
-                <Button variant="primary" size="md" icon={<ArrowRight size={16} weight="bold" />}>
+                <Button variant="primary" size="md" icon={<ArrowRight size={16} weight="fill" />}>
                   Check My Eligibility
                 </Button>
               </Link>

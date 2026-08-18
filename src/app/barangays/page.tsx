@@ -38,13 +38,13 @@ export default function BarangaysPage() {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case "Poblacion":
-        return <Buildings size={16} aria-hidden="true" className="text-comelec-blue-700" />;
+        return <Buildings size={16} aria-hidden="true" className="text-comelec-blue-700" weight="fill" />;
       case "Coastal":
-        return <Waves size={16} aria-hidden="true" className="text-cyan-600" />;
+        return <Waves size={16} aria-hidden="true" className="text-cyan-600" weight="fill" />;
       case "Upland":
-        return <Mountains size={16} aria-hidden="true" className="text-emerald-700" />;
+        return <Mountains size={16} aria-hidden="true" className="text-emerald-700" weight="fill" />;
       default:
-        return <Tree size={16} aria-hidden="true" className="text-amber-700" />;
+        return <Tree size={16} aria-hidden="true" className="text-amber-700" weight="fill" />;
     }
   };
 
@@ -55,10 +55,10 @@ export default function BarangaysPage() {
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-comelec-blue-700 flex items-center gap-1 transition-colors text-slate-600 font-medium">
-              <House size={16} aria-hidden="true" />
+              <House size={16} aria-hidden="true" weight="fill" />
               <span>Home</span>
             </Link>
-            <CaretRight size={16} aria-hidden="true" className="text-slate-400" />
+            <CaretRight size={16} aria-hidden="true" className="text-slate-400" weight="fill" />
             <span className="text-comelec-blue-950 font-semibold">19 Barangays Directory</span>
           </nav>
         </Container>
@@ -101,7 +101,7 @@ export default function BarangaysPage() {
                     placeholder="Filter by barangay (e.g. Su-ay, Carabalan, Poblacion)..."
                     className="w-full h-12 pl-11 pr-4 text-sm font-medium rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-comelec-blue-600 focus:outline-none transition-all shadow-inner"
                   />
-                  <MagnifyingGlass size={16} aria-hidden="true" className="text-slate-400 absolute left-4 top-4" />
+                  <MagnifyingGlass size={16} aria-hidden="true" className="text-slate-400 absolute left-4 top-4" weight="fill" />
                 </div>
 
                 {/* Counter */}
@@ -113,7 +113,7 @@ export default function BarangaysPage() {
               {/* District Filter Tabs */}
               <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100">
                 <span className="text-xs font-medium text-slate-500 mr-2 flex items-center gap-1">
-                  <Compass size={16} aria-hidden="true" /> Filter District:
+                  <Compass size={16} aria-hidden="true" weight="fill" /> Filter District:
                 </span>
                 {types.map((t) => (
                   <button
@@ -166,7 +166,7 @@ export default function BarangaysPage() {
                       className="inline-flex items-center gap-1.5 text-xs font-semibold text-comelec-blue-800 hover:text-comelec-blue-600 group"
                     >
                       <span>Check in {b.name}</span>
-                      <ArrowRight size={16} weight="bold" aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight size={16} weight="fill" aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>

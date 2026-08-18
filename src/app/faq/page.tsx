@@ -38,10 +38,10 @@ export default function FAQPage() {
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-comelec-blue-700 flex items-center gap-1 transition-colors text-slate-600 font-medium">
-              <House size={16} aria-hidden="true" />
+              <House size={16} aria-hidden="true" weight="fill" />
               <span>Home</span>
             </Link>
-            <CaretRight size={16} aria-hidden="true" className="text-slate-400" />
+            <CaretRight size={16} aria-hidden="true" className="text-slate-400" weight="fill" />
             <span className="text-comelec-blue-950 font-semibold">Frequently Asked Questions</span>
           </nav>
         </Container>
@@ -82,12 +82,12 @@ export default function FAQPage() {
                   placeholder="Search questions (e.g. 18 years old, anti-dynasty, registration, residency)..."
                   className="w-full h-12 pl-11 pr-4 text-sm font-medium rounded-lg border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-comelec-blue-600 focus:outline-none transition-all"
                 />
-                <MagnifyingGlass size={16} aria-hidden="true" className="text-slate-400 absolute left-4 top-4" />
+                <MagnifyingGlass size={16} aria-hidden="true" className="text-slate-400 absolute left-4 top-4" weight="fill" />
               </div>
 
               <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
                 <span className="text-xs font-medium text-slate-500 mr-2 flex items-center gap-1">
-                  <Funnel size={16} aria-hidden="true" /> Topic Filter:
+                  <Funnel size={16} aria-hidden="true" weight="fill" /> Topic Filter:
                 </span>
                 {categories.map((cat) => (
                   <button
@@ -122,7 +122,7 @@ export default function FAQPage() {
                         <span className="font-medium text-slate-600">Category: {faq.category}</span>
                         <Link href="/checker" className="text-comelec-blue-700 font-semibold hover:underline inline-flex items-center gap-1">
                           <span>Check My Eligibility</span>
-                          <ArrowRight size={16} weight="bold" aria-hidden="true" />
+                          <ArrowRight size={16} weight="fill" aria-hidden="true" />
                         </Link>
                       </div>
                     </div>
@@ -159,7 +159,7 @@ export default function FAQPage() {
 
                 <div className="shrink-0">
                   <Link href="/contact">
-                    <Button variant="gold" size="lg" icon={<ArrowRight size={16} weight="bold" />}>
+                    <Button variant="gold" size="lg" icon={<ArrowRight size={16} weight="fill" />}>
                       Contact Election Officer
                     </Button>
                   </Link>

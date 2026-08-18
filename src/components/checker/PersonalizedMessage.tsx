@@ -68,7 +68,7 @@ export function PersonalizedMessage({
     <div className={clsx("p-6 sm:p-7 rounded-xl border shadow-card space-y-3", official.bg)}>
       <div className="flex items-start gap-3.5">
         <div className="w-8 h-8 rounded-lg bg-white shadow-subtle flex items-center justify-center text-blue-900 shrink-0 mt-0.5">
-          <Info size={20} weight="regular" aria-hidden="true" />
+          <Info size={20} weight="fill" aria-hidden="true" />
         </div>
         <div className="space-y-1.5 flex-1">
           <h3 className={clsx("text-base sm:text-lg font-semibold", official.accent)}>

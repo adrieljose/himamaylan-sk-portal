@@ -28,10 +28,10 @@ export default function ContactPage() {
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-comelec-blue-700 flex items-center gap-1 transition-colors text-slate-600 font-medium">
-              <House size={16} aria-hidden="true" />
+              <House size={16} aria-hidden="true" weight="fill" />
               <span>Home</span>
             </Link>
-            <CaretRight size={16} aria-hidden="true" className="text-slate-400" />
+            <CaretRight size={16} aria-hidden="true" className="text-slate-400" weight="fill" />
             <span className="text-comelec-blue-950 font-semibold">Contact Election Office</span>
           </nav>
         </Container>
@@ -80,7 +80,7 @@ export default function ContactPage() {
               {/* Office Hours Card */}
               <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-3">
                 <div className="w-12 h-12 rounded-lg bg-comelec-blue-900 text-comelec-gold-400 flex items-center justify-center shadow-sm">
-                  <Clock size={24} aria-hidden="true" />
+                  <Clock size={24} aria-hidden="true" weight="fill" />
                 </div>
                 <h3 className="font-semibold text-slate-900 text-lg">Operating Schedule</h3>
                 <div className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
@@ -147,7 +147,7 @@ export default function ContactPage() {
                     className="font-semibold text-comelec-blue-700 hover:underline flex items-center gap-1"
                   >
                     <span>Open in Google Maps</span>
-                    <ArrowSquareOut size={16} weight="bold" aria-hidden="true" />
+                    <ArrowSquareOut size={16} weight="fill" aria-hidden="true" />
                   </a>
                 </div>
               </div>
@@ -197,7 +197,7 @@ export default function ContactPage() {
                         className="p-3.5 rounded-lg bg-white/10 hover:bg-white/20 transition-all flex items-center justify-between text-xs sm:text-sm border border-white/10 min-h-[44px]"
                       >
                         <span className="font-semibold">{link.label}</span>
-                        <ArrowSquareOut size={16} weight="bold" aria-hidden="true" className="text-comelec-gold-400" />
+                        <ArrowSquareOut size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
                       </a>
                     ))}
                   </div>

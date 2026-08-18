@@ -30,10 +30,10 @@ export default function DisclaimerPage() {
         <Container size="xl">
           <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-comelec-blue-700 flex items-center gap-1 transition-colors text-slate-600 font-medium">
-              <House size={16} aria-hidden="true" />
+              <House size={16} aria-hidden="true" weight="fill" />
               <span>Home</span>
             </Link>
-            <CaretRight size={16} aria-hidden="true" className="text-slate-400" />
+            <CaretRight size={16} aria-hidden="true" className="text-slate-400" weight="fill" />
             <span className="text-comelec-blue-950 font-semibold">Disclaimer &amp; Privacy Policy</span>
           </nav>
         </Container>
@@ -95,7 +95,7 @@ export default function DisclaimerPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="p-5 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
                   <div className="flex items-center gap-2 text-slate-900 font-semibold text-sm">
-                    <EyeSlash size={16} aria-hidden="true" className="text-comelec-blue-700" />
+                    <EyeSlash size={16} aria-hidden="true" className="text-comelec-blue-700" weight="fill" />
                     <span>No Storage of Birthdates</span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed font-normal">
@@ -105,7 +105,7 @@ export default function DisclaimerPage() {
 
                 <div className="p-5 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
                   <div className="flex items-center gap-2 text-slate-900 font-semibold text-sm">
-                    <Lock size={16} aria-hidden="true" className="text-comelec-blue-700" />
+                    <Lock size={16} aria-hidden="true" className="text-comelec-blue-700" weight="fill" />
                     <span>No User Accounts Required</span>
                   </div>
                   <p className="text-xs text-slate-600 leading-relaxed font-normal">
@@ -148,11 +148,11 @@ export default function DisclaimerPage() {
             {/* Bottom Actions */}
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200">
               <Link href="/references" className="text-xs font-semibold text-comelec-blue-700 hover:underline flex items-center gap-1.5">
-                <FileText size={16} aria-hidden="true" className="text-comelec-gold-500" />
+                <FileText size={16} aria-hidden="true" className="text-comelec-gold-500" weight="fill" />
                 <span>Review Official Governing Laws &amp; Acts</span>
               </Link>
               <Link href="/checker">
-                <Button variant="gold" size="md" rightIcon={<ArrowRight size={16} weight="bold" />}>
+                <Button variant="gold" size="md" rightIcon={<ArrowRight size={16} weight="fill" />}>
                   Check My Eligibility
                 </Button>
               </Link>

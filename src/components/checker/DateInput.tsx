@@ -42,7 +42,7 @@ export function DateInput({
       {/* Quick Age Presets */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2">
         <div className="flex items-center gap-2">
-          <CalendarBlank size={16} weight="regular" aria-hidden="true" className="text-blue-600" />
+          <CalendarBlank size={16} weight="fill" aria-hidden="true" className="text-blue-600" />
           <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
             Quick Age Presets:
           </span>

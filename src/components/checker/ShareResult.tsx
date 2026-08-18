@@ -53,12 +53,12 @@ export function ShareResult({
     >
       {copied ? (
         <>
-          <Check size={16} weight="bold" aria-hidden="true" className="text-emerald-600" />
+          <Check size={16} weight="fill" aria-hidden="true" className="text-emerald-600" />
           <span className="text-emerald-700">Link Copied!</span>
         </>
       ) : (
         <>
-          <ShareNetwork size={16} weight="regular" aria-hidden="true" className="text-blue-700" />
+          <ShareNetwork size={16} weight="fill" aria-hidden="true" className="text-blue-700" />
           <span>Share My Result</span>
         </>
       )}

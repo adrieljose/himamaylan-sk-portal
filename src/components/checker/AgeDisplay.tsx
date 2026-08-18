@@ -76,7 +76,7 @@ export function AgeDisplay({
       <div className="relative z-10 space-y-5">
         {/* Header Tag */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-comelec-gold-300 text-xs font-semibold uppercase tracking-wider border border-white/15 shadow-inner-glow">
-          <Calendar size={16} weight="bold" aria-hidden="true" className="text-comelec-gold-400" />
+          <Calendar size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
           <span>Statutory Age on Election Day: Nov 2, 2026</span>
         </div>
 
