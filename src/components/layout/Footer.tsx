@@ -66,6 +66,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/voters" prefetch={true} className="hover:text-gold-300 transition-colors">
+                  Registered Voters Infographic
+                </Link>
+              </li>
+              <li>
                 <Link href="/faq" prefetch={true} className="hover:text-gold-300 transition-colors">
                   Frequently Asked Questions
                 </Link>

@@ -12,6 +12,7 @@ import {
   Phone,
   ShieldWarning,
   ArrowUpRight,
+  ChartBar,
 } from "@phosphor-icons/react";
 import { Container } from "../ui/Container";
 
@@ -44,6 +45,13 @@ const QUICK_SECTIONS = [
     href: "/barangays",
     icon: MapPin,
     badge: "Local Directory",
+  },
+  {
+    title: "Voters Infographics",
+    description: "Official COMELEC demographics, age cohorts (15-17, 18-30, 31+), and 19-barangay voter statistics.",
+    href: "/voters",
+    icon: ChartBar,
+    badge: "81,821 Voters",
   },
   {
     title: "Frequently Asked Questions",

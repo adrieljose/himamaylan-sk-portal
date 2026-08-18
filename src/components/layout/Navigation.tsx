@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/qualifications", label: "Qualifications" },
   { href: "/election-info", label: "2026 Election" },
   { href: "/barangays", label: "Barangays" },
+  { href: "/voters", label: "Voters Infographic" },
   { href: "/faq", label: "FAQs" },
   { href: "/references", label: "References" },
   { href: "/contact", label: "Contact" },

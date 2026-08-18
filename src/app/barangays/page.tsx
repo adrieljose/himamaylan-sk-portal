@@ -83,20 +83,13 @@ export default function BarangaysPage() {
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <a
-                href="#voter-infographics"
+              <Link
+                href="/voters"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-comelec-gold-400 text-slate-950 font-bold text-xs hover:bg-comelec-gold-300 transition-colors shadow-md"
               >
                 <ChartBar size={16} weight="fill" aria-hidden="true" />
-                <span>View Registered Voters Infographic (81,821 Voters)</span>
-              </a>
-              <a
-                href="#barangay-directory"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors border border-white/20"
-              >
-                <MapPin size={16} weight="fill" aria-hidden="true" />
-                <span>Browse 19 Barangays</span>
-              </a>
+                <span>View Registered Voters Infographics (81,821 Voters)</span>
+              </Link>
             </div>
           </div>
         </Container>
@@ -211,9 +204,32 @@ export default function BarangaysPage() {
         </Container>
       </div>
 
-      {/* Official COMELEC Voter Demographics Infographics Section */}
-      <section id="voter-infographics" className="border-t border-slate-200">
-        <VoterInfographicSection />
+      {/* Official COMELEC Voter Demographics Infographics Callout */}
+      <section className="border-t border-slate-200 bg-white py-12">
+        <Container size="xl">
+          <div className="rounded-2xl bg-gradient-to-br from-comelec-blue-950 via-comelec-blue-900 to-slate-950 p-8 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-card">
+            <div className="space-y-2 max-w-2xl text-center md:text-left">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-comelec-gold-300 text-xs font-semibold uppercase tracking-wider border border-white/15">
+                <ChartBar size={14} weight="fill" />
+                <span>Electoral Demographics</span>
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                Explore the Official Registered Voters Infographic
+              </h3>
+              <p className="text-sm text-blue-100/90 leading-relaxed font-normal">
+                View demographic data, statutory age cohorts (15–17, 18–30, 31+), ranking charts, and disparity ratios across all 19 barangays.
+              </p>
+            </div>
+            <Link
+              href="/voters"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-comelec-gold-400 text-slate-950 font-bold text-sm hover:bg-comelec-gold-300 transition-all shadow-lg hover:shadow-xl shrink-0"
+            >
+              <ChartBar size={18} weight="fill" />
+              <span>Open Voters Infographic (81,821 Voters)</span>
+              <ArrowRight size={16} weight="fill" />
+            </Link>
+          </div>
+        </Container>
       </section>
     </div>
   );

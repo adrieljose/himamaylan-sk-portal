@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/qualifications",
     "/election-info",
     "/barangays",
+    "/voters",
     "/faq",
     "/references",
     "/contact",
