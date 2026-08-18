@@ -77,10 +77,6 @@ export function EligibilityCard({
               </span>
             </div>
           </div>
-
-          <Badge variant={style.badgeVariant} size="sm">
-            {style.badgeLabel}
-          </Badge>
         </div>
 
         {/* Status Headline with Icon */}

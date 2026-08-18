@@ -37,11 +37,6 @@ export function Footer() {
             <p className="text-xs text-blue-200/80 leading-relaxed">
               Official public service portal for youth voter education, statutory age verification, and candidacy requirements for the November 2, 2026 Sangguniang Kabataan Elections.
             </p>
-
-            <div className="flex items-center gap-2 text-xs text-gold-300 font-semibold bg-blue-900/60 px-3 py-1.5 rounded-lg border border-blue-800/80 w-fit">
-              <Calendar size={16} weight="fill" aria-hidden="true" />
-              <span>Target: Nov 2, 2026</span>
-            </div>
           </div>
 
           {/* Column 2: Quick Links */}
