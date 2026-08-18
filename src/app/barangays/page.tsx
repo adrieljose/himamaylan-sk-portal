@@ -14,9 +14,11 @@ import {
   Mountains,
   Compass,
   Users,
+  ChartBar,
 } from "@phosphor-icons/react";
 import { Container } from "@/components/ui/Container";
 import { HIMAMAYLAN_BARANGAYS } from "@/config/barangays";
+import { VoterInfographicSection } from "@/components/voters/VoterInfographicSection";
 
 export default function BarangaysPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -79,12 +81,29 @@ export default function BarangaysPage() {
             <p className="text-sm sm:text-base text-blue-100/90 leading-relaxed font-normal">
               Explore the 19 official barangays of the City of Himamaylan, Negros Occidental (5th District). Every barangay elects 1 SK Chairperson and 7 SK Kagawad on <strong>November 2, 2026</strong>.
             </p>
+
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href="#voter-infographics"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-comelec-gold-400 text-slate-950 font-bold text-xs hover:bg-comelec-gold-300 transition-colors shadow-md"
+              >
+                <ChartBar size={16} weight="fill" aria-hidden="true" />
+                <span>View Registered Voters Infographic (81,821 Voters)</span>
+              </a>
+              <a
+                href="#barangay-directory"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors border border-white/20"
+              >
+                <MapPin size={16} weight="fill" aria-hidden="true" />
+                <span>Browse 19 Barangays</span>
+              </a>
+            </div>
           </div>
         </Container>
       </section>
 
       {/* Main Directory Area */}
-      <div className="py-12 sm:py-16 flex-1">
+      <div id="barangay-directory" className="py-12 sm:py-16">
         <Container size="xl">
           <div className="space-y-8">
             {/* Search & Filter Controls */}
@@ -191,6 +210,11 @@ export default function BarangaysPage() {
           </div>
         </Container>
       </div>
+
+      {/* Official COMELEC Voter Demographics Infographics Section */}
+      <section id="voter-infographics" className="border-t border-slate-200">
+        <VoterInfographicSection />
+      </section>
     </div>
   );
 }

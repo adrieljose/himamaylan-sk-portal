@@ -21,7 +21,25 @@
 
 ---
 
-## 🗺️ 2. Official Barangays Directory (`/barangays`)
+## 📊 2. Official COMELEC Registered Voters Infographics (`/barangays` & Home)
+- **Official COMELEC Dataset Integration:** Exact voter demographics extracted from the official 6-page Himamaylan City Commission on Elections Registered Voters and SK Statistics.
+- **Key Demographic Insights:**
+  - **Overall Registered Voters:** 81,821 Total Voters across 19 Barangays.
+    - *Ages 15–17 (Youth only):* 3,003 (3.7%)
+    - *Ages 18–30 (Youth & Regular dual):* 25,365 (31.0%)
+    - *Ages 31 & Above (Regular only):* 53,453 (65.3%)
+  - **Sangguniang Kabataan (SK) Voters (Ages 15–30):** 28,368 Total Youth Voters (34.7% of total voting population).
+  - **Regular Voters (Ages 18 & Above):** 78,818 Total Regular Voters.
+- **Interactive Multi-View Controls:**
+  - **Cohort View Tabs:** Instant toggling between **Overall Registered Voters (81,821)**, **SK Voters (28,368)**, and **Regular Voters (78,818)**.
+  - **Interactive Barangay Chart:** Dynamic stacked horizontal bar charts visualizing demographic proportions for each of the 19 barangays.
+  - **Interactive Sorting & Search:** Sort barangays by Highest Voters, Lowest Voters, or Alphabetical (A-Z), with real-time text filter.
+  - **Key Electoral Metrics:** Visual disparity ratio analysis (4.9× spread between Aguisan and I-Poblacion), top 7 barangay voter concentration (~50%), and youth voter share breakdown.
+  - **Official Citation:** Direct COMELEC Himamaylan City and Project of Precincts citation with statutory disclaimer.
+
+---
+
+## 🗺️ 3. Official Barangays Directory (`/barangays`)
 - **Complete 19 Barangays Database:** Comprehensive directory covering all official barangays in Himamaylan City (5th District, Negros Occidental):
   - *Aguisan, Buenavista, Cabadiangan, Cabanbanan, Carabalan, Caradio-an, Libacao, Mambagaton, Mahalang, Nabali-an, San Antonio, Sara-et, Su-ay, Talaban, To-oy, Poblacion 1, Poblacion 2, Poblacion 3, Poblacion 4*.
 - **Interactive Search & Filter:**
