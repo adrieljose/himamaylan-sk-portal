@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Info, ShieldWarning, FileText, CheckCircle, WarningCircle } from "@phosphor-icons/react";
+import { ShieldWarning } from "@phosphor-icons/react";
 
 export function CheckerNoticeBox() {
   return (
@@ -28,8 +28,7 @@ export function CheckerNoticeBox() {
       </div>
 
       <div className="rounded-xl bg-white border border-amber-200/90 p-4 sm:p-5 shadow-inner space-y-3">
-        <div className="flex items-center gap-2.5 text-comelec-blue-900">
-          <FileText size={20} weight="fill" className="text-comelec-blue-700 shrink-0" aria-hidden="true" />
+        <div>
           <h4 className="text-sm sm:text-base font-bold text-slate-900">
             Dual Ballot Privilege: Voters Aged 18 to 30 Receive 2 Separate Ballots
           </h4>
