@@ -48,7 +48,7 @@ export function Navigation() {
           </div>
 
           <div className="flex items-center justify-center sm:justify-end text-[11px] sm:text-xs text-slate-300">
-            <span className="inline-flex items-center gap-1.5 bg-blue-900/90 text-gold-300 px-2.5 py-0.5 rounded-full border border-blue-800 font-medium">
+            <span className="inline-flex items-center gap-1.5 bg-blue-900/90 text-gold-300 px-2.5 py-0.5 rounded-full font-medium">
               <Calendar size={13} weight="fill" className="text-gold-400 shrink-0" aria-hidden="true" />
               <span>Election Day: <strong className="text-white font-semibold">Nov 2, 2026</strong></span>
             </span>
