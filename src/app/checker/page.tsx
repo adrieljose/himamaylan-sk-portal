@@ -6,7 +6,7 @@ import { EligibilityChecker } from "@/components/checker/EligibilityChecker";
 import { Container } from "@/components/ui/Container";
 
 export const metadata: Metadata = {
-  title: "SK Age & Eligibility Checker (Nov 2, 2026) | Himamaylan City COMELEC",
+  title: "SK Age & Eligibility Checker | Himamaylan City COMELEC",
   description:
     "Interactive statutory age and eligibility calculator for youth voters and candidates in Himamaylan City for the 2026 Barangay and Sangguniang Kabataan Elections.",
 };
