@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     default: "Himamaylan City COMELEC | 2026 SK Age & Eligibility Checker",
     template: "%s | Himamaylan City COMELEC",
   },
+  icons: {
+    icon: "/images/comelec-logo.svg",
+    shortcut: "/images/comelec-logo.svg",
+    apple: "/images/comelec-logo.svg",
+  },
   description: electionConfig.siteDescription,
   keywords: [
     "Himamaylan City COMELEC",
