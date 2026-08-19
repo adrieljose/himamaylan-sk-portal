@@ -17,7 +17,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-  title: "Disclaimer & Privacy Notice | Himamaylan City COMELEC",
+  title: "Disclaimer & Privacy Notice",
   description:
     "Official legal disclaimer, privacy commitments, and data protection policies for the 2026 SK Age & Eligibility Checker web portal.",
 };

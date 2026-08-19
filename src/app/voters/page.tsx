@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { VoterInfographicSection } from "@/components/voters/VoterInfographicSection";
 
 export const metadata: Metadata = {
-  title: "Official Registered Voters Infographic | Himamaylan City COMELEC",
+  title: "Official Registered Voters Infographic",
   description:
     "Explore official COMELEC registered voter statistics for all 19 barangays of Himamaylan City across statutory age cohorts: 15-17, 18-30 (SK), and 31 & above.",
   keywords: [

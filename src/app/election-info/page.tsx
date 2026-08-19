@@ -20,7 +20,7 @@ import { DisclaimerBanner } from "@/components/layout/DisclaimerBanner";
 import { electionConfig } from "@/config/election";
 
 export const metadata: Metadata = {
-  title: "2026 Barangay & SK Election Information | Himamaylan City COMELEC",
+  title: "2026 Barangay & SK Election Information",
   description:
     "Comprehensive guide to the 2026 Barangay and Sangguniang Kabataan Elections in Himamaylan City: election date, youth council roles, voter registration, and candidate filing.",
 };

@@ -15,7 +15,7 @@ import { Container } from "@/components/ui/Container";
 import { CONTACT_CONFIG } from "@/config/contact";
 
 export const metadata: Metadata = {
-  title: "Contact Election Office | Himamaylan City COMELEC",
+  title: "Contact Election Office",
   description:
     "Official directory for the Office of the Election Officer in Himamaylan City: address at City Hall Compound, telephone hotlines, email assistance, and office hours.",
 };

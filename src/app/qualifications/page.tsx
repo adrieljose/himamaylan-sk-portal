@@ -19,7 +19,7 @@ import { Badge } from "@/components/ui/Badge";
 import { DisclaimerBanner } from "@/components/layout/DisclaimerBanner";
 
 export const metadata: Metadata = {
-  title: "SK Qualifications & Legal Criteria | Himamaylan City COMELEC",
+  title: "SK Qualifications & Legal Criteria",
   description:
     "Official legal qualifications for SK voters (15–30) and SK candidates (18–24) under RA 10742 and RA 11768 for the 2026 Barangay and Sangguniang Kabataan Elections.",
 };

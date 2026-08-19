@@ -15,7 +15,7 @@ import { LEGAL_REFERENCES } from "@/config/references";
 import { electionConfig } from "@/config/election";
 
 export const metadata: Metadata = {
-  title: "Statutory References & Laws | Himamaylan City COMELEC",
+  title: "Statutory References & Laws",
   description:
     "Official legal authorities, Republic Acts, and COMELEC resolutions governing the 2026 Barangay and Sangguniang Kabataan Elections.",
 };
