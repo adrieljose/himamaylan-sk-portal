@@ -1,10 +1,10 @@
-# 🗳️ Himamaylan City COMELEC — 2026 SK Age & Eligibility Checker
+# Himamaylan City COMELEC — 2026 SK Age & Eligibility Checker
 
 A civic-technology web application built for the **Himamaylan City COMELEC / Office of the Election Officer**, designed to assist youth voters and aspiring candidates across all 19 barangays of Himamaylan City, Negros Occidental for the **November 2, 2026 Barangay and Sangguniang Kabataan Elections (BSKE)**.
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 - **Exact Age Engine:** Calculates exact years, months, and days lived as of **November 2, 2026**.
 - **Dual Eligibility Check:** Evaluates both **SK Voter (15–30)** and **SK Candidate (18–24)** statutory qualification thresholds under Republic Act No. 10742 and RA 11768.
@@ -18,7 +18,7 @@ A civic-technology web application built for the **Himamaylan City COMELEC / Off
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Framework:** [Next.js 14 (App Router)](https://nextjs.org/)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
@@ -29,7 +29,7 @@ A civic-technology web application built for the **Himamaylan City COMELEC / Off
 
 ---
 
-## 🏛️ Statutory Authority
+## Statutory Authority
 
 1. **Republic Act No. 10742** — *Sangguniang Kabataan Reform Act of 2015*
 2. **Republic Act No. 11768** — *Amendments to the SK Reform Act*
@@ -38,7 +38,7 @@ A civic-technology web application built for the **Himamaylan City COMELEC / Off
 
 ---
 
-## 🚀 Getting Started Locally
+## Getting Started Locally
 
 ### 1. Clone & Install Dependencies
 ```bash
@@ -61,7 +61,7 @@ npm run start
 
 ---
 
-## 🌐 Deploying to Vercel
+## Deploying to Vercel
 
 1. Push your repository to GitHub or GitLab.
 2. Import the repository in [Vercel](https://vercel.com/new).
@@ -71,7 +71,7 @@ npm run start
 
 ---
 
-## 🏢 Office of the Election Officer — Himamaylan City
+## Office of the Election Officer — Himamaylan City
 
 - **Location:** Ground Floor Executive Building, Himamaylan City Hall Compound, Rizal St., Himamaylan City, Negros Occidental 6108
 - **Hours:** Monday to Friday, 8:00 AM – 5:00 PM

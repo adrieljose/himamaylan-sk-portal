@@ -31,7 +31,7 @@ export function CheckerNoticeBox() {
         <div className="flex items-center gap-2.5 text-comelec-blue-900">
           <FileText size={20} weight="fill" className="text-comelec-blue-700 shrink-0" aria-hidden="true" />
           <h4 className="text-sm sm:text-base font-bold text-slate-900">
-            🗳️ Dual Ballot Privilege: Voters Aged 18 to 30 Receive 2 Separate Ballots
+            Dual Ballot Privilege: Voters Aged 18 to 30 Receive 2 Separate Ballots
           </h4>
         </div>
 

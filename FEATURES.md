@@ -6,9 +6,9 @@
 
 ---
 
-## 🏛️ 1. Core Civic Features & Interactive Tools
+## 1. Core Civic Features & Interactive Tools
 
-### ⚡ Statutory Age & Eligibility Calculator (`/checker`)
+### Statutory Age & Eligibility Calculator (`/checker`)
 - **Precise Date-of-Birth Verification:** Accurately computes exact age in years, months, and days down to the statutory election cutoff date (**November 2, 2026**).
 - **Dual Status Evaluation:**
   - **SK Youth Voter:** Evaluates eligibility for ages **15 to 30** under Republic Act No. 10742.
@@ -21,7 +21,7 @@
 
 ---
 
-## 📊 2. Official COMELEC Registered Voters Infographics (`/barangays` & Home)
+## 2. Official COMELEC Registered Voters Infographics (`/barangays` & Home)
 - **Official COMELEC Dataset Integration:** Exact voter demographics extracted from the official 6-page Himamaylan City Commission on Elections Registered Voters and SK Statistics.
 - **Key Demographic Insights:**
   - **Overall Registered Voters:** 81,821 Total Voters across 19 Barangays.
@@ -39,7 +39,7 @@
 
 ---
 
-## 🗺️ 3. Official Barangays Directory (`/barangays`)
+## 3. Official Barangays Directory (`/barangays`)
 - **Complete 19 Barangays Database:** Comprehensive directory covering all official barangays in Himamaylan City (5th District, Negros Occidental):
   - *Aguisan, Buenavista, Cabadiangan, Cabanbanan, Carabalan, Caradio-an, Libacao, Mambagaton, Mahalang, Nabali-an, San Antonio, Sara-et, Su-ay, Talaban, To-oy, Poblacion 1, Poblacion 2, Poblacion 3, Poblacion 4*.
 - **Interactive Search & Filter:**
@@ -49,32 +49,32 @@
 
 ---
 
-## 📜 3. Educational & Electoral Resource Pages
+## 3. Educational & Electoral Resource Pages
 
-### ⚖️ Qualifications & Disqualifications (`/qualifications`)
+### Qualifications & Disqualifications (`/qualifications`)
 - **Voter Qualifications Matrix:** Complete statutory rules for Katipunan ng Kabataan members (Philippine citizenship, 6-month residency, age requirements).
 - **Candidate Qualifications & Disqualifications:** Clear breakdown of Republic Act No. 10742 as amended by RA 11768:
   - Strict **Anti-Dynasty Clause** (prohibiting relationships up to the 2nd civil degree of consanguinity or affinity to incumbent elective officials).
   - Literacy, residency, moral turpitude, and conviction disqualifications.
 
-### 📅 Election Timetable & Roadmap (`/election-info`)
+### Election Timetable & Roadmap (`/election-info`)
 - **Official BSKE Milestones:** Chronological timeline covering Voter Registration, Certificate of Candidacy (COC) Filing, Regulated Campaign Period, and Election Day.
 - **SK Organizational Structure:** Visual hierarchy showing the Sangguniang Kabataan Council (Chairperson, Kagawads, appointed Secretary & Treasurer).
 - **Key Mandates & Duties:** Highlights the 4 major pillars of youth governance (CBYDP, 10% Youth Fund Autonomy, Katipunan ng Kabataan Assemblies, Socio-Civic Programs).
 
-### ❓ Frequently Asked Questions (`/faq`)
+### Frequently Asked Questions (`/faq`)
 - **Categorized Accordions:** High-priority questions for first-time voters and aspiring youth candidates.
 - **Searchable Topics:** Registration requirements, voter reactivation, candidate age limits, anti-dynasty rules, and appointed officer qualifications.
 
-### 📚 Statutory References (`/references`)
+### Statutory References (`/references`)
 - **Legal Foundations:** Direct citations and downloadable statutory references for **Republic Act No. 10742** (SK Reform Act of 2015) and **Republic Act No. 11768** (2022 SK Amendments).
 
-### 📞 Contact & Public Assistance (`/contact`)
+### Contact & Public Assistance (`/contact`)
 - **Himamaylan City Election Office Directory:** Official physical address at Himamaylan City Hall, official contact numbers, email addresses, and public service hours.
 
 ---
 
-## 🔒 4. Privacy, Security & Compliance
+## 4. Privacy, Security & Compliance
 
 - **100% Client-Side & Private:** All birthdates, residency inputs, and calculations are computed locally inside the user's browser without database logging or server storage.
 - **Comprehensive Statutory Disclaimers:** Explicit civic notices on every page clarifying that calculations serve as informational guides, with official COMELEC records and legal resolutions prevailing.
@@ -82,7 +82,7 @@
 
 ---
 
-## 🎨 5. UI/UX & Design System
+## 5. UI/UX & Design System
 
 - **Official Civic Aesthetic:** Tailored color palette inspired by Philippine electoral and government standards (COMELEC Navy Blue `#0a2540`, Rich Gold, Slate, and Emerald accents).
 - **Solid Filled Phosphor Icons:** Unified design language utilizing `@phosphor-icons/react` filled icon variants (`weight="fill"`) across all navigation, badges, cards, and buttons.
@@ -91,7 +91,7 @@
 
 ---
 
-## 💻 6. Technical Architecture
+## 6. Technical Architecture
 
 | Technology | Specification |
 |---|---|
