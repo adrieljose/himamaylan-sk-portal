@@ -1,84 +1,97 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { Megaphone, CalendarBlank, ArrowRight } from "@phosphor-icons/react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { ANNOUNCEMENTS } from "@/config/announcements";
 import { Container } from "../ui/Container";
 import { Badge } from "../ui/Badge";
+import { Reveal } from "../motion/Reveal";
 
+/**
+ * A dated bulletin list, not a card grid. Notices are chronological records —
+ * the date is the primary axis, so it leads the row.
+ */
 export function AnnouncementsBanner() {
   return (
-    <section className="py-16 sm:py-20 bg-slate-50 border-b border-slate-200 font-sans">
-      <Container size="xl">
-        <div className="space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-lg bg-amber-100 text-amber-900 shadow-sm">
-                <Megaphone size={20} aria-hidden="true" className="text-amber-800" weight="fill" />
-              </div>
-              <div>
-                <h2 className="font-semibold text-slate-900 text-xl sm:text-2xl tracking-tight">
-                  Official Election Advisories &amp; Notices
-                </h2>
-                <p className="text-xs text-slate-500 font-normal">
-                  Broadcasts from the Himamaylan City Office of the Election Officer
-                </p>
-              </div>
-            </div>
-
-            <span className="text-xs font-medium text-slate-500 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-xs self-start sm:self-auto">
-              Official Bulletin Board
-            </span>
+    <section className="py-14 sm:py-20 lg:py-24 bg-white border-b border-line">
+      <Container>
+        <Reveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div className="max-w-2xl">
+            <p className="eyebrow">Bulletin</p>
+            <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-display font-semibold text-ink-950">
+              Advisories and notices
+            </h2>
+            <p className="mt-4 text-base text-ink-700 leading-relaxed">
+              Issued by the Office of the Election Officer, Himamaylan City.
+            </p>
           </div>
+        </Reveal>
 
-          {ANNOUNCEMENTS.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {ANNOUNCEMENTS.map((item) => (
-                <div
-                  key={item.id}
-                  className="rounded-xl p-6 sm:p-7 border border-slate-200 bg-white shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between hover:-translate-y-0.5"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-2">
-                      <Badge variant="gold" size="sm">
+        {ANNOUNCEMENTS.length > 0 ? (
+          <ol className="border-t border-ink-950">
+            {ANNOUNCEMENTS.map((item) => (
+              <li key={item.id} className="border-b border-line">
+                <article className="py-7 grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-3">
+                  <div className="md:col-span-3">
+                    <time
+                      dateTime={item.date}
+                      className="block font-display font-semibold text-sm text-ink-950"
+                    >
+                      {item.date}
+                    </time>
+                    <span className="mt-2 inline-block">
+                      <Badge
+                        variant={item.isUrgent ? "boundary" : "neutral"}
+                        size="sm"
+                        showIcon={item.isUrgent}
+                      >
                         {item.category}
                       </Badge>
-                      <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                        <CalendarBlank size={16} aria-hidden="true" weight="fill" />
-                        <span>{item.date}</span>
-                      </div>
-                    </div>
-
-                    <h3 className="font-semibold text-slate-900 text-lg leading-snug">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                      {item.content}
-                    </p>
+                    </span>
                   </div>
 
-                  {item.linkUrl && item.linkText && (
-                    <div className="mt-5 pt-4 border-t border-slate-100">
+                  <div className="md:col-span-9">
+                    <h3 className="font-display font-semibold text-ink-950 text-lg sm:text-xl leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2.5 text-sm sm:text-base text-ink-700 leading-relaxed prose-civic">
+                      {item.content}
+                    </p>
+                    {item.linkUrl && item.linkText && (
                       <Link
                         href={item.linkUrl}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-comelec-blue-800 hover:text-comelec-blue-600 group"
+                        className="mt-4 inline-flex items-center gap-2 text-sm font-display font-semibold text-navy-700 hover:text-navy-800 group"
                       >
-                        <span>{item.linkText}</span>
-                        <ArrowRight size={16} weight="fill" aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
+                        {item.linkText}
+                        <ArrowRight
+                          size={15}
+                          weight="bold"
+                          aria-hidden="true"
+                          className="group-hover:translate-x-0.5 transition-transform"
+                        />
                       </Link>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="p-8 text-center rounded-xl bg-white border border-slate-200 text-slate-500 text-sm">
-              No new election advisories at this time. Check back regularly for registration calendar updates.
-            </div>
-          )}
-        </div>
+                    )}
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div className="border-y border-line py-14 text-center">
+            <p className="font-display font-semibold text-ink-950">
+              No advisories at this time
+            </p>
+            <p className="mt-2 text-sm text-ink-700">
+              New notices from the election office will appear here.
+            </p>
+            <Link
+              href="/contact"
+              className="mt-5 inline-flex items-center gap-2 text-sm font-display font-semibold text-navy-700 hover:text-navy-800"
+            >
+              Contact the office directly
+              <ArrowRight size={15} weight="bold" aria-hidden="true" />
+            </Link>
+          </div>
+        )}
       </Container>
     </section>
   );

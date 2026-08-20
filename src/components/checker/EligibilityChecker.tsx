@@ -1,19 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Sparkle,
-  CalendarBlank,
-  ShieldCheck,
-  CheckCircle,
-  ShareNetwork,
-  CaretDown,
-  Info,
-  Buildings,
-  FileText,
-} from "@phosphor-icons/react";
+import { clsx } from "clsx";
 import { DateInput } from "./DateInput";
 import { AgeDisplay } from "./AgeDisplay";
 import { EligibilityCard } from "./EligibilityCard";
@@ -32,14 +21,24 @@ import {
   getPersonalizedAdvice,
 } from "@/lib/eligibility";
 
+const TABS = [
+  { id: "summary", label: "All requirements" },
+  { id: "timeline", label: "Age spectrum" },
+  { id: "questionnaire", label: "Self-assessment" },
+  { id: "barangay", label: "Your barangay" },
+] as const;
+
+type TabId = (typeof TABS)[number]["id"];
+
 export function EligibilityChecker() {
   const searchParams = useSearchParams();
 
   const [month, setMonth] = useState<number>(11);
   const [day, setDay] = useState<number>(2);
-  const [year, setYear] = useState<number>(2005); 
+  const [year, setYear] = useState<number>(2005);
   const [selectedBarangay, setSelectedBarangay] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"summary" | "timeline" | "questionnaire" | "barangay">("summary");
+  const [activeTab, setActiveTab] = useState<TabId>("summary");
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     const dobParam = searchParams.get("dob");
@@ -54,9 +53,7 @@ export function EligibilityChecker() {
       }
     }
 
-    if (bgyParam) {
-      setSelectedBarangay(bgyParam);
-    }
+    if (bgyParam) setSelectedBarangay(bgyParam);
   }, [searchParams]);
 
   const validation = validateDateOfBirth(month, day, year);
@@ -71,196 +68,176 @@ export function EligibilityChecker() {
     : checkEligibility(11, 2, 2005);
 
   const advice = getPersonalizedAdvice(ageResult.category, ageResult.years);
-
   const dobIso = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
+  /**
+   * Arrow-key navigation between tabs, per the WAI-ARIA tabs pattern. The old
+   * markup used plain buttons toggling `display: none`, which gave screen
+   * reader users no indication that a tab set existed at all.
+   */
+  const onTabKeyDown = (e: React.KeyboardEvent, index: number) => {
+    const last = TABS.length - 1;
+    let next = -1;
+
+    if (e.key === "ArrowRight") next = index === last ? 0 : index + 1;
+    else if (e.key === "ArrowLeft") next = index === 0 ? last : index - 1;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = last;
+    else return;
+
+    e.preventDefault();
+    setActiveTab(TABS[next].id);
+    tabRefs.current[next]?.focus();
+  };
+
   return (
-    <div className="space-y-8 max-w-5xl mx-auto">
+    <div className="space-y-10 max-w-5xl mx-auto">
+      <CheckerNoticeBox />
 
-      <div className="bezel-outer">
-        <div className="bezel-inner p-6 sm:p-10 space-y-8">
+      <DateInput
+        month={month}
+        day={day}
+        year={year}
+        onChangeMonth={setMonth}
+        onChangeDay={setDay}
+        onChangeYear={setYear}
+        onSelectQuickPreset={(m, d, y) => {
+          setMonth(m);
+          setDay(d);
+          setYear(y);
+        }}
+        isValid={isValid}
+        errorMessage={validation.errorMessage}
+      />
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
-            <div>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-comelec-blue-700 bg-comelec-blue-50 px-3 py-1 rounded-full border border-comelec-blue-200/80 mb-2">
-                <Sparkle size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-500" />
-                Official Statutory Calculator
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-                2026 Sangguniang Kabataan Age Checker
-              </h2>
-              <p className="text-sm text-slate-500 mt-1">
-                Enter your exact birthdate to evaluate youth voting and candidacies under RA 10742 &amp; RA 11768.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <div className="text-right hidden sm:block">
-                <span className="text-xs text-slate-400 font-normal block">Election Target</span>
-                <span className="text-xs font-semibold text-slate-900 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
-                  November 2, 2026
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <CheckerNoticeBox />
-
-          <DateInput
-            month={month}
-            day={day}
-            year={year}
-            onChangeMonth={setMonth}
-            onChangeDay={setDay}
-            onChangeYear={setYear}
-            onSelectQuickPreset={(m, d, y) => {
-              setMonth(m);
-              setDay(d);
-              setYear(y);
-            }}
-            isValid={isValid}
-            errorMessage={validation.errorMessage}
+      {isValid && (
+        /*
+         * No `key` here, deliberately. Keying this wrapper on the date made
+         * React destroy and rebuild the whole results subtree on every select
+         * change: the box visibly flashed, and any local state inside it —
+         * notably the six questionnaire answers — was silently discarded.
+         *
+         * The results panel is now a stable element that simply re-renders with
+         * new props. Only the individual figures animate, via AnimatedValue.
+         */
+        <div className="space-y-8 pt-8 border-t border-line">
+          <AgeDisplay
+            years={ageResult.years}
+            months={ageResult.months}
+            days={ageResult.days}
+            totalDays={ageResult.totalDays}
+            category={ageResult.category}
+            categoryLabel={ageResult.categoryLabel}
           />
 
-          <AnimatePresence mode="wait">
-            {isValid && (
-              <motion.div
-                key={`${month}-${day}-${year}`}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-8 pt-4 border-t border-slate-100"
-              >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <EligibilityCard
+              type="voter"
+              status={eligibilityResult.voterEligibility.status}
+              headline={eligibilityResult.voterEligibility.headline}
+              reason={eligibilityResult.voterEligibility.reason}
+              legalCitation={eligibilityResult.voterEligibility.legalCitation}
+            />
+            <EligibilityCard
+              type="candidate"
+              status={eligibilityResult.candidateEligibility.status}
+              headline={eligibilityResult.candidateEligibility.headline}
+              reason={eligibilityResult.candidateEligibility.reason}
+              legalCitation={eligibilityResult.candidateEligibility.legalCitation}
+            />
+          </div>
 
-                <AgeDisplay
-                  years={ageResult.years}
-                  months={ageResult.months}
-                  days={ageResult.days}
-                  totalDays={ageResult.totalDays}
-                  category={ageResult.category}
-                  categoryLabel={ageResult.categoryLabel}
+          <PersonalizedMessage
+            category={ageResult.category}
+            headline={advice.headline}
+            explanation={advice.explanation}
+            nextSteps={advice.nextSteps}
+            statutoryNote={advice.statutoryNote}
+          />
+
+          <div>
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line">
+              <div role="tablist" aria-label="More detail" className="flex flex-wrap -mb-px">
+                {TABS.map((tab, i) => {
+                  const selected = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      ref={(el) => {
+                        tabRefs.current[i] = el;
+                      }}
+                      type="button"
+                      role="tab"
+                      id={`tab-${tab.id}`}
+                      aria-selected={selected}
+                      aria-controls={`panel-${tab.id}`}
+                      tabIndex={selected ? 0 : -1}
+                      onClick={() => setActiveTab(tab.id)}
+                      onKeyDown={(e) => onTabKeyDown(e, i)}
+                      className={clsx(
+                        "px-4 py-3 min-h-[44px] font-display text-sm font-semibold border-b-[3px] transition-colors cursor-pointer",
+                        selected
+                          ? "border-orange-500 text-ink-950"
+                          : "border-transparent text-ink-700 hover:text-navy-700"
+                      )}
+                    >
+                      {tab.label}
+                      {tab.id === "barangay" && selectedBarangay && (
+                        <span className="ml-1.5 font-normal text-ink-600">
+                          ({selectedBarangay})
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="pb-2">
+                <ShareResult
+                  dobString={dobIso}
+                  calculatedAge={ageResult.years}
+                  voterEligible={eligibilityResult.isVoterEligible}
+                  candidateEligible={eligibilityResult.isCandidateEligible}
+                  barangay={selectedBarangay}
                 />
+              </div>
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <EligibilityCard
-                    type="voter"
-                    status={eligibilityResult.voterEligibility.status}
-                    headline={eligibilityResult.voterEligibility.headline}
-                    reason={eligibilityResult.voterEligibility.reason}
-                    legalCitation={eligibilityResult.voterEligibility.legalCitation}
-                  />
-
-                  <EligibilityCard
-                    type="candidate"
-                    status={eligibilityResult.candidateEligibility.status}
-                    headline={eligibilityResult.candidateEligibility.headline}
-                    reason={eligibilityResult.candidateEligibility.reason}
-                    legalCitation={eligibilityResult.candidateEligibility.legalCitation}
-                  />
+            <div className="pt-8">
+              {TABS.map((tab) => (
+                <div
+                  key={tab.id}
+                  role="tabpanel"
+                  id={`panel-${tab.id}`}
+                  aria-labelledby={`tab-${tab.id}`}
+                  tabIndex={0}
+                  hidden={activeTab !== tab.id}
+                >
+                  {tab.id === "summary" && (
+                    <EligibilitySummary
+                      years={ageResult.years}
+                      isVoterEligible={eligibilityResult.isVoterEligible}
+                      isCandidateEligible={eligibilityResult.isCandidateEligible}
+                    />
+                  )}
+                  {tab.id === "timeline" && (
+                    <AgeRangeTimeline currentAge={ageResult.years} />
+                  )}
+                  {tab.id === "questionnaire" && (
+                    <ExpandedQuestionnaire calculatedAge={ageResult.years} />
+                  )}
+                  {tab.id === "barangay" && (
+                    <BarangaySelector
+                      selectedBarangay={selectedBarangay}
+                      onSelect={setSelectedBarangay}
+                    />
+                  )}
                 </div>
-
-                <PersonalizedMessage
-                  category={ageResult.category}
-                  headline={advice.headline}
-                  explanation={advice.explanation}
-                  nextSteps={advice.nextSteps}
-                  statutoryNote={advice.statutoryNote}
-                />
-
-                <div className="space-y-4 pt-2">
-                  <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-2">
-                    <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl">
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab("summary")}
-                        className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer min-h-[44px] ${
-                          activeTab === "summary"
-                            ? "bg-white text-comelec-blue-950 shadow-sm"
-                            : "text-slate-600 hover:text-slate-900"
-                        }`}
-                      >
-                        Criteria Table
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab("timeline")}
-                        className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer min-h-[44px] ${
-                          activeTab === "timeline"
-                            ? "bg-white text-comelec-blue-950 shadow-sm"
-                            : "text-slate-600 hover:text-slate-900"
-                        }`}
-                      >
-                        Visual Spectrum
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab("questionnaire")}
-                        className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer min-h-[44px] ${
-                          activeTab === "questionnaire"
-                            ? "bg-white text-comelec-blue-950 shadow-sm"
-                            : "text-slate-600 hover:text-slate-900"
-                        }`}
-                      >
-                        Legal Questionnaire
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab("barangay")}
-                        className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer min-h-[44px] ${
-                          activeTab === "barangay"
-                            ? "bg-white text-comelec-blue-950 shadow-sm"
-                            : "text-slate-600 hover:text-slate-900"
-                        }`}
-                      >
-                        Barangay {selectedBarangay ? `(${selectedBarangay})` : "Selector"}
-                      </button>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <ShareResult
-                        dobString={dobIso}
-                        calculatedAge={ageResult.years}
-                        voterEligible={eligibilityResult.isVoterEligible}
-                        candidateEligible={eligibilityResult.isCandidateEligible}
-                        barangay={selectedBarangay}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <div style={{ display: activeTab === "summary" ? "block" : "none" }}>
-                      <EligibilitySummary
-                        years={ageResult.years}
-                        isVoterEligible={eligibilityResult.isVoterEligible}
-                        isCandidateEligible={eligibilityResult.isCandidateEligible}
-                      />
-                    </div>
-
-                    <div style={{ display: activeTab === "timeline" ? "block" : "none" }}>
-                      <AgeRangeTimeline currentAge={ageResult.years} />
-                    </div>
-
-                    <div style={{ display: activeTab === "questionnaire" ? "block" : "none" }}>
-                      <ExpandedQuestionnaire calculatedAge={ageResult.years} />
-                    </div>
-
-                    <div style={{ display: activeTab === "barangay" ? "block" : "none" }}>
-                      <BarangaySelector
-                        selectedBarangay={selectedBarangay}
-                        onSelect={setSelectedBarangay}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -2,41 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   Himamaylan City COMELEC — Global foundation
+   ========================================================================== */
+
 :root {
-  --color-blue-950: #06172e;
-  --color-blue-900: #0a2540;
-  --color-blue-800: #102e82;
-  --color-blue-700: #0f35a0;
-  --color-blue-600: #1244c8;
-  --color-blue-500: #1d5ee9;
-  --color-blue-100: #e0ebfe;
-  --color-blue-50:  #f0f5ff;
+  /* Focus indicator is a variable, not a hardcoded colour, so that dark
+     surfaces can override it and stay above the 3:1 non-text minimum.
+     Navy #14508C scores 8.2:1 on white but only 1.89:1 on the navy masthead. */
+  --focus-ring: #14508C;
+  --focus-offset: #FFFFFF;
+}
 
-  --color-gold-600: #bc7511;
-  --color-gold-500: #d99718;
-  --color-gold-400: #e6b024;
-  --color-gold-100: #faefd6;
-
-  --color-eligible: #16a34a;
-  --color-eligible-bg: #f0fdf4;
-  --color-ineligible: #dc2626;
-  --color-ineligible-bg: #fef2f2;
-  --color-boundary: #d97706;
-  --color-boundary-bg: #fffbeb;
-
-  --radius-card: 0.75rem;
-  --radius-input: 0.5rem;
-  --radius-badge: 9999px;
+/* Any dark institutional surface swaps the ring to city orange (4.4:1 on navy). */
+.on-dark {
+  --focus-ring: #F97316;
+  --focus-offset: #0A2540;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: var(--font-sans), system-ui, sans-serif;
-    color: #0f172a;
-    background-color: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
   }
 
   body {
@@ -44,25 +33,83 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
-    color: #0f172a;
+    color: #334155;
+    font-family: var(--font-sans), system-ui, sans-serif;
     overflow-x: clip;
+    /* Aligned figures everywhere: ages, dates and counts must not jitter. */
+    font-variant-numeric: tabular-nums;
   }
 
-  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), system-ui, sans-serif;
+    color: #0B1F33;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Single, surface-aware focus treatment. No !important — components that
+     need a different shape (e.g. inset rings on flush controls) can opt out. */
   :focus-visible {
-    outline: 2px solid #1244c8 !important;
-    outline-offset: 2px !important;
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Long tokens (URLs, reference citations) must reflow, not overflow. */
+  a, code {
+    overflow-wrap: anywhere;
+  }
+
+  ::selection {
+    background-color: #FFEDD5;
+    color: #0B1F33;
   }
 }
 
+@layer components {
+  /* Editorial measure for statutory prose. */
+  .prose-civic {
+    max-width: 68ch;
+  }
 
-.civic-grid-pattern {
-  background-size: 36px 36px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  .prose-civic p + p {
+    margin-top: 0.875rem;
+  }
+
+  /* Section eyebrow: a small ruled label. Replaces the pill-badge pattern. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9A3412;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 1.5rem;
+    height: 2px;
+    background-color: #EA580C;
+    flex-shrink: 0;
+  }
+
+  .on-dark .eyebrow {
+    color: #F97316;
+  }
 }
 
+/* --------------------------------------------------------------------------
+   Motion. Two animations exist, both functional:
+   `shake` signals a rejected input; `fade-rise` marks content arrival.
+   -------------------------------------------------------------------------- */
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
@@ -74,16 +121,58 @@
   animation: shake 300ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.animate-fade-rise {
+  animation: fade-rise 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* A single recomputed figure arriving. Opacity + transform only — never a
+   layout property — so a digit changing width cannot shift its neighbours. */
+@keyframes value-in {
+  from { opacity: 0; transform: translateY(-0.18em); }
+  to   { opacity: 1; transform: none; }
+}
+
+.animate-value-in {
+  animation: value-in 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --------------------------------------------------------------------------
+   Scroll-driven motion. Sections start displaced and settle as they enter the
+   viewport; the parallax layer is offset by JS writing a single custom
+   property. Both are inert under reduced-motion (see the block further down).
+   -------------------------------------------------------------------------- */
+
+/*
+ * Deliberately no `will-change` here. A page carries ~18 of these at once, and
+ * hinting them all would ask the compositor to promote eighteen layers for a
+ * one-shot 620ms fade that it already handles cheaply. `will-change` earns its
+ * cost on continuous animation, not on a single transition.
+ */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-shift, 14px), 0);
+  transition:
+    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal[data-revealed="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* The parallax layer does animate continuously while scrolling, so here the
+   hint is worth its cost — one promoted layer, for one element. */
+.parallax-layer {
+  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  will-change: transform;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -94,8 +183,29 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  /*
+   * Critical: `.reveal` starts at opacity 0 and is only made visible by an
+   * observer. Zeroing transition duration alone would still leave content
+   * invisible until (or unless) that observer fires. Reduced motion must mean
+   * "no animation", never "no content", so the final state is forced here and
+   * the parallax offset is pinned to zero.
+   */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .parallax-layer {
+    transform: none !important;
+    --parallax-y: 0px !important;
+  }
 }
 
+/* --------------------------------------------------------------------------
+   Print — results are official-looking records users bring to an office.
+   -------------------------------------------------------------------------- */
 
 @media print {
   nav,
@@ -107,12 +217,23 @@
   }
 
   body {
-    font-family: "Georgia", serif !important;
+    font-family: Georgia, "Times New Roman", serif !important;
     color: #000000 !important;
     background: #ffffff !important;
     font-size: 11pt !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: Georgia, "Times New Roman", serif !important;
+    color: #000000 !important;
+  }
+
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #333333;
   }
 
   .print-certificate-warning {

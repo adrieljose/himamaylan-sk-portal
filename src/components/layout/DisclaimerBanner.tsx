@@ -1,85 +1,57 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { ShieldWarning, Info, WarningCircle } from "@phosphor-icons/react/dist/ssr";
 import { clsx } from "clsx";
+import { Notice } from "../ui/Notice";
 
 export interface DisclaimerBannerProps {
   variant?: "inline" | "prominent" | "card";
   className?: string;
 }
 
+/**
+ * Three intensities of the same statutory caveat, all built on Notice so the
+ * disclaimer looks identical wherever it appears.
+ */
 export function DisclaimerBanner({
   variant = "inline",
   className,
 }: DisclaimerBannerProps) {
   if (variant === "prominent") {
     return (
-      <div
-        className={clsx(
-          "p-4 sm:p-5 rounded-xl bg-amber-50 border-2 border-amber-200 text-amber-950 text-xs sm:text-sm shadow-xs",
-          className
-        )}
-        role="region"
-        aria-label="Civic Disclaimer"
+      <Notice
+        tone="warning"
+        title="This is not an official certificate of eligibility"
+        className={className}
       >
-        <div className="flex items-start gap-3">
-          <ShieldWarning size={20} weight="fill" aria-hidden="true" className="text-amber-700 shrink-0 mt-0.5" />
-          <div className="space-y-1">
-            <p className="font-semibold text-amber-900">
-              Important Civic Information &amp; Eligibility Notice
-            </p>
-            <p className="text-amber-900/90 leading-relaxed font-normal">
-              This checker provides general age calculations based on user-entered information and prevailing statutory rules for the November 2, 2026 elections. 
-              <strong className="font-semibold"> It is not an official COMELEC certificate of eligibility.</strong> Official voter registration status and candidacy approvals are determined solely by official COMELEC proceedings and records.
-            </p>
-            <div className="pt-1">
-              <Link
-                href="/disclaimer"
-                className="font-semibold text-amber-900 underline hover:text-amber-950"
-              >
-                Read Complete Disclaimer &amp; Privacy Notice →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+        This checker computes your age from the date you enter and applies the statutory
+        rules for the 2 November 2026 elections. Registration status and candidacy approval
+        are determined solely by official COMELEC proceedings.{" "}
+        <Link href="/disclaimer" className="text-navy-700 font-semibold">
+          Read the full disclaimer and privacy notice
+        </Link>
+        .
+      </Notice>
     );
   }
 
   if (variant === "card") {
     return (
-      <div
-        className={clsx(
-          "p-4 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 leading-relaxed font-normal",
-          className
-        )}
-      >
-        <div className="flex items-start gap-2.5">
-          <Info size={16} aria-hidden="true" className="text-slate-500 shrink-0 mt-0.5" weight="fill" />
-          <div>
-            <span className="font-semibold text-slate-800">Civic Notice: </span>
-            <span>
-              Age determination is calculated for November 2, 2026. Additional statutory qualifications (citizenship, residency, registration, literacy, and absence of disqualifications) must be satisfied.
-            </span>
-          </div>
-        </div>
-      </div>
+      <Notice tone="statutory" className={className}>
+        Age is calculated for 2 November 2026. Citizenship, residency, registration,
+        literacy and the absence of disqualifications must also be satisfied.
+      </Notice>
     );
   }
 
   return (
-    <div
+    <p
       className={clsx(
-        "flex items-center gap-2 p-3 rounded-lg bg-blue-50 border border-blue-200 text-xs text-blue-900 font-normal",
+        "text-sm text-ink-700 border-l-[3px] border-l-line-strong pl-4 py-1",
         className
       )}
     >
-      <WarningCircle size={16} weight="fill" aria-hidden="true" className="text-blue-700 shrink-0" />
-      <span>
-        <strong className="font-semibold">Official Notice:</strong> Results are educational and informative. Official COMELEC records and resolutions prevail.
-      </span>
-    </div>
+      <span className="font-display font-semibold text-ink-900">Note: </span>
+      Results are informational. Official COMELEC records and resolutions prevail.
+    </p>
   );
 }

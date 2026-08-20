@@ -4,180 +4,184 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { List, X, Calendar, CaretRight, Sparkle } from "@phosphor-icons/react";
+import { List, X, CaretRight } from "@phosphor-icons/react";
+import { clsx } from "clsx";
 import { electionConfig } from "@/config/election";
 
+/**
+ * Seven top-level destinations. References moved to the footer (it is a
+ * citations appendix, not a task) and Contact moved to the utility bar, which
+ * is where public-sector sites conventionally put it.
+ */
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/checker", label: "SK Checker" },
+  { href: "/checker", label: "Check Eligibility", primary: true },
   { href: "/qualifications", label: "Qualifications" },
   { href: "/election-info", label: "2026 Election" },
   { href: "/barangays", label: "Barangays" },
-  { href: "/voters", label: "Voters Infographic" },
+  { href: "/voters", label: "Voter Data" },
   { href: "/faq", label: "FAQs" },
-  { href: "/references", label: "References" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 15);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full font-sans transition-all duration-200">
+    <>
+      {/*
+        The utility bar sits outside the sticky header on purpose: it scrolls
+        away and gives the viewport back, with no scroll listener, no height
+        animation and no layout shift.
+      */}
+      <div className="on-dark bg-navy-900 text-navy-100 text-xs">
+        <div className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8 py-2 flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center sm:text-left">
+          <p className="font-display tracking-[0.06em] uppercase text-2xs sm:text-xs">
+            <span className="text-orange-400 font-semibold">Republic of the Philippines</span>
+            <span className="text-navy-200/50 mx-2 hidden sm:inline">|</span>
+            <span className="hidden sm:inline">Commission on Elections</span>
+          </p>
 
-      <div className="bg-blue-950 text-slate-200 text-xs border-b border-blue-900 select-none py-1.5 px-3 sm:px-4">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-2 text-center sm:text-left">
-          <div className="flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs tracking-wider uppercase">
-            <span className="text-gold-300 font-bold">Republic of the Philippines</span>
-            <span className="text-slate-500 hidden sm:inline">•</span>
-            <span className="text-slate-300 hidden sm:inline">Himamaylan City, Negros Occidental</span>
-          </div>
-
-          <div className="flex items-center justify-center sm:justify-end text-[11px] sm:text-xs text-slate-300">
-            <span className="inline-flex items-center gap-1.5 bg-blue-900/90 text-gold-300 px-2.5 py-0.5 rounded-full font-medium">
-              <Calendar size={13} weight="fill" className="text-gold-400 shrink-0" aria-hidden="true" />
-              <span>Election Day: <strong className="text-white font-semibold">Nov 2, 2026</strong></span>
+          <div className="flex items-center gap-4 text-2xs sm:text-xs">
+            <span>
+              Election Day{" "}
+              <strong className="font-semibold text-white">
+                {electionConfig.electionDateDisplay}
+              </strong>
             </span>
+            <Link
+              href="/contact"
+              className="font-semibold text-orange-400 hover:text-orange-300 hover:underline underline-offset-2"
+            >
+              Contact the Office
+            </Link>
           </div>
         </div>
       </div>
 
-      <nav
-        className={`w-full transition-all duration-200 h-16 sm:h-[72px] flex items-center border-b ${scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-card border-slate-200"
-          : "bg-white border-slate-200"
-          }`}
-        aria-label="Main Navigation"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
-          <div className="flex items-center justify-between gap-3">
-
+      <header className="sticky top-0 z-50 bg-white border-b border-line">
+        <nav aria-label="Main" className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-6 h-[68px]">
             <Link
               href="/"
-              prefetch={true}
-              className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg p-1 -m-1"
+              prefetch
+              className="flex items-center gap-3 shrink-0 group"
+              aria-label="Himamaylan City COMELEC, home"
             >
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg bg-blue-900 p-1 flex items-center justify-center border border-blue-800 shadow-sm">
-                <Image
-                  src="/images/comelec-logo.svg"
-                  alt="COMELEC — Commission on Elections"
-                  width={36}
-                  height={36}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-bold text-sm sm:text-base text-blue-950 tracking-tight leading-none group-hover:text-blue-700 transition-colors">
-                    HIMAMAYLAN CITY
-                  </span>
-                </div>
-                <span className="text-xs text-slate-500 font-medium tracking-normal mt-0.5">
-                  2026 SK Age &amp; Eligibility Portal
+              <Image
+                src="/images/comelec-logo.svg"
+                alt=""
+                width={40}
+                height={40}
+                className="w-9 h-9 sm:w-10 sm:h-10 object-contain shrink-0"
+              />
+              <span className="flex flex-col leading-none">
+                <span className="font-display font-semibold text-sm sm:text-[0.95rem] text-ink-950 tracking-tight group-hover:text-navy-700 transition-colors">
+                  Himamaylan City
                 </span>
-              </div>
+                <span className="text-2xs sm:text-xs text-ink-600 mt-1">
+                  Office of the Election Officer
+                </span>
+              </span>
             </Link>
 
-            <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-1.5 flex-nowrap shrink-0">
+            <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1.5">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    prefetch={true}
-                    className={`relative text-xs xl:text-[13px] 2xl:text-sm font-semibold px-2 xl:px-2.5 py-1.5 rounded-lg transition-colors select-none whitespace-nowrap ${isActive
-                      ? "text-blue-900 bg-blue-50 font-bold"
-                      : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
-                      }`}
-                  >
-                    {link.label}
-                    {isActive && (
-                      <span className="absolute bottom-0 left-2 right-2 h-0.5 bg-blue-600 rounded-full" />
-                    )}
-                  </Link>
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      prefetch
+                      aria-current={isActive ? "page" : undefined}
+                      className={clsx(
+                        "relative block px-2.5 xl:px-3 py-2 text-[0.8125rem] xl:text-sm font-display transition-colors whitespace-nowrap",
+                        isActive
+                          ? "text-navy-800 font-semibold"
+                          : "text-ink-700 hover:text-navy-700",
+                        link.primary && !isActive && "font-semibold text-ink-900"
+                      )}
+                    >
+                      {link.label}
+                      {/* Active marker uses orange-500 as a rule: non-text use, 3.6:1. */}
+                      <span
+                        className={clsx(
+                          "absolute left-2.5 right-2.5 xl:left-3 xl:right-3 -bottom-px h-[3px] transition-opacity",
+                          isActive ? "bg-orange-500 opacity-100" : "opacity-0"
+                        )}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  </li>
                 );
               })}
-            </div>
-
-            <div className="hidden 2xl:flex items-center gap-2 shrink-0">
-              <Link
-                href="/checker"
-                prefetch={true}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-xs sm:text-sm font-semibold shadow-sm transition-all border border-blue-500 whitespace-nowrap"
-              >
-                <Sparkle size={16} weight="fill" className="text-gold-300" aria-hidden="true" />
-                <span>Check My Eligibility</span>
-              </Link>
-            </div>
+            </ul>
 
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg text-slate-700 hover:text-slate-950 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 cursor-pointer border border-slate-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
-              aria-label="Toggle navigation menu"
+              className="lg:hidden -mr-2 p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-800 hover:text-navy-700 hover:bg-surface-subtle rounded cursor-pointer transition-colors"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav"
             >
               {mobileMenuOpen ? (
-                <X size={20} weight="fill" aria-hidden="true" />
+                <X size={22} weight="bold" aria-hidden="true" />
               ) : (
-                <List size={20} weight="fill" aria-hidden="true" />
+                <List size={22} weight="bold" aria-hidden="true" />
               )}
             </button>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 shadow-floating p-4 space-y-2">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                prefetch={true}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-between px-4 py-3 rounded-lg text-sm font-semibold transition-colors min-h-[44px] ${isActive
-                  ? "bg-blue-900 text-white"
-                  : "text-slate-700 hover:bg-slate-100"
-                  }`}
-              >
-                <span>{link.label}</span>
-                <CaretRight size={16} weight="fill" className={isActive ? "text-gold-300" : "text-slate-400"} aria-hidden="true" />
-              </Link>
-            );
-          })}
+        {/* City orange signature rule. Replaces the gold gradient strip. */}
+        <div className="h-[3px] w-full bg-orange-500" aria-hidden="true" />
 
-          <div className="pt-2">
-            <Link
-              href="/checker"
-              prefetch={true}
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-blue-600 text-white font-semibold text-sm shadow-sm min-h-[44px]"
-            >
-              <Sparkle size={16} weight="fill" className="text-gold-300" aria-hidden="true" />
-              <span>Check My Eligibility</span>
-            </Link>
+        {mobileMenuOpen && (
+          <div
+            id="mobile-nav"
+            className="lg:hidden bg-white border-b border-line shadow-menu max-h-[calc(100dvh-8rem)] overflow-y-auto"
+          >
+            <ul className="px-5 sm:px-6">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <li key={link.href} className="border-b border-line last:border-0">
+                    <Link
+                      href={link.href}
+                      prefetch
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={clsx(
+                        "flex items-center justify-between gap-3 py-4 min-h-[44px] font-display text-[0.9375rem] transition-colors",
+                        isActive
+                          ? "text-navy-800 font-semibold"
+                          : "text-ink-800 hover:text-navy-700"
+                      )}
+                    >
+                      <span className="flex items-center gap-3">
+                        <span
+                          className={clsx(
+                            "w-[3px] h-5 shrink-0",
+                            isActive ? "bg-orange-500" : "bg-transparent"
+                          )}
+                          aria-hidden="true"
+                        />
+                        {link.label}
+                      </span>
+                      <CaretRight size={15} weight="bold" aria-hidden="true" className="text-ink-400" />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        </div>
-      )}
-
-      <div className="h-1 sm:h-1.5 w-full bg-gradient-to-r from-amber-600 via-comelec-gold-400 to-amber-600 shadow-xs" />
-    </header>
+        )}
+      </header>
+    </>
   );
 }

@@ -1,77 +1,67 @@
-"use client";
-
 import React from "react";
-import { CalendarBlank, Cpu, CheckCircle, ShieldCheck } from "@phosphor-icons/react";
 import { Container } from "../ui/Container";
+import { Reveal } from "../motion/Reveal";
+
+const steps = [
+  {
+    title: "Enter your date of birth",
+    desc: "Month, day and year. The calculation runs entirely in your browser — nothing is sent to a server and nothing is stored.",
+  },
+  {
+    title: "Your age on 2 November 2026 is computed",
+    desc: "Down to the exact year, month and day, because the candidate age ceiling is measured that precisely under RA 10742 and RA 11768.",
+  },
+  {
+    title: "You get your voting and candidacy status",
+    desc: "Whether you may vote, how many ballots you receive, whether you may file a certificate of candidacy, and which requirements still apply.",
+  },
+];
 
 export function HowItWorks() {
-  const steps = [
-    {
-      num: "01",
-      icon: <CalendarBlank size={24} weight="fill" aria-hidden="true" className="text-comelec-blue-600" />,
-      title: "Input Your Date of Birth",
-      desc: "Select your month, day, and year of birth. All computations execute 100% locally in your browser with zero private data transmitted.",
-    },
-    {
-      num: "02",
-      icon: <Cpu size={24} weight="fill" aria-hidden="true" className="text-comelec-gold-500" />,
-      title: "Exact Cutoff Computation",
-      desc: "Our engine determines your precise age in years, months, and days on November 2, 2026 under Republic Act No. 10742 & RA 11768.",
-    },
-    {
-      num: "03",
-      icon: <CheckCircle size={24} weight="fill" aria-hidden="true" className="text-emerald-600" />,
-      title: "Receive Legal Eligibility Status",
-      desc: "Get instant status cards for Katipunan ng Kabataan voting (15–30), SK candidacy (18–24), self-assessment questionnaire, and personalized advice.",
-    },
-  ];
-
   return (
-    <section className="py-20 bg-slate-50 relative overflow-hidden font-sans">
-      <div className="absolute inset-0 civic-light-grid opacity-60 pointer-events-none" />
+    <section className="py-14 sm:py-20 lg:py-24 bg-white border-b border-line">
+      <Container>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-10">
+          <Reveal className="lg:col-span-4">
+            <p className="eyebrow">Using the checker</p>
+            <h2 className="mt-4 text-2xl sm:text-3xl font-display font-semibold text-ink-950">
+              Three steps, about ten seconds
+            </h2>
+            <p className="mt-4 text-base text-ink-700 leading-relaxed">
+              The checker answers one question precisely: how old will you be on election
+              day, and what does that entitle you to?
+            </p>
+          </Reveal>
 
-      <Container size="xl" className="relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <span className="text-xs font-semibold uppercase tracking-wider text-comelec-blue-700 bg-comelec-blue-50 px-3.5 py-1 rounded-full border border-comelec-blue-200 inline-block">
-            Simple 3-Step Verification
-          </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight">
-            How the Official SK Checker Works
-          </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Understanding your electoral rights and candidacy qualification for the 2026 Himamaylan City youth elections in under 10 seconds.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {steps.map((step, idx) => (
-            <div
-              key={step.num}
-              className="rounded-xl bg-white p-7 sm:p-8 border border-slate-200 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-inner">
-                    {step.icon}
-                  </div>
-                  <span className="font-mono text-3xl font-bold text-slate-300 group-hover:text-comelec-blue-600 transition-colors">
-                    {step.num}
-                  </span>
+          {/*
+            A numbered ruled list rather than three equal cards. Steps are
+            sequential, and a horizontal card row communicates the opposite.
+          */}
+          <Reveal as="div" delay={90} className="lg:col-span-8 lg:pl-4">
+          <ol className="border-t border-ink-950">
+            {steps.map((step, i) => (
+              <li
+                key={step.title}
+                className="py-7 border-b border-line flex flex-col sm:flex-row gap-4 sm:gap-8"
+              >
+                <span
+                  className="font-display font-semibold text-orange-600 text-sm shrink-0 sm:w-16 sm:pt-1"
+                  aria-hidden="true"
+                >
+                  Step {i + 1}
+                </span>
+                <div>
+                  <h3 className="font-display font-semibold text-ink-950 text-lg sm:text-xl">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-sm sm:text-base text-ink-700 leading-relaxed prose-civic">
+                    {step.desc}
+                  </p>
                 </div>
-
-                <h3 className="text-xl font-semibold text-slate-900 mb-2.5">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {step.desc}
-                </p>
-              </div>
-
-              <div className="pt-6 border-t border-slate-100 mt-6 flex items-center gap-1 text-xs font-semibold text-comelec-blue-800">
-                <span>Step {idx + 1} of 3</span>
-              </div>
-            </div>
-          ))}
+              </li>
+            ))}
+          </ol>
+          </Reveal>
         </div>
       </Container>
     </section>

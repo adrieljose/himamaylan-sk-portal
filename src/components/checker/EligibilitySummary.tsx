@@ -42,95 +42,116 @@ export function EligibilitySummary({
     : finalYears >= 18;
 
   const candidateStatusLabel = candidateEligible
-    ? "Within Range"
+    ? "Within range"
     : finalYears < 18
-    ? "Below Age Limit (<18)"
-    : "Above Age Limit (25+)";
+    ? "Below 18"
+    : "Above 24";
 
   const rows = [
     {
-      role: "SK Youth Voter",
-      criteria: "15 to 30 years old on Nov 2, 2026",
-      userValue: `${finalYears} years old (${finalMonths}m, ${finalDays}d)`,
-      eligible: voterEligible,
-      statusLabel: voterEligible ? "Within Range" : "Outside Range",
+      role: "SK voter",
+      note: "Elects the SK Chairperson and seven Kagawad",
+      criteria: "15 to 30 years old on 2 Nov 2026",
+      userValue: `${finalYears} years, ${finalMonths} months, ${finalDays} days`,
+      statusLabel: voterEligible ? "Within range" : "Outside range",
       badgeVariant: voterEligible ? ("success" as const) : ("danger" as const),
-      note: "Elects SK Chairperson and 7 Kagawad",
     },
     {
-      role: "SK Candidate (Chair / Kagawad)",
-      criteria: "18 to 24 years old on Nov 2, 2026",
-      userValue: `${finalYears} years old on Nov 2, 2026`,
-      eligible: candidateEligible,
+      role: "SK candidate",
+      note: "Chairperson or Kagawad",
+      criteria: "18 to 24 years old on 2 Nov 2026",
+      userValue: `${finalYears} years old`,
       statusLabel: candidateStatusLabel,
       badgeVariant: candidateEligible ? ("success" as const) : ("danger" as const),
-      note: "Subject to 1-yr residency & anti-dynasty rules",
     },
     {
-      role: "Regular Barangay Council Voter",
-      criteria: "18 years old and above on Nov 2, 2026",
-      userValue: `${finalYears} years old on Nov 2, 2026`,
-      eligible: regularVoterEligible,
-      statusLabel: regularVoterEligible ? "Eligible (18+)" : "Underage (<18)",
+      role: "Barangay council voter",
+      note: "Elects the Punong Barangay and seven Kagawad",
+      criteria: "18 years and above on 2 Nov 2026",
+      userValue: `${finalYears} years old`,
+      statusLabel: regularVoterEligible ? "Eligible" : "Below 18",
       badgeVariant: regularVoterEligible ? ("success" as const) : ("neutral" as const),
-      note: "Votes for Punong Barangay & 7 Barangay Kagawad",
     },
     {
-      role: "Barangay Residency Requirement",
-      criteria: "Voter: 6+ months / Candidate: 1+ year",
-      userValue: "Requires verification with Barangay / COMELEC",
-      eligible: null,
-      statusLabel: "Must Be Verified",
+      role: "Barangay residency",
+      note: "Physical residence in Himamaylan City",
+      criteria: "Voter: 6 months. Candidate: 1 year",
+      userValue: "Cannot be computed from your date of birth",
+      statusLabel: "Verify in person",
       badgeVariant: "warning" as const,
-      note: "Actual physical residence in Himamaylan City",
     },
     {
-      role: "COMELEC Voter Registration",
-      criteria: "Active registration in official COMELEC book",
-      userValue: "Requires active registration with Election Officer",
-      eligible: null,
-      statusLabel: "Must Be Verified",
+      role: "COMELEC registration",
+      note: "Active record in the official list of voters",
+      criteria: "Registered in your barangay",
+      userValue: "Cannot be computed from your date of birth",
+      statusLabel: "Verify in person",
       badgeVariant: "warning" as const,
-      note: "Visit Himamaylan City Election Office",
     },
   ];
 
   return (
-    <div className="p-6 sm:p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-4">
-      <div>
-        <h3 className="font-semibold text-slate-900 text-lg sm:text-xl">
-          Comprehensive Eligibility Summary Table
+    <section aria-labelledby="summary-heading">
+      <div className="mb-5">
+        <h3
+          id="summary-heading"
+          className="font-display font-semibold text-ink-950 text-lg sm:text-xl"
+        >
+          Every requirement, side by side
         </h3>
-        <p className="text-xs text-slate-500">
-          Side-by-side evaluation of statutory qualifications for the November 2, 2026 Elections.
+        <p className="mt-1.5 text-sm text-ink-700">
+          Two of these five depend on records this service cannot see.
         </p>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs sm:text-sm border-collapse">
+      <div className="overflow-x-auto -mx-5 px-5 sm:mx-0 sm:px-0">
+        <table className="w-full min-w-[680px] border-collapse text-left">
+          <caption className="sr-only">
+            Statutory qualifications for the 2 November 2026 elections evaluated against
+            your date of birth.
+          </caption>
           <thead>
-            <tr className="border-b-2 border-slate-200 bg-slate-50/80 text-slate-700">
-              <th className="py-3 px-3.5 font-semibold">Electoral Role / Requirement</th>
-              <th className="py-3 px-3 font-semibold hidden sm:table-cell">Legal Requirement</th>
-              <th className="py-3 px-3 font-semibold">Your Status</th>
-              <th className="py-3 px-3 font-semibold text-center">Evaluation</th>
+            <tr className="border-y border-ink-950">
+              <th
+                scope="col"
+                className="py-3.5 pr-4 font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-700"
+              >
+                Role or requirement
+              </th>
+              <th
+                scope="col"
+                className="py-3.5 px-4 font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-700"
+              >
+                What the law requires
+              </th>
+              <th
+                scope="col"
+                className="py-3.5 px-4 font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-700"
+              >
+                Your position
+              </th>
+              <th
+                scope="col"
+                className="py-3.5 pl-4 font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-700"
+              >
+                Result
+              </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
-            {rows.map((row, idx) => (
-              <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
-                <td className="py-3.5 px-3.5">
-                  <p className="font-semibold text-slate-900">{row.role}</p>
-                  <p className="text-xs text-slate-500 sm:hidden mt-0.5">{row.criteria}</p>
-                  <p className="text-xs text-slate-400 mt-0.5">{row.note}</p>
-                </td>
-                <td className="py-3.5 px-3 text-slate-600 font-medium hidden sm:table-cell">
-                  {row.criteria}
-                </td>
-                <td className="py-3.5 px-3 font-semibold text-slate-800">
-                  {row.userValue}
-                </td>
-                <td className="py-3.5 px-3 text-center">
+          <tbody className="divide-y divide-line">
+            {rows.map((row) => (
+              <tr key={row.role}>
+                <th scope="row" className="py-4 pr-4 align-top">
+                  <span className="block font-display font-semibold text-ink-950 text-sm">
+                    {row.role}
+                  </span>
+                  <span className="block mt-1 text-xs text-ink-600 font-normal">
+                    {row.note}
+                  </span>
+                </th>
+                <td className="py-4 px-4 align-top text-sm text-ink-700">{row.criteria}</td>
+                <td className="py-4 px-4 align-top text-sm text-ink-800">{row.userValue}</td>
+                <td className="py-4 pl-4 align-top">
                   <Badge variant={row.badgeVariant} size="sm">
                     {row.statusLabel}
                   </Badge>
@@ -141,9 +162,11 @@ export function EligibilitySummary({
         </table>
       </div>
 
-      <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-500 leading-relaxed">
-        * Note: Age qualification is mathematically computed based on your entered date of birth. Other criteria (residency, registration, and citizenship) must be confirmed with the Office of the Election Officer in Himamaylan City.
-      </div>
-    </div>
+      <p className="mt-5 text-xs text-ink-600 leading-relaxed prose-civic">
+        Age is computed exactly from the date of birth you entered. Residency, registration
+        and citizenship must be confirmed with the Office of the Election Officer in
+        Himamaylan City.
+      </p>
+    </section>
   );
 }

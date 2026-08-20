@@ -2,15 +2,8 @@
 
 import React, { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Sparkle,
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle,
-  XCircle,
-  MapPin,
-  FileText,
-} from "@phosphor-icons/react";
+import { ArrowRight, CheckCircle, XCircle } from "@phosphor-icons/react";
+import { clsx } from "clsx";
 import {
   MONTH_NAMES,
   DAYS_IN_MONTHS,
@@ -20,232 +13,277 @@ import {
   validateDateOfBirth,
 } from "@/lib/eligibility";
 import { HIMAMAYLAN_BARANGAYS } from "@/config/barangays";
+import { Container } from "../ui/Container";
+import { Field, Select } from "../ui/Field";
 import { CheckerNoticeBox } from "../checker/CheckerNoticeBox";
+import { Reveal } from "../motion/Reveal";
+
+const PRESET_AGES = [15, 18, 21, 24, 25, 30];
 
 export function QuickCheckerEmbed() {
   const router = useRouter();
   const [month, setMonth] = useState(11);
   const [day, setDay] = useState(2);
-  const [year, setYear] = useState(2005); 
+  const [year, setYear] = useState(2005);
   const [selectedBarangay, setSelectedBarangay] = useState<string>("");
 
-  const validation = useMemo(() => validateDateOfBirth(month, day, year), [month, day, year]);
+  const validation = useMemo(
+    () => validateDateOfBirth(month, day, year),
+    [month, day, year]
+  );
   const isValid = validation.isValid;
 
-  const ageResult = useMemo(() => {
-    return isValid ? calculateExactAge(month, day, year) : calculateExactAge(11, 2, 2005);
-  }, [month, day, year, isValid]);
+  const ageResult = useMemo(
+    () => (isValid ? calculateExactAge(month, day, year) : calculateExactAge(11, 2, 2005)),
+    [month, day, year, isValid]
+  );
 
-  const eligibility = useMemo(() => {
-    return isValid ? checkEligibility(month, day, year) : checkEligibility(11, 2, 2005);
-  }, [month, day, year, isValid]);
+  const eligibility = useMemo(
+    () => (isValid ? checkEligibility(month, day, year) : checkEligibility(11, 2, 2005)),
+    [month, day, year, isValid]
+  );
 
   const handlePreset = (presetAge: number) => {
-    const targetYear = 2026 - presetAge;
     setMonth(11);
     setDay(2);
-    setYear(targetYear);
+    setYear(2026 - presetAge);
   };
 
-  const handleLaunchFullChecker = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const dobString = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-    const query = selectedBarangay
-      ? `/checker?dob=${dobString}&barangay=${encodeURIComponent(selectedBarangay)}`
-      : `/checker?dob=${dobString}`;
-    router.push(query);
+    const dob = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    router.push(
+      selectedBarangay
+        ? `/checker?dob=${dob}&barangay=${encodeURIComponent(selectedBarangay)}`
+        : `/checker?dob=${dob}`
+    );
   };
+
+  const outcomes = [
+    {
+      label: "Voting in the SK election",
+      sub: "Ages 15 to 30",
+      eligible: eligibility.isVoterEligible,
+      headline: eligibility.voterEligibility.headline,
+    },
+    {
+      label: "Running for SK office",
+      sub: "Ages 18 to 24",
+      eligible: eligibility.isCandidateEligible,
+      headline: eligibility.candidateEligibility.headline,
+    },
+  ];
 
   return (
-    <section id="calculator" className="py-12 sm:py-16 bg-slate-50 relative z-10 scroll-mt-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="text-center space-y-2 mb-8">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-comelec-blue-100 text-comelec-blue-900 text-xs font-semibold uppercase tracking-wider border border-comelec-blue-200">
-            <Sparkle size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-600" />
-            Interactive Civic Tool
-          </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight">
-            Instant SK Age &amp; Eligibility Calculator
+    <section
+      id="calculator"
+      aria-labelledby="calculator-heading"
+      className="py-14 sm:py-20 lg:py-24 bg-surface-subtle border-b border-line scroll-mt-20"
+    >
+      <Container size="md">
+        <Reveal className="max-w-2xl mb-10">
+          <p className="eyebrow">Quick check</p>
+          <h2
+            id="calculator-heading"
+            className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-display font-semibold text-ink-950"
+          >
+            How old will you be on election day?
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
-            Select your exact birth date below. The calculator immediately computes your statutory age on <strong>November 2, 2026</strong>.
+          <p className="mt-4 text-base text-ink-700 leading-relaxed">
+            Set your date of birth. Your status updates as you change it.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="bezel-outer shadow-floating">
-          <div className="bezel-inner p-6 sm:p-9 space-y-6">
-
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-slate-100">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                  Test Presets:
-                </span>
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {[15, 18, 21, 24, 25, 30].map((age) => (
+        <Reveal as="div" delay={90} className="bg-white border border-line rounded">
+          <div className="px-5 sm:px-8 py-6 border-b border-line">
+            <fieldset>
+              <legend className="font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-600 mb-3">
+                Jump to an age
+              </legend>
+              <div className="flex flex-wrap gap-2">
+                {PRESET_AGES.map((age) => {
+                  const active = ageResult.years === age && month === 11 && day === 2;
+                  return (
                     <button
                       key={age}
                       type="button"
                       onClick={() => handlePreset(age)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer min-h-[44px] ${ageResult.years === age && month === 11 && day === 2
-                        ? "bg-comelec-blue-900 text-comelec-gold-300 ring-2 ring-comelec-gold-400 shadow-sm"
-                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                        }`}
+                      aria-pressed={active}
+                      className={clsx(
+                        "px-4 min-h-[44px] rounded border font-display text-sm font-semibold transition-colors cursor-pointer",
+                        active
+                          ? "bg-navy-900 border-navy-900 text-white"
+                          : "bg-white border-line-strong text-ink-800 hover:border-ink-600 hover:bg-surface-subtle"
+                      )}
                     >
-                      {age} yo
+                      {age} years old
                     </button>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
+            </fieldset>
+          </div>
 
-            </div>
-
-            <CheckerNoticeBox />
-
-            <form onSubmit={handleLaunchFullChecker} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-                <div>
-                  <label htmlFor="quick-month-select" className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Birth Month
-                  </label>
-                  <select
+          <form onSubmit={handleSubmit} className="px-5 sm:px-8 py-7 space-y-6">
+            <fieldset>
+              <legend className="font-display text-sm font-semibold text-ink-900 mb-3">
+                Your date of birth
+              </legend>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <Field id="quick-month-select" label="Month">
+                  <Select
                     id="quick-month-select"
                     value={month}
                     onChange={(e) => setMonth(parseInt(e.target.value, 10))}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 focus:bg-white focus:ring-2 focus:ring-comelec-blue-600 focus:outline-none transition-all cursor-pointer min-h-[48px]"
                   >
                     {MONTH_NAMES.map((name, i) => (
                       <option key={name} value={i + 1}>
-                        {name} ({i + 1})
+                        {name}
                       </option>
                     ))}
-                  </select>
-                </div>
+                  </Select>
+                </Field>
 
-                <div>
-                  <label htmlFor="quick-day-select" className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Birth Day
-                  </label>
-                  <select
+                <Field id="quick-day-select" label="Day">
+                  <Select
                     id="quick-day-select"
                     value={day}
                     onChange={(e) => setDay(parseInt(e.target.value, 10))}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 focus:bg-white focus:ring-2 focus:ring-comelec-blue-600 focus:outline-none transition-all cursor-pointer font-mono min-h-[48px]"
+                    invalid={!isValid}
                   >
                     {DAYS_IN_MONTHS.map((d) => (
                       <option key={d} value={d}>
                         {d}
                       </option>
                     ))}
-                  </select>
-                </div>
+                  </Select>
+                </Field>
 
-                <div>
-                  <label htmlFor="quick-year-select" className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Birth Year
-                  </label>
-                  <select
+                <Field id="quick-year-select" label="Year">
+                  <Select
                     id="quick-year-select"
                     value={year}
                     onChange={(e) => setYear(parseInt(e.target.value, 10))}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-3 text-sm font-semibold text-slate-900 focus:bg-white focus:ring-2 focus:ring-comelec-blue-600 focus:outline-none transition-all font-mono cursor-pointer min-h-[48px]"
                   >
                     {YEAR_RANGE.map((y) => (
                       <option key={y} value={y}>
                         {y}
                       </option>
                     ))}
-                  </select>
-                </div>
+                  </Select>
+                </Field>
               </div>
 
-              <div>
-                <label htmlFor="quick-barangay-select" className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center gap-1">
-                  <MapPin size={16} aria-hidden="true" className="text-comelec-blue-700" weight="fill" />
-                  <span>Your Himamaylan Barangay (Optional)</span>
-                </label>
-                <select
-                  id="quick-barangay-select"
-                  value={selectedBarangay}
-                  onChange={(e) => setSelectedBarangay(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2.5 text-xs sm:text-sm font-semibold text-slate-900 focus:bg-white focus:ring-2 focus:ring-comelec-blue-600 focus:outline-none transition-all cursor-pointer min-h-[48px]"
+              {!isValid && validation.errorMessage && (
+                <p
+                  role="alert"
+                  className="mt-3 text-sm font-semibold text-status-danger"
                 >
-                  <option value="">-- Select Your Barangay (All 19 Barangays) --</option>
-                  {HIMAMAYLAN_BARANGAYS.map((bgy) => (
-                    <option key={bgy.id} value={bgy.name}>
-                      {bgy.name} ({bgy.type})
-                    </option>
-                  ))}
-                </select>
-              </div>
+                  {validation.errorMessage}
+                </p>
+              )}
+            </fieldset>
 
+            <Field
+              id="quick-barangay-select"
+              label="Your barangay"
+              optional
+              hint="Used only to show contact details for your barangay."
+            >
+              <Select
+                id="quick-barangay-select"
+                value={selectedBarangay}
+                onChange={(e) => setSelectedBarangay(e.target.value)}
+              >
+                <option value="">Select a barangay</option>
+                {HIMAMAYLAN_BARANGAYS.map((bgy) => (
+                  <option key={bgy.id} value={bgy.name}>
+                    {bgy.name}
+                  </option>
+                ))}
+              </Select>
+            </Field>
+
+            {/*
+              The result is announced politely so a screen reader user hears the
+              outcome after changing a select, without the update stealing focus.
+            */}
+            <div aria-live="polite" aria-atomic="true">
               {isValid && (
-                <div className="p-5 sm:p-6 rounded-xl bg-gradient-to-br from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border border-comelec-blue-800 shadow-card space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
-                    <div>
-                      <span className="text-xs text-comelec-gold-300 font-semibold uppercase tracking-wider block">
-                        Statutory Age on Nov 2, 2026
+                <div className="border border-line rounded overflow-hidden">
+                  <div className="px-5 py-5 bg-navy-900 on-dark">
+                    <p className="font-display text-2xs font-semibold uppercase tracking-[0.08em] text-orange-400">
+                      Your age on 2 November 2026
+                    </p>
+                    <p className="mt-2 font-display font-semibold text-white text-3xl">
+                      {ageResult.years}
+                      <span className="text-lg font-normal text-navy-100 ml-2">
+                        years, {ageResult.months} months, {ageResult.days} days
                       </span>
-                      <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                        {ageResult.years} <span className="text-base text-slate-300 font-normal">Years Old</span>{" "}
-                        <span className="text-xs text-slate-400 font-normal font-sans">
-                          ({ageResult.months}m, {ageResult.days}d)
-                        </span>
-                      </div>
-                    </div>
-
-                    <span className="px-3 py-1 rounded-full bg-white/10 text-xs font-semibold text-comelec-gold-300 border border-white/15">
-                      {ageResult.categoryLabel}
-                    </span>
+                    </p>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="p-3.5 rounded-lg bg-white/10 border border-white/10 flex items-start gap-2.5">
-                      {eligibility.isVoterEligible ? (
-                        <CheckCircle size={20} weight="fill" aria-hidden="true" className="text-emerald-400 shrink-0 mt-0.5" />
-                      ) : (
-                        <XCircle size={20} weight="fill" aria-hidden="true" className="text-rose-400 shrink-0 mt-0.5" />
-                      )}
-                      <div>
-                        <span className="text-xs text-slate-300 font-medium block">
-                          SK Voter (15–30 yrs):
-                        </span>
-                        <strong className="text-sm text-white font-semibold block">
-                          {eligibility.voterEligibility.headline}
-                        </strong>
+                  <dl className="divide-y divide-line">
+                    {outcomes.map((o) => (
+                      <div
+                        key={o.label}
+                        className="px-5 py-4 flex items-start gap-3.5"
+                      >
+                        {o.eligible ? (
+                          <CheckCircle
+                            size={20}
+                            weight="fill"
+                            aria-hidden="true"
+                            className="text-status-success shrink-0 mt-0.5"
+                          />
+                        ) : (
+                          <XCircle
+                            size={20}
+                            weight="fill"
+                            aria-hidden="true"
+                            className="text-status-danger shrink-0 mt-0.5"
+                          />
+                        )}
+                        <div className="min-w-0">
+                          <dt className="font-display font-semibold text-ink-950 text-[0.9375rem]">
+                            {o.label}
+                            <span className="ml-2 font-normal text-ink-600 text-sm">
+                              {o.sub}
+                            </span>
+                          </dt>
+                          <dd className="mt-0.5 text-sm text-ink-700">
+                            {/* Text label, never colour alone. */}
+                            <strong
+                              className={clsx(
+                                "font-semibold",
+                                o.eligible ? "text-status-success" : "text-status-danger"
+                              )}
+                            >
+                              {o.eligible ? "Eligible" : "Not eligible"}
+                            </strong>
+                            {" — "}
+                            {o.headline}
+                          </dd>
+                        </div>
                       </div>
-                    </div>
-
-                    <div className="p-3.5 rounded-lg bg-white/10 border border-white/10 flex items-start gap-2.5">
-                      {eligibility.isCandidateEligible ? (
-                        <CheckCircle size={20} weight="fill" aria-hidden="true" className="text-emerald-400 shrink-0 mt-0.5" />
-                      ) : (
-                        <XCircle size={20} weight="fill" aria-hidden="true" className="text-rose-400 shrink-0 mt-0.5" />
-                      )}
-                      <div>
-                        <span className="text-xs text-slate-300 font-medium block">
-                          SK Candidate (18–24 yrs):
-                        </span>
-                        <strong className="text-sm text-white font-semibold block">
-                          {eligibility.candidateEligibility.headline}
-                        </strong>
-                      </div>
-                    </div>
-                  </div>
+                    ))}
+                  </dl>
                 </div>
               )}
+            </div>
 
-              <button
-                type="submit"
-                className="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-comelec-gold-400 via-comelec-gold-500 to-amber-500 text-slate-950 font-bold text-sm sm:text-base shadow-card hover:shadow-glow-gold transition-all duration-200 flex items-center justify-center gap-2.5 group active:scale-[0.99] cursor-pointer border border-comelec-gold-300 min-h-[48px]"
-              >
-                <FileText size={20} weight="fill" aria-hidden="true" className="text-slate-950" />
-                <span>Check My Eligibility</span>
-                <ArrowRight size={16} weight="fill" aria-hidden="true" className="text-slate-950 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
+            <CheckerNoticeBox />
+
+            <button
+              type="submit"
+              className="w-full min-h-[52px] px-6 py-3.5 bg-navy-700 hover:bg-navy-800 text-white font-display font-semibold text-base rounded transition-colors active:translate-y-px inline-flex items-center justify-center gap-2.5 cursor-pointer"
+            >
+              See my full result
+              <ArrowRight size={18} weight="bold" aria-hidden="true" />
+            </button>
+          </form>
+        </Reveal>
+      </Container>
     </section>
   );
 }

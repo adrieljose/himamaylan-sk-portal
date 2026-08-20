@@ -1,223 +1,152 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { User, Sparkle, ShieldCheck, CheckCircle } from "@phosphor-icons/react";
+import { clsx } from "clsx";
 
 export interface AgeRangeTimelineProps {
   currentAge: number;
 }
 
+const MIN_SCALE = 12;
+const MAX_SCALE = 34;
+
+/** The four statutory bands, drawn to scale across the same axis. */
+const BANDS = [
+  { from: 12, to: 15, label: "Too young", fill: "bg-surface-sunken", text: "text-ink-700" },
+  { from: 15, to: 18, label: "SK voter", fill: "bg-navy-100", text: "text-navy-800" },
+  { from: 18, to: 25, label: "Voter and candidate", fill: "bg-orange-200", text: "text-orange-900" },
+  { from: 25, to: 31, label: "SK voter", fill: "bg-navy-100", text: "text-navy-800" },
+  { from: 31, to: 34, label: "Barangay voter", fill: "bg-surface-sunken", text: "text-ink-700" },
+];
+
+const TICKS = [15, 18, 24, 30];
+
 export function AgeRangeTimeline({ currentAge }: AgeRangeTimelineProps) {
+  const toPercent = (age: number) =>
+    ((Math.max(MIN_SCALE, Math.min(MAX_SCALE, age)) - MIN_SCALE) /
+      (MAX_SCALE - MIN_SCALE)) *
+    100;
 
-  const minScale = 12;
-  const maxScale = 34;
+  const positionPercent = useMemo(() => toPercent(currentAge), [currentAge]);
 
-  const positionPercent = useMemo(() => {
-    const clamped = Math.max(minScale, Math.min(maxScale, currentAge));
-    return ((clamped - minScale) / (maxScale - minScale)) * 100;
-  }, [currentAge]);
-
-  const bracketInfo = useMemo(() => {
-    if (currentAge < 15) {
+  const bracket = useMemo(() => {
+    if (currentAge < 15)
       return {
-        label: "Under Minimum SK Age",
-        desc: "Below 15 on Election Day (Ineligible for 2026)",
-        badgeClass: "bg-slate-100 text-slate-700 border-slate-300",
-        color: "text-slate-600",
+        label: "Below the SK age range",
+        desc: "The minimum age to join the Katipunan ng Kabataan is 15 on election day.",
       };
-    }
-    if (currentAge >= 15 && currentAge <= 17) {
+    if (currentAge <= 17)
       return {
-        label: "SK Youth Voter Only (15–17)",
-        desc: "Eligible for Katipunan ng Kabataan Voter Registration",
-        badgeClass: "bg-blue-100 text-blue-900 border-blue-300",
-        color: "text-blue-700",
+        label: "SK voter",
+        desc: "You may vote for your SK council. Standing for office opens at 18.",
       };
-    }
-    if (currentAge >= 18 && currentAge <= 24) {
+    if (currentAge <= 24)
       return {
-        label: "Dual Eligible: Voter + Candidate (18–24)",
-        desc: "Eligible for SK Voter & Elective Office (Chair/Kagawad)",
-        badgeClass: "bg-gradient-to-r from-comelec-gold-400 to-amber-400 text-slate-950 border-amber-500 font-semibold shadow-sm",
-        color: "text-amber-600",
+        label: "SK voter and candidate",
+        desc: "You are inside both the voting range and the candidate age window.",
       };
-    }
-    if (currentAge >= 25 && currentAge <= 30) {
+    if (currentAge <= 30)
       return {
-        label: "SK Youth Voter (25–30)",
-        desc: "Eligible for KK Voter (Above Candidate Age Ceiling)",
-        badgeClass: "bg-blue-100 text-blue-900 border-blue-300",
-        color: "text-blue-700",
+        label: "SK voter",
+        desc: "You may vote for your SK council. The candidate window closed at 24.",
       };
-    }
     return {
-      label: "Above SK Age Limit (31+)",
-      desc: "Regular Sangguniang Barangay Voter Only",
-      badgeClass: "bg-slate-100 text-slate-700 border-slate-300",
-      color: "text-slate-600",
+      label: "Barangay voter",
+      desc: "You are above the Katipunan ng Kabataan range and vote the barangay ballot only.",
     };
   }, [currentAge]);
 
   return (
-    <div className="p-6 sm:p-8 rounded-xl bg-white border border-slate-200 shadow-card space-y-7 @container">
-
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <h3 className="font-semibold text-slate-900 text-base sm:text-lg tracking-tight">
-              Statutory Age Spectrum &amp; Eligibility Map
-            </h3>
-          </div>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-            Visual comparative timeline of Republic Act 10742 &amp; RA 11768 youth electoral age brackets.
-          </p>
-        </div>
-
-        <div className={`px-3.5 py-1.5 rounded-full text-xs border font-semibold self-start sm:self-auto ${bracketInfo.badgeClass}`}>
-          {bracketInfo.label}
-        </div>
+    <section aria-labelledby="timeline-heading">
+      <div className="pb-4 border-b border-ink-950">
+        <h3
+          id="timeline-heading"
+          className="font-display font-semibold text-ink-950 text-lg sm:text-xl"
+        >
+          Where you sit on the age scale
+        </h3>
+        <p className="mt-1.5 text-sm text-ink-700 prose-civic">
+          Age on 2 November 2026, from {MIN_SCALE} to {MAX_SCALE}.
+        </p>
       </div>
 
-      <div className="space-y-6 pt-2">
-
-        <div className="relative w-full h-8">
+      <div className="pt-10 pb-2">
+        <div className="relative">
+          {/* Marker for the computed age. */}
           <div
-            className="absolute bottom-0 -ml-16 sm:-ml-20 transition-all duration-500 ease-out z-20 flex flex-col items-center pointer-events-none"
+            className="absolute -top-9 z-10 -translate-x-1/2 flex flex-col items-center"
             style={{ left: `${positionPercent}%` }}
           >
-            <div className="px-3 py-1 rounded-lg bg-comelec-blue-950 text-white text-xs font-semibold font-mono shadow-md border border-comelec-gold-400/60 whitespace-nowrap flex items-center gap-1.5">
-              <User size={14} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
-              <span>You: {currentAge} yrs</span>
-            </div>
-            <div className="w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-comelec-blue-950" />
-          </div>
-        </div>
-
-        <div className="relative w-full h-10 rounded-xl overflow-hidden bg-slate-200 flex border-2 border-slate-300 shadow-inner">
-
-          <div
-            style={{ width: `${((15 - minScale) / (maxScale - minScale)) * 100}%` }}
-            className="h-full bg-slate-200/90 flex flex-col items-center justify-center text-xs font-semibold text-slate-500 border-r border-slate-300 select-none"
-            title="Under 15: Below youth voter age"
-          >
-            <span>&lt; 15</span>
-            <span className="text-xs text-slate-400 hidden @sm:inline">Below SK</span>
-          </div>
-
-          <div
-            style={{ width: `${((18 - 15) / (maxScale - minScale)) * 100}%` }}
-            className={`h-full flex flex-col items-center justify-center text-xs font-semibold border-r border-blue-300 select-none transition-colors ${
-              currentAge >= 15 && currentAge <= 17
-                ? "bg-blue-200 text-blue-950 font-bold ring-2 ring-inset ring-blue-500"
-                : "bg-blue-100 text-blue-800"
-            }`}
-            title="15–17: Katipunan ng Kabataan Voter"
-          >
-            <span>15–17</span>
-            <span className="text-xs text-blue-600 hidden @sm:inline font-semibold">Voter Only</span>
-          </div>
-
-          <div
-            style={{ width: `${((25 - 18) / (maxScale - minScale)) * 100}%` }}
-            className={`h-full flex flex-col items-center justify-center border-r border-amber-600 select-none transition-all shadow-inner ${
-              currentAge >= 18 && currentAge <= 24
-                ? "bg-gradient-to-r from-comelec-blue-900 via-comelec-blue-800 to-comelec-blue-900 text-comelec-gold-300 ring-2 ring-inset ring-comelec-gold-400 font-bold"
-                : "bg-comelec-blue-900 text-white font-semibold"
-            }`}
-            title="18–24: Voter & Candidate Eligible Range"
-          >
-            <div className="flex items-center gap-1">
-              <Sparkle size={12} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
-              <span className="text-xs font-bold">18–24</span>
-            </div>
-            <span className="text-xs text-comelec-gold-300 hidden @sm:inline uppercase tracking-tighter">
-              Voter &amp; Candidate
+            <span className="whitespace-nowrap px-2.5 py-1 rounded-sm bg-ink-950 text-white font-display text-xs font-semibold">
+              You: {currentAge}
             </span>
+            <span
+              className="w-px h-3 bg-ink-950"
+              aria-hidden="true"
+            />
           </div>
 
-          <div
-            style={{ width: `${((31 - 25) / (maxScale - minScale)) * 100}%` }}
-            className={`h-full flex flex-col items-center justify-center text-xs font-semibold border-r border-slate-300 select-none transition-colors ${
-              currentAge >= 25 && currentAge <= 30
-                ? "bg-blue-200 text-blue-950 font-bold ring-2 ring-inset ring-blue-500"
-                : "bg-blue-100 text-blue-800"
-            }`}
-            title="25–30: SK Youth Voter (Above candidate limit)"
-          >
-            <span>25–30</span>
-            <span className="text-xs text-blue-600 hidden @sm:inline font-semibold">Voter Only</span>
+          {/* Bands drawn proportionally. */}
+          <div className="flex h-11 rounded-sm overflow-hidden border border-line" aria-hidden="true">
+            {BANDS.map((band) => (
+              <div
+                key={`${band.from}-${band.to}`}
+                className={clsx(
+                  "flex items-center justify-center overflow-hidden",
+                  band.fill
+                )}
+                style={{ width: `${((band.to - band.from) / (MAX_SCALE - MIN_SCALE)) * 100}%` }}
+              >
+                <span
+                  className={clsx(
+                    "px-1 text-2xs font-display font-semibold text-center leading-tight truncate",
+                    band.text
+                  )}
+                >
+                  {band.label}
+                </span>
+              </div>
+            ))}
           </div>
 
-          <div
-            style={{ width: `${((maxScale - 31) / (maxScale - minScale)) * 100}%` }}
-            className="h-full bg-slate-200/90 flex flex-col items-center justify-center text-xs font-semibold text-slate-500 select-none"
-            title="31+: Regular Barangay Voter"
-          >
-            <span>31+</span>
-            <span className="text-xs text-slate-400 hidden @sm:inline">Regular</span>
-          </div>
-        </div>
-
-        <div className="relative w-full text-xs font-mono font-semibold text-slate-500 h-5">
-          <span
-            className="absolute -translate-x-1/2"
-            style={{ left: `${((15 - minScale) / (maxScale - minScale)) * 100}%` }}
-          >
-            15
-          </span>
-          <span
-            className="absolute -translate-x-1/2 text-comelec-blue-900 font-bold text-xs"
-            style={{ left: `${((18 - minScale) / (maxScale - minScale)) * 100}%` }}
-          >
-            18
-          </span>
-          <span
-            className="absolute -translate-x-1/2 text-comelec-blue-900 font-bold text-xs"
-            style={{ left: `${((24 - minScale) / (maxScale - minScale)) * 100}%` }}
-          >
-            24
-          </span>
-          <span
-            className="absolute -translate-x-1/2"
-            style={{ left: `${((30 - minScale) / (maxScale - minScale)) * 100}%` }}
-          >
-            30
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-
-          <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-white border border-blue-200/80 shadow-xs space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-blue-950">
-                <CheckCircle size={16} weight="fill" aria-hidden="true" className="text-blue-600" />
-                SK Youth Voter Range
+          {/* Axis ticks at the statutory boundaries. */}
+          <div className="relative h-6 mt-1.5" aria-hidden="true">
+            {TICKS.map((tick) => (
+              <span
+                key={tick}
+                className="absolute -translate-x-1/2 font-display text-xs font-semibold text-ink-700"
+                style={{ left: `${toPercent(tick)}%` }}
+              >
+                {tick}
               </span>
-              <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-900">
-                15 to 30 Years Old
-              </span>
-            </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              <strong>Katipunan ng Kabataan (KK):</strong> All youth registered in the barangay who are 15 to 30 on Election Day are legally entitled to vote for SK Chairperson and 7 Kagawads (RA 10742 §3).
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-gradient-to-br from-amber-50/80 to-white border border-amber-200/80 shadow-xs space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-950">
-                <ShieldCheck size={16} weight="fill" aria-hidden="true" className="text-amber-600" />
-                SK Candidate Range
-              </span>
-              <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-amber-100 text-amber-900">
-                18 to 24 Years Old
-              </span>
-            </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              <strong>Elective Youth Officials:</strong> Must have reached 18th birthday and must NOT be 25 years old on Election Day. Candidates 25 or older are disqualified from running (RA 10742 §10).
-            </p>
+            ))}
           </div>
         </div>
       </div>
-    </div>
+
+      {/* The chart is decorative; this is the actual statement of the result. */}
+      <div className="mt-4 border-l-[3px] border-l-orange-500 bg-surface-subtle rounded-r px-5 py-4">
+        <p className="font-display font-semibold text-ink-950">
+          At {currentAge} years old you are a {bracket.label.toLowerCase()}.
+        </p>
+        <p className="mt-1.5 text-sm text-ink-700 leading-relaxed prose-civic">
+          {bracket.desc}
+        </p>
+      </div>
+
+      <dl className="mt-6 grid grid-cols-2 sm:grid-cols-4 border-t border-line">
+        {[
+          { t: "15", d: "Youngest SK voter" },
+          { t: "18", d: "Youngest candidate" },
+          { t: "24", d: "Oldest candidate" },
+          { t: "30", d: "Oldest SK voter" },
+        ].map((item) => (
+          <div key={item.t} className="py-4 pr-4 border-b border-line">
+            <dt className="font-display font-semibold text-ink-950 text-xl">{item.t}</dt>
+            <dd className="mt-0.5 text-xs text-ink-700">{item.d}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
   );
 }

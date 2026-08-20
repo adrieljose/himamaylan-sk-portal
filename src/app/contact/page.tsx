@@ -1,215 +1,165 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
-import {
-  Phone,
-  Envelope,
-  MapPin,
-  Clock,
-  ArrowSquareOut,
-  CaretRight,
-  House,
-  WarningCircle,
-} from "@phosphor-icons/react/dist/ssr";
+import { ArrowSquareOut } from "@phosphor-icons/react/dist/ssr";
 import { Container } from "@/components/ui/Container";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Notice } from "@/components/ui/Notice";
 import { CONTACT_CONFIG } from "@/config/contact";
 
 export const metadata: Metadata = {
-  title: "Contact Election Office",
+  title: "Contact the Election Office",
   description:
-    "Official directory for the Office of the Election Officer in Himamaylan City: address at City Hall Compound, telephone hotlines, email assistance, and office hours.",
+    "Office hours, telephone numbers, email addresses and location of the Office of the Election Officer, Himamaylan City.",
 };
 
 export default function ContactPage() {
+  const { officeName, agencyName, address, operatingHours, phones, emails, officialLinks, mapCoordinates } =
+    CONTACT_CONFIG;
+
   return (
-    <div className="flex-1 flex flex-col font-sans bg-slate-50 min-h-screen">
+    <>
+      <PageHeader
+        eyebrow="Contact"
+        title="Office of the Election Officer"
+        intro={`${agencyName}, ${address.city}. This is the office that holds your registration record and answers questions this website cannot.`}
+        crumbs={[{ label: "Contact" }]}
+      />
 
-      <div className="bg-white border-b border-slate-200/80 py-2.5 px-4 text-xs font-medium text-slate-500">
-        <Container size="xl">
-          <nav className="flex items-center gap-1.5" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-comelec-blue-700 flex items-center gap-1 transition-colors text-slate-600 font-medium">
-              <House size={16} aria-hidden="true" weight="fill" />
-              <span>Home</span>
-            </Link>
-            <CaretRight size={16} aria-hidden="true" className="text-slate-400" weight="fill" />
-            <span className="text-comelec-blue-950 font-semibold">Contact Election Office</span>
-          </nav>
-        </Container>
-      </div>
+      <section className="py-12 sm:py-16 lg:py-20 border-b border-line">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-12">
+            <div className="lg:col-span-5">
+              <h2 className="font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-600 pb-4 border-b border-ink-950">
+                Visit
+              </h2>
+              <address className="not-italic pt-5 text-base text-ink-800 leading-relaxed">
+                <span className="font-display font-semibold text-ink-950 block">
+                  {officeName}
+                </span>
+                <span className="block mt-2">
+                  {address.building}
+                  <br />
+                  {address.street}
+                  <br />
+                  {address.city}, {address.province} {address.postalCode}
+                  <br />
+                  {address.region}
+                </span>
+              </address>
 
-      <section className="py-12 sm:py-16 bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border-b border-comelec-blue-800 relative overflow-hidden">
-        <div className="absolute inset-0 civic-grid-pattern opacity-30 pointer-events-none" />
-        <Container size="xl" className="relative z-10">
-          <div className="max-w-3xl space-y-3">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-comelec-gold-300 border border-white/15 text-xs font-semibold uppercase tracking-wider">
-              <Phone size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
-              <span>Official Civic Directory</span>
-            </span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
-              Contact the Election Officer
-            </h1>
-            <p className="text-sm sm:text-base text-blue-100/90 leading-relaxed font-normal">
-              Get in touch with the Commission on Elections local office in Himamaylan City for voter registration assistance, Precinct Finder inquiries, and candidate filing requirements.
-            </p>
+              <h2 className="mt-10 font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-600 pb-4 border-b border-ink-950">
+                Opening hours
+              </h2>
+              <div className="pt-5">
+                <p className="font-display font-semibold text-ink-950 text-lg">
+                  {operatingHours.days}
+                </p>
+                <p className="text-base text-ink-800 mt-1">{operatingHours.hours}</p>
+                <p className="mt-3 text-sm text-ink-700 leading-relaxed prose-civic">
+                  {operatingHours.notes}
+                </p>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <h2 className="font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-600 pb-4 border-b border-ink-950">
+                Telephone
+              </h2>
+              <dl className="divide-y divide-line">
+                {phones.map((phone) => (
+                  <div
+                    key={phone.number}
+                    className="py-4 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1"
+                  >
+                    <dt className="text-sm text-ink-700">{phone.label}</dt>
+                    <dd>
+                      <a
+                        href={`tel:${phone.number.replace(/[^\d+]/g, "")}`}
+                        className="font-display font-semibold text-navy-700 hover:text-navy-800 hover:underline underline-offset-4"
+                      >
+                        {phone.number}
+                      </a>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+
+              <h2 className="mt-10 font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-600 pb-4 border-b border-ink-950">
+                Email
+              </h2>
+              <dl className="divide-y divide-line">
+                {emails.map((email) => (
+                  <div key={email.address} className="py-4">
+                    <dt className="text-sm text-ink-700">{email.label}</dt>
+                    <dd className="mt-1">
+                      <a
+                        href={`mailto:${email.address}`}
+                        className="font-display font-semibold text-navy-700 hover:text-navy-800 hover:underline underline-offset-4"
+                      >
+                        {email.address}
+                      </a>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+
+              <h2 className="mt-10 font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-600 pb-4 border-b border-ink-950">
+                Official websites
+              </h2>
+              <ul className="divide-y divide-line">
+                {officialLinks.map((link) => (
+                  <li key={link.url} className="py-4">
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 font-display font-semibold text-navy-700 hover:text-navy-800 hover:underline underline-offset-4"
+                    >
+                      {link.label}
+                      <ArrowSquareOut size={14} weight="bold" aria-hidden="true" />
+                      <span className="sr-only">(opens in a new tab)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </Container>
       </section>
 
-      <div className="py-12 sm:py-16 flex-1">
-        <Container size="xl">
-          <div className="space-y-12 max-w-5xl mx-auto">
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-              <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-3">
-                <div className="w-12 h-12 rounded-lg bg-comelec-blue-900 text-comelec-gold-400 flex items-center justify-center shadow-sm">
-                  <MapPin size={24} weight="fill" aria-hidden="true" />
-                </div>
-                <h3 className="font-semibold text-slate-900 text-lg">Office Address</h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                  {CONTACT_CONFIG.address.building}, {CONTACT_CONFIG.address.street}
-                  <br />
-                  {CONTACT_CONFIG.address.city}, {CONTACT_CONFIG.address.province} {CONTACT_CONFIG.address.postalCode}
-                  <br />
-                  <span className="text-slate-400 text-xs font-medium">{CONTACT_CONFIG.address.region}</span>
-                </p>
-              </div>
-
-              <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-3">
-                <div className="w-12 h-12 rounded-lg bg-comelec-blue-900 text-comelec-gold-400 flex items-center justify-center shadow-sm">
-                  <Clock size={24} aria-hidden="true" weight="fill" />
-                </div>
-                <h3 className="font-semibold text-slate-900 text-lg">Operating Schedule</h3>
-                <div className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                  <strong className="text-slate-900 font-semibold">{CONTACT_CONFIG.operatingHours.days}</strong>
-                  <br />
-                  {CONTACT_CONFIG.operatingHours.hours}
-                  <br />
-                  <span className="text-xs text-slate-500 mt-1 block">
-                    {CONTACT_CONFIG.operatingHours.notes}
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-3">
-                <div className="w-12 h-12 rounded-lg bg-comelec-blue-900 text-comelec-gold-400 flex items-center justify-center shadow-sm">
-                  <Phone size={24} weight="fill" aria-hidden="true" />
-                </div>
-                <h3 className="font-semibold text-slate-900 text-lg">Hotlines &amp; Phones</h3>
-                <div className="space-y-2 text-xs sm:text-sm text-slate-600">
-                  {CONTACT_CONFIG.phones.map((p) => (
-                    <div key={p.label}>
-                      <span className="text-slate-400 text-xs block">{p.label}:</span>
-                      <strong className="text-slate-900 font-semibold font-mono">{p.number}</strong>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-              <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-4 flex flex-col justify-between">
-                <div className="space-y-1.5">
-                  <h3 className="text-xl font-semibold text-slate-900">
-                    Himamaylan City Hall Location Map
-                  </h3>
-                  <p className="text-xs text-slate-500 font-normal">
-                    The Office of the Election Officer is situated within the Executive Building at the City Hall Compound.
-                  </p>
-                </div>
-
-                <div className="w-full h-72 sm:h-80 rounded-lg overflow-hidden border border-slate-200 relative bg-slate-100 shadow-inner">
-                  <iframe
-                    title="Himamaylan City Hall Compound Map"
-                    src={CONTACT_CONFIG.mapCoordinates.embedUrl}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen={false}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                </div>
-
-                <div className="pt-2 text-xs text-slate-500 flex items-center justify-between">
-                  <span className="font-mono text-xs">Coordinates: 10.0984° N, 122.8687° E</span>
-                  <a
-                    href="https://maps.google.com/?q=Himamaylan+City+Hall"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-comelec-blue-700 hover:underline flex items-center gap-1"
-                  >
-                    <span>Open in Google Maps</span>
-                    <ArrowSquareOut size={16} weight="fill" aria-hidden="true" />
-                  </a>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div className="p-7 rounded-xl bg-white border border-slate-200 shadow-card space-y-4">
-                  <h3 className="text-xl font-semibold text-slate-900">
-                    Official Email Channels
-                  </h3>
-                  <p className="text-xs text-slate-500 font-normal">
-                    For official communications, voter certificate inquiries, and legal election notices:
-                  </p>
-
-                  <div className="space-y-3">
-                    {CONTACT_CONFIG.emails.map((em) => (
-                      <div
-                        key={em.address}
-                        className="p-4 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between gap-2 text-xs sm:text-sm"
-                      >
-                        <div>
-                          <p className="text-xs text-slate-400 font-medium">{em.label}</p>
-                          <p className="font-semibold text-slate-900 font-mono">{em.address}</p>
-                        </div>
-                        <a
-                          href={`mailto:${em.address}`}
-                          className="px-3.5 py-1.5 rounded-lg bg-comelec-blue-100 text-comelec-blue-900 font-semibold text-xs hover:bg-comelec-blue-200 transition-colors min-h-[36px] inline-flex items-center"
-                        >
-                          Send Email
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="p-7 rounded-xl bg-gradient-to-br from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white border border-comelec-blue-700/60 shadow-floating space-y-4">
-                  <h3 className="text-xl font-semibold text-white">
-                    National Election Portals
-                  </h3>
-                  <div className="space-y-2.5">
-                    {CONTACT_CONFIG.officialLinks.map((link) => (
-                      <a
-                        key={link.url}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3.5 rounded-lg bg-white/10 hover:bg-white/20 transition-all flex items-center justify-between text-xs sm:text-sm border border-white/10 min-h-[44px]"
-                      >
-                        <span className="font-semibold">{link.label}</span>
-                        <ArrowSquareOut size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-950 flex items-start gap-3.5 shadow-sm">
-              <WarningCircle size={20} weight="fill" aria-hidden="true" className="text-blue-700 shrink-0 mt-0.5" />
-              <div>
-                <p className="font-semibold text-blue-900 text-sm">In-Person Voter Registration Policy</p>
-                <p className="mt-1 leading-relaxed text-slate-700 font-normal">
-                  Please be reminded that official voter registration, biometric capturing, and filing of Certificates of Candidacy (COC) cannot be processed entirely online and require personal appearance at the Office of the Election Officer with valid government identification.
-                </p>
-              </div>
-            </div>
+      <section className="py-12 sm:py-16 lg:py-20 bg-surface-subtle">
+        <Container>
+          <div className="max-w-2xl mb-8">
+            <p className="eyebrow">Location</p>
+            <h2 className="mt-4 text-2xl sm:text-3xl font-display font-semibold text-ink-950">
+              Himamaylan City Hall compound
+            </h2>
+            <p className="mt-4 text-base text-ink-700 leading-relaxed">
+              The election office is on the ground floor of the Executive Building.
+            </p>
           </div>
+
+          <div className="border border-line rounded overflow-hidden bg-white">
+            <iframe
+              title="Map showing Himamaylan City Hall, Negros Occidental"
+              src={mapCoordinates.embedUrl}
+              width="100%"
+              height="420"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="block w-full border-0"
+            />
+          </div>
+
+          <Notice tone="info" title="Before you travel" className="mt-8">
+            Registration periods can change at short notice. Telephone the office on{" "}
+            <a href={`tel:${phones[0].number.replace(/[^\d+]/g, "")}`}>
+              {phones[0].number}
+            </a>{" "}
+            to confirm it is open before making the journey.
+          </Notice>
         </Container>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }

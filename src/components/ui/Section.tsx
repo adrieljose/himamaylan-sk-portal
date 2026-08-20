@@ -4,74 +4,85 @@ import { twMerge } from "tailwind-merge";
 import { Container } from "./Container";
 
 export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+  eyebrow?: string;
   title?: string;
   subtitle?: string;
-  badge?: string;
   align?: "left" | "center";
   containerSize?: "sm" | "md" | "lg" | "xl" | "full";
-  background?: "white" | "slate" | "blue" | "subtle";
+  background?: "white" | "subtle" | "sunken" | "navy";
+  /** Hairline rule above the section. Section rhythm comes from rules, not colour blocks. */
+  ruled?: boolean;
+  headingLevel?: "h2" | "h3";
 }
 
+/**
+ * Sections are separated by hairline rules and whitespace rather than by
+ * alternating background colours — the "every other section is grey" pattern
+ * is what makes a page read as a template.
+ */
 export function Section({
   className,
+  eyebrow,
   title,
   subtitle,
-  badge,
   align = "left",
   containerSize = "lg",
   background = "white",
+  ruled = false,
+  headingLevel = "h2",
   children,
   ...props
 }: SectionProps) {
   const backgrounds = {
     white: "bg-white",
-    slate: "bg-slate-50",
-    blue: "bg-gradient-to-b from-comelec-blue-950 to-comelec-blue-900 text-white",
-    subtle: "bg-gradient-to-b from-slate-50 to-white",
+    subtle: "bg-surface-subtle",
+    sunken: "bg-surface-sunken",
+    navy: "bg-navy-900 text-navy-100 on-dark",
   };
+
+  const isDark = background === "navy";
+  const Heading = headingLevel;
 
   return (
     <section
       className={twMerge(
-        clsx("py-12 sm:py-16 lg:py-20", backgrounds[background], className)
+        clsx(
+          "py-14 sm:py-20 lg:py-24",
+          backgrounds[background],
+          ruled && !isDark && "border-t border-line",
+          className
+        )
       )}
       {...props}
     >
       <Container size={containerSize}>
-        {(title || subtitle || badge) && (
+        {(title || subtitle || eyebrow) && (
           <div
             className={clsx(
-              "mb-8 sm:mb-12",
-              align === "center" ? "text-center max-w-3xl mx-auto" : "max-w-3xl"
+              "mb-10 sm:mb-14",
+              align === "center" ? "text-center max-w-2xl mx-auto" : "max-w-2xl"
             )}
           >
-            {badge && (
-              <span
-                className={clsx(
-                  "inline-block px-3 py-1 mb-3 text-xs font-semibold uppercase tracking-wider rounded-full",
-                  background === "blue"
-                    ? "bg-comelec-gold-500/20 text-comelec-gold-300 border border-comelec-gold-400/30"
-                    : "bg-comelec-blue-100 text-comelec-blue-800 border border-comelec-blue-200"
-                )}
-              >
-                {badge}
-              </span>
+            {eyebrow && (
+              <p className={clsx("eyebrow mb-4", align === "center" && "justify-center")}>
+                {eyebrow}
+              </p>
             )}
             {title && (
-              <h2
+              <Heading
                 className={clsx(
-                  "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
-                  background === "blue" ? "text-white" : "text-slate-900"
+                  "text-2xl sm:text-3xl lg:text-4xl font-display font-semibold",
+                  isDark ? "text-white" : "text-ink-950"
                 )}
               >
                 {title}
-              </h2>
+              </Heading>
             )}
             {subtitle && (
               <p
                 className={clsx(
-                  "mt-3 text-base sm:text-lg leading-relaxed",
-                  background === "blue" ? "text-blue-100/90" : "text-slate-600"
+                  "mt-4 text-base sm:text-lg leading-relaxed",
+                  isDark ? "text-navy-100" : "text-ink-700"
                 )}
               >
                 {subtitle}

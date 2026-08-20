@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { MONTH_NAMES, DAYS_IN_MONTHS, YEAR_RANGE } from "@/lib/eligibility";
-import { WarningCircle, CheckCircle, CalendarBlank } from "@phosphor-icons/react";
+import { WarningCircle } from "@phosphor-icons/react";
 import { clsx } from "clsx";
+import { Field, Select } from "../ui/Field";
 
 export interface DateInputProps {
   month: number;
@@ -17,6 +18,15 @@ export interface DateInputProps {
   errorMessage?: string;
 }
 
+const quickPresets = [
+  { label: "15", m: 11, d: 2, y: 2011, desc: "youngest voter" },
+  { label: "18", m: 11, d: 2, y: 2008, desc: "youngest candidate" },
+  { label: "21", m: 11, d: 2, y: 2005, desc: "mid-range" },
+  { label: "24", m: 11, d: 2, y: 2002, desc: "oldest candidate" },
+  { label: "25", m: 11, d: 2, y: 2001, desc: "voter only" },
+  { label: "30", m: 11, d: 2, y: 1996, desc: "oldest voter" },
+];
+
 export function DateInput({
   month,
   day,
@@ -28,133 +38,119 @@ export function DateInput({
   isValid,
   errorMessage,
 }: DateInputProps) {
-  const quickPresets = [
-    { label: "15 yo", m: 11, d: 2, y: 2011, desc: "Min Voter" },
-    { label: "18 yo", m: 11, d: 2, y: 2008, desc: "Candidate Entrance" },
-    { label: "21 yo", m: 11, d: 2, y: 2005, desc: "Prime SK Age" },
-    { label: "24 yo", m: 11, d: 2, y: 2002, desc: "Max Candidate" },
-    { label: "25 yo", m: 11, d: 2, y: 2001, desc: "Voter Only" },
-    { label: "30 yo", m: 11, d: 2, y: 1996, desc: "Max Voter" },
-  ];
-
   return (
-    <div className="space-y-5">
-
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2">
-        <div className="flex items-center gap-2">
-          <CalendarBlank size={16} weight="fill" aria-hidden="true" className="text-blue-600" />
-          <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider">
-            Quick Age Presets:
-          </span>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-1.5">
+    <div className="space-y-6">
+      <fieldset>
+        <legend className="font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-600 mb-3">
+          Or jump to an age
+        </legend>
+        <div className="flex flex-wrap gap-2">
           {quickPresets.map((preset) => {
-            const isSelected = month === preset.m && day === preset.d && year === preset.y;
+            const isSelected =
+              month === preset.m && day === preset.d && year === preset.y;
             return (
               <button
                 key={preset.label}
                 type="button"
                 onClick={() => onSelectQuickPreset(preset.m, preset.d, preset.y)}
+                aria-pressed={isSelected}
                 className={clsx(
-                  "px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer min-h-[36px] flex items-center gap-1",
+                  "px-3.5 min-h-[44px] rounded border font-display text-sm font-semibold transition-colors cursor-pointer inline-flex items-center gap-1.5",
                   isSelected
-                    ? "bg-blue-900 text-white shadow-sm ring-2 ring-gold-400"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200"
+                    ? "bg-navy-900 border-navy-900 text-white"
+                    : "bg-white border-line-strong text-ink-800 hover:border-ink-600 hover:bg-surface-subtle"
                 )}
               >
                 <span>{preset.label}</span>
-                <span className="text-xs text-slate-400 font-normal hidden md:inline">
-                  ({preset.desc})
+                <span
+                  className={clsx(
+                    "font-normal text-xs hidden md:inline",
+                    isSelected ? "text-navy-200" : "text-ink-600"
+                  )}
+                >
+                  {preset.desc}
                 </span>
               </button>
             );
           })}
         </div>
-      </div>
+      </fieldset>
 
-      <div
+      <fieldset
         className={clsx(
-          "grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-xl border transition-all duration-200",
-          !isValid
-            ? "bg-red-50/50 border-red-400 animate-shake"
-            : "bg-surface-subtle border-slate-200"
+          "border rounded p-4 sm:p-5 transition-colors",
+          !isValid ? "border-status-danger border-2 animate-shake" : "border-line"
         )}
       >
+        <legend className="px-2 font-display text-sm font-semibold text-ink-900">
+          Your date of birth
+        </legend>
 
-        <div>
-          <label
-            htmlFor="birth-month"
-            className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5"
-          >
-            Birth Month
-          </label>
-          <select
-            id="birth-month"
-            value={month}
-            onChange={(e) => onChangeMonth(parseInt(e.target.value, 10))}
-            className="w-full h-12 bg-white border border-slate-300 rounded-lg px-3.5 text-sm font-medium text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all cursor-pointer"
-          >
-            {MONTH_NAMES.map((name, i) => (
-              <option key={name} value={i + 1}>
-                {name} ({i + 1})
-              </option>
-            ))}
-          </select>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <Field id="birth-month" label="Month">
+            <Select
+              id="birth-month"
+              value={month}
+              onChange={(e) => onChangeMonth(parseInt(e.target.value, 10))}
+            >
+              {MONTH_NAMES.map((name, i) => (
+                <option key={name} value={i + 1}>
+                  {name}
+                </option>
+              ))}
+            </Select>
+          </Field>
+
+          <Field id="birth-day" label="Day">
+            <Select
+              id="birth-day"
+              value={day}
+              invalid={!isValid}
+              aria-describedby={!isValid ? "dob-error" : undefined}
+              onChange={(e) => onChangeDay(parseInt(e.target.value, 10))}
+            >
+              {DAYS_IN_MONTHS.map((d) => (
+                <option key={d} value={d}>
+                  {d}
+                </option>
+              ))}
+            </Select>
+          </Field>
+
+          <Field id="birth-year" label="Year">
+            <Select
+              id="birth-year"
+              value={year}
+              onChange={(e) => onChangeYear(parseInt(e.target.value, 10))}
+            >
+              {YEAR_RANGE.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </Select>
+          </Field>
         </div>
 
-        <div>
-          <label
-            htmlFor="birth-day"
-            className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5"
+        {!isValid && (
+          <p
+            id="dob-error"
+            role="alert"
+            className="mt-4 flex items-start gap-2 text-sm font-semibold text-status-danger"
           >
-            Birth Day
-          </label>
-          <select
-            id="birth-day"
-            value={day}
-            onChange={(e) => onChangeDay(parseInt(e.target.value, 10))}
-            className="w-full h-12 bg-white border border-slate-300 rounded-lg px-3.5 text-sm font-medium text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all cursor-pointer font-mono"
-          >
-            {DAYS_IN_MONTHS.map((d) => (
-              <option key={d} value={d}>
-                {d}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label
-            htmlFor="birth-year"
-            className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5"
-          >
-            Birth Year
-          </label>
-          <select
-            id="birth-year"
-            value={year}
-            onChange={(e) => onChangeYear(parseInt(e.target.value, 10))}
-            className="w-full h-12 bg-white border border-slate-300 rounded-lg px-3.5 text-sm font-medium text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all font-mono cursor-pointer"
-          >
-            {YEAR_RANGE.map((y) => (
-              <option key={y} value={y}>
-                {y}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {!isValid && (
-        <div
-          role="alert"
-          className="p-3.5 rounded-lg bg-red-50 border border-red-300 text-xs text-red-900 flex items-center gap-2"
-        >
-          <WarningCircle size={16} weight="fill" aria-hidden="true" className="text-red-600 shrink-0" />
-          <span>{errorMessage || "That date doesn't look right. Please enter a valid date."}</span>
-        </div>
-      )}
+            <WarningCircle
+              size={17}
+              weight="fill"
+              aria-hidden="true"
+              className="shrink-0 mt-0.5"
+            />
+            <span>
+              {errorMessage ||
+                "That date does not exist. Check the day against the month you selected."}
+            </span>
+          </p>
+        )}
+      </fieldset>
     </div>
   );
 }

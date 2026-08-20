@@ -1,115 +1,132 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import {
-  Sparkle,
-  ArrowRight,
-  ShieldCheck,
-  CalendarBlank,
-  Users,
-  Medal,
-  MapPin,
-} from "@phosphor-icons/react";
+import Image from "next/image";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { Container } from "../ui/Container";
+import { Parallax } from "../motion/Parallax";
+import { Reveal } from "../motion/Reveal";
+import { electionConfig } from "@/config/election";
+
+/**
+ * The four facts a visitor needs before anything else. Presented as a
+ * definition list rather than stat cards: these are official figures, and a
+ * ruled table is how official figures are published.
+ */
+const atAGlance = [
+  { term: "Election day", value: electionConfig.electionDateDisplay, note: "Monday" },
+  { term: "Who may vote", value: "15 to 30", note: "years old on election day" },
+  { term: "Who may run", value: "18 to 24", note: "years old on election day" },
+  { term: "Where", value: "19 barangays", note: "Himamaylan City" },
+];
 
 export function Hero() {
-  const stats = [
-    {
-      label: "Election Day",
-      value: "Nov 2, 2026",
-      desc: "Synchronized Cutoff",
-      icon: <CalendarBlank size={16} aria-hidden="true" className="text-comelec-gold-400" weight="fill" />,
-    },
-    {
-      label: "SK Youth Voter",
-      value: "15 to 30 yrs",
-      desc: "Katipunan ng Kabataan",
-      icon: <Users size={16} aria-hidden="true" className="text-sky-400" weight="fill" />,
-    },
-    {
-      label: "SK Candidate",
-      value: "18 to 24 yrs",
-      desc: "Chair & Kagawad",
-      icon: <Medal size={16} aria-hidden="true" className="text-emerald-400" weight="fill" />,
-    },
-    {
-      label: "Local Scope",
-      value: "19 Barangays",
-      desc: "Himamaylan City",
-      icon: <MapPin size={16} aria-hidden="true" className="text-rose-400" weight="fill" />,
-    },
-  ];
-
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-comelec-blue-950 via-comelec-blue-900 to-slate-950 text-white pt-20 pb-16 sm:pt-28 sm:pb-24 border-b border-comelec-blue-800">
+    <section className="relative overflow-hidden bg-surface-subtle border-b border-line">
+      {/* See PageHeader: the seal watermark is the parallax surface. */}
+      <Parallax
+        speed={0.2}
+        maxShift={110}
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute -right-32 -top-24 hidden lg:block"
+      >
+        <Image
+          src="/images/himamaylan-seal.svg"
+          alt=""
+          width={560}
+          height={560}
+          className="w-[560px] h-[560px] opacity-[0.045]"
+        />
+      </Parallax>
 
-      <div className="absolute inset-0 civic-grid-pattern opacity-40 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-comelec-blue-500/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-20 right-10 w-[400px] h-[400px] bg-comelec-gold-500/10 rounded-full blur-[100px] pointer-events-none" />
+      <Container className="relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-12 py-14 sm:py-20 lg:py-24">
+          <Reveal className="lg:col-span-7 max-w-2xl">
+            <p className="eyebrow">2026 Barangay and SK Elections</p>
 
-      <Container size="xl" className="relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs sm:text-sm font-semibold text-slate-200 shadow-inner-glow">
-            <span className="text-comelec-gold-300 font-bold uppercase tracking-wider text-xs">
-              Official COMELEC Civic Portal
-            </span>
-            <span className="text-white/40">•</span>
-            <span>Himamaylan City, Negros Occidental</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08]">
-            Check Your SK Eligibility for the{" "}
-            <span className="bg-gradient-to-r from-comelec-gold-300 via-comelec-gold-400 to-amber-300 bg-clip-text text-transparent underline decoration-comelec-gold-500/40 underline-offset-8">
-              2026 Elections
-            </span>
-          </h1>
-
-          <p className="text-base sm:text-xl text-blue-100/90 max-w-2xl mx-auto leading-relaxed">
-            Compute your exact statutory age on <strong>November 2, 2026</strong>. Instant verification for Sangguniang Kabataan voting (15–30) and youth leadership candidacy (18–24) in Himamaylan City.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <Link
-              href="/checker"
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-lg bg-gradient-to-r from-comelec-gold-400 via-comelec-gold-500 to-amber-500 text-slate-950 font-bold text-base shadow-glow-gold hover:shadow-xl transition-all duration-200 active:scale-[0.98] border border-comelec-gold-300 min-h-[48px]"
-            >
-              <Sparkle size={20} weight="fill" aria-hidden="true" className="text-slate-950" />
-              <span>Check My Eligibility</span>
-              <span className="w-6 h-6 rounded-full bg-slate-950/15 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                <ArrowRight size={16} weight="fill" aria-hidden="true" className="text-slate-950" />
+            <h1 className="mt-5 text-[2.125rem] leading-[1.12] sm:text-[2.75rem] lg:text-[3.25rem] lg:leading-[1.08] font-display font-semibold text-ink-950 tracking-[-0.022em]">
+              Find out if you can vote or run in the{" "}
+              <span className="relative whitespace-nowrap">
+                SK elections
+                <span
+                  className="absolute left-0 right-0 -bottom-1 h-[5px] bg-orange-500"
+                  aria-hidden="true"
+                />
               </span>
-            </Link>
+            </h1>
 
-            <Link
-              href="/qualifications"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg bg-white/10 hover:bg-white/15 text-white font-bold text-base border border-white/20 backdrop-blur-sm transition-all duration-200 active:scale-[0.98] min-h-[48px]"
-            >
-              <ShieldCheck size={20} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
-              <span>View Qualifications</span>
-            </Link>
-          </div>
+            <p className="mt-7 text-lg text-ink-700 leading-relaxed prose-civic">
+              Enter your date of birth. This service computes your exact age on{" "}
+              <strong className="text-ink-900 font-semibold">
+                {electionConfig.electionDateDisplay}
+              </strong>{" "}
+              and tells you whether you meet the age requirements set by the Sangguniang
+              Kabataan Reform Act.
+            </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4 pt-8 text-left">
-            {stats.map((item) => (
-              <div
-                key={item.label}
-                className="rounded-xl bg-white/5 backdrop-blur-md border border-white/10 p-4 shadow-inner-glow transition-all hover:bg-white/10 hover:border-white/20"
+            <div className="mt-9 flex flex-col sm:flex-row gap-3">
+              <Link
+                href="/checker"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 min-h-[52px] bg-navy-700 hover:bg-navy-800 text-white font-display font-semibold text-base rounded transition-colors active:translate-y-px"
               >
-                <div className="flex items-center gap-2 mb-1.5 text-xs text-slate-300 font-semibold">
-                  {item.icon}
-                  <span>{item.label}</span>
-                </div>
-                <div className="text-lg sm:text-xl font-bold text-white font-mono tracking-tight">
-                  {item.value}
-                </div>
-                <div className="text-xs text-slate-400 mt-0.5 truncate">
-                  {item.desc}
-                </div>
-              </div>
-            ))}
-          </div>
+                Check my eligibility
+                <ArrowRight size={18} weight="bold" aria-hidden="true" />
+              </Link>
+
+              <Link
+                href="/qualifications"
+                className="inline-flex items-center justify-center px-6 py-3.5 min-h-[52px] bg-white hover:bg-surface-sunken text-ink-900 font-display font-semibold text-base border border-line-strong hover:border-ink-400 rounded transition-colors active:translate-y-px"
+              >
+                Read the full requirements
+              </Link>
+            </div>
+
+            <p className="mt-6 text-sm text-ink-600 flex items-start gap-2.5">
+              <Image
+                src="/images/himamaylan-seal.svg"
+                alt=""
+                width={22}
+                height={22}
+                className="w-[22px] h-[22px] object-contain shrink-0 mt-px"
+              />
+              <span>
+                Your date of birth is calculated in your browser. Nothing is submitted or
+                stored.
+              </span>
+            </p>
+          </Reveal>
+
+          <Reveal delay={110} className="lg:col-span-5">
+            <div className="bg-white border border-line rounded">
+              <h2 className="font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-600 px-6 pt-5 pb-4 border-b border-line">
+                At a glance
+              </h2>
+              <dl className="divide-y divide-line">
+                {atAGlance.map((item) => (
+                  <div
+                    key={item.term}
+                    className="px-6 py-4 flex items-baseline justify-between gap-4"
+                  >
+                    <dt className="text-sm text-ink-700 shrink-0">{item.term}</dt>
+                    <dd className="text-right">
+                      <span className="block font-display font-semibold text-ink-950 text-[0.9375rem]">
+                        {item.value}
+                      </span>
+                      <span className="block text-xs text-ink-600 mt-0.5">{item.note}</span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="px-6 py-4 border-t border-line bg-surface-subtle text-xs text-ink-600 rounded-b">
+                Governed by RA 10742, as amended by RA 11768.{" "}
+                <Link
+                  href="/references"
+                  className="text-navy-700 font-semibold underline underline-offset-2 hover:text-navy-800"
+                >
+                  View sources
+                </Link>
+              </p>
+            </div>
+          </Reveal>
         </div>
       </Container>
     </section>

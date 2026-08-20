@@ -1,10 +1,29 @@
 import type { Metadata, Viewport } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
+import { Lexend, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 import { electionConfig } from "@/config/election";
+
+/**
+ * Lexend is designed to reduce visual stress and improve reading proficiency —
+ * a substantive choice for a youth portal serving mixed digital literacy,
+ * not a stylistic one. Used for headings and UI labels.
+ */
+const display = Lexend({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+/** Source Sans 3 — civic workhorse, holds up at small sizes in dense statutory copy. */
+const sans = Source_Sans_3({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   themeColor: "#0a2540",
@@ -69,12 +88,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="min-h-[100dvh] flex flex-col font-sans overflow-x-clip bg-white text-slate-900 selection:bg-amber-100 selection:text-slate-950">
+    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+      <body className="min-h-[100dvh] flex flex-col font-sans overflow-x-clip bg-white text-ink-800">
+        {/*
+          Scroll-revealed sections render at opacity 0 and are made visible by an
+          IntersectionObserver. Without JavaScript that observer never runs, so
+          the page would be blank. A public information service must degrade to
+          readable text, so no-JS visitors get the fully settled state.
+        */}
+        <noscript>
+          {/* eslint-disable-next-line react/no-danger */}
+          <style
+            dangerouslySetInnerHTML={{
+              __html: ".reveal{opacity:1!important;transform:none!important}",
+            }}
+          />
+        </noscript>
 
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 px-4 py-2 bg-blue-900 text-white rounded-lg font-bold shadow-lg ring-2 ring-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:px-4 focus:py-2.5 focus:bg-navy-900 focus:text-white focus:font-display focus:font-semibold focus:text-sm focus:shadow-overlay"
         >
           Skip to main content
         </a>

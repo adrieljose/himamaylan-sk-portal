@@ -1,79 +1,85 @@
-"use client";
-
 import React from "react";
-import { ShieldWarning } from "@phosphor-icons/react";
+import Link from "next/link";
+import { Notice } from "../ui/Notice";
+
+const ballots = [
+  {
+    n: "1",
+    name: "Sangguniang Kabataan ballot",
+    detail: "Elects one SK Chairperson and seven SK Kagawad for your barangay youth council.",
+  },
+  {
+    n: "2",
+    name: "Barangay ballot",
+    detail: "Elects one Punong Barangay and seven Sangguniang Barangay members.",
+  },
+];
+
+const byAge = [
+  { range: "15 to 17", result: "SK ballot only" },
+  { range: "18 to 30", result: "Both ballots" },
+  { range: "31 and above", result: "Barangay ballot only" },
+];
 
 export function CheckerNoticeBox() {
   return (
-    <div className="rounded-2xl border-2 border-amber-300 bg-gradient-to-br from-amber-50 via-amber-50/70 to-orange-50/60 p-5 sm:p-7 shadow-sm space-y-5 text-slate-800">
+    <div className="space-y-5">
+      <Notice tone="warning" title="This is not your voter registration record">
+        This service computes your age under RA 10742, as amended by RA 11768. It is{" "}
+        <strong className="font-semibold text-ink-900">
+          not the COMELEC Certified List of Voters
+        </strong>{" "}
+        or the precinct masterlist. To vote on 2 November 2026 you must also hold an active
+        registration record with the Office of the Election Officer.{" "}
+        <Link href="/contact" className="text-navy-700 font-semibold">
+          Ask the office about your registration
+        </Link>
+        .
+      </Notice>
 
-      <div className="flex items-start gap-3.5 sm:gap-4">
-        <div className="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-          <ShieldWarning size={24} weight="fill" aria-hidden="true" />
-        </div>
-        <div className="space-y-1 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-200 text-amber-950 border border-amber-300">
-              Important Advisory
-            </span>
-          </div>
-          <h3 className="text-base sm:text-lg font-bold text-slate-950 tracking-tight">
-            This Checker is for Age &amp; Qualification Verification Only
+      <div className="border border-line rounded">
+        <div className="px-5 py-4 border-b border-line">
+          <h3 className="font-display font-semibold text-ink-950 text-[0.9375rem]">
+            How many ballots you receive
           </h3>
-          <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-            This tool computes your exact age and evaluates statutory eligibility under <strong>Republic Act No. 10742</strong> (as amended by <strong>RA 11768</strong>).
-            <strong className="text-amber-950"> This is NOT the official COMELEC Certified List of Voters (CLOV) or Precinct Masterlist.</strong> To vote on Election Day (<strong>November 2, 2026</strong>), you must have an active voter registration record with the Office of the Election Officer — Himamaylan City COMELEC.
+          <p className="mt-1 text-sm text-ink-700">
+            Voters aged 18 to 30 on election day are issued two separate ballots.
           </p>
         </div>
-      </div>
 
-      <div className="rounded-xl bg-white border border-amber-200/90 p-4 sm:p-5 shadow-inner space-y-3">
-        <div>
-          <h4 className="text-sm sm:text-base font-bold text-slate-900">
-            Dual Ballot Privilege: Voters Aged 18 to 30 Receive 2 Separate Ballots
-          </h4>
-        </div>
-
-        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-          If you are between <strong>18 and 30 years old on Election Day (Nov 2, 2026)</strong> — <em>including if you are currently or will be exactly 30 years old on that day</em> — you are a dual-qualified voter and will be issued <strong>TWO (2) OFFICIAL BALLOTS</strong> at your polling precinct:
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-
-          <div className="p-3.5 rounded-lg bg-comelec-blue-50/80 border border-comelec-blue-200 flex items-start gap-2.5">
-            <span className="w-6 h-6 rounded-full bg-comelec-blue-700 text-white text-xs font-bold flex items-center justify-center shrink-0">
-              1
-            </span>
-            <div className="text-xs">
-              <span className="font-bold text-comelec-blue-950 block text-xs sm:text-sm">
-                SK Youth Ballot (Red/Blue)
+        <ol className="divide-y divide-line">
+          {ballots.map((b) => (
+            <li key={b.n} className="px-5 py-4 flex gap-4">
+              <span
+                className="shrink-0 w-6 h-6 rounded-sm bg-navy-900 text-white font-display text-xs font-semibold flex items-center justify-center mt-0.5"
+                aria-hidden="true"
+              >
+                {b.n}
               </span>
-              <span className="text-slate-600 font-normal">
-                Elects <strong>1 SK Chairperson</strong> and <strong>7 SK Kagawad</strong> for your barangay youth council.
-              </span>
-            </div>
-          </div>
+              <div>
+                <p className="font-display font-semibold text-ink-950 text-sm">{b.name}</p>
+                <p className="mt-1 text-sm text-ink-700 leading-relaxed">{b.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
 
-          <div className="p-3.5 rounded-lg bg-emerald-50/80 border border-emerald-200 flex items-start gap-2.5">
-            <span className="w-6 h-6 rounded-full bg-emerald-700 text-white text-xs font-bold flex items-center justify-center shrink-0">
-              2
-            </span>
-            <div className="text-xs">
-              <span className="font-bold text-emerald-950 block text-xs sm:text-sm">
-                Barangay Ballot (Regular)
-              </span>
-              <span className="text-slate-600 font-normal">
-                Elects <strong>1 Punong Barangay (Captain)</strong> and <strong>7 Sangguniang Barangay Members</strong>.
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="text-[11px] text-slate-500 pt-1 flex flex-wrap items-center gap-x-3 gap-y-1 font-medium border-t border-slate-100">
-          <span>• <strong>Ages 15–17:</strong> Receives ONLY the SK Youth Ballot (1 ballot)</span>
-          <span>• <strong>Ages 18–30 (including 30):</strong> Receives BOTH SK &amp; Barangay Ballots (2 ballots)</span>
-          <span>• <strong>Ages 31 &amp; Above:</strong> Receives ONLY the Regular Barangay Ballot (1 ballot)</span>
-        </div>
+        <table className="w-full border-t border-line text-left">
+          <caption className="sr-only">Ballots issued by age on election day</caption>
+          <tbody className="divide-y divide-line">
+            {byAge.map((row) => (
+              <tr key={row.range}>
+                <th
+                  scope="row"
+                  className="px-5 py-3 font-display font-semibold text-ink-900 text-sm whitespace-nowrap"
+                >
+                  {row.range}
+                </th>
+                <td className="px-5 py-3 text-sm text-ink-700 text-right">{row.result}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

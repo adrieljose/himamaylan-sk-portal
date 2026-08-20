@@ -1,9 +1,9 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AgeCategory } from "@/lib/eligibility";
-import { Badge } from "../ui/Badge";
-import { Calendar, Sparkle, Clock, ShieldCheck } from "@phosphor-icons/react";
+import { AnimatedValue } from "../ui/AnimatedValue";
+
+/** "1 day" / "2 days" — the boundary cases here are exactly the interesting ones. */
+const plural = (n: number, unit: string) => `${n} ${unit}${n === 1 ? "" : "s"}`;
 
 export interface AgeDisplayProps {
   years: number;
@@ -14,6 +14,13 @@ export interface AgeDisplayProps {
   categoryLabel: string;
 }
 
+/**
+ * The computed age, presented as an official figure.
+ *
+ * This panel is deliberately static: the surrounding chrome, rules and labels
+ * never remount. Only the figures themselves transition, so recomputing an age
+ * reads as values updating in place rather than as the panel reloading.
+ */
 export function AgeDisplay({
   years,
   months,
@@ -22,100 +29,76 @@ export function AgeDisplay({
   category,
   categoryLabel,
 }: AgeDisplayProps) {
-  const [displayYears, setDisplayYears] = useState(years);
-
-  useEffect(() => {
-
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
-      setDisplayYears(years);
-      return;
-    }
-
-    let start = 0;
-    const duration = 450;
-    const startTime = performance.now();
-
-    const animateCount = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      setDisplayYears(Math.round(start + (years - start) * easeOut));
-
-      if (progress < 1) {
-        requestAnimationFrame(animateCount);
-      } else {
-        setDisplayYears(years);
-      }
-    };
-
-    requestAnimationFrame(animateCount);
-  }, [years]);
-
-  const getBadgeVariant = (cat: AgeCategory) => {
-    switch (cat) {
-      case "BOTH":
-      case "VOTER_ONLY":
-      case "VOTER_ABOVE_CANDIDATE":
-        return "eligible" as const;
-      case "BELOW_SK":
-      case "ABOVE_SK":
-        return "boundary" as const;
-    }
-  };
+  const parts = [
+    { label: "Years", value: years },
+    { label: "Months", value: months },
+    { label: "Days", value: days },
+  ];
 
   return (
-    <div className="p-6 sm:p-9 rounded-2xl bg-gradient-to-b from-slate-900 via-comelec-blue-950 to-slate-950 text-white border border-comelec-blue-800 text-center space-y-6 shadow-floating relative overflow-hidden">
+    <section
+      aria-labelledby="age-display-heading"
+      className="on-dark bg-navy-900 text-navy-100 rounded"
+    >
+      <div className="px-6 sm:px-8 pt-7 pb-6 border-b border-navy-800">
+        <h2
+          id="age-display-heading"
+          className="font-display text-2xs font-semibold uppercase tracking-[0.08em] text-orange-400"
+        >
+          Your age on election day, 2 November 2026
+        </h2>
 
-      <div className="absolute inset-0 civic-grid-pattern opacity-20 pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-36 bg-comelec-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="relative z-10 space-y-5">
-
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-comelec-gold-300 text-xs font-semibold uppercase tracking-wider border border-white/15 shadow-inner-glow">
-          <Calendar size={16} weight="fill" aria-hidden="true" className="text-comelec-gold-400" />
-          <span>Statutory Age on Election Day: Nov 2, 2026</span>
-        </div>
-
-        <div className="space-y-1.5">
-          <div className="text-6xl sm:text-8xl font-extrabold text-white font-mono tracking-tight flex items-baseline justify-center gap-2">
-            <span className="bg-gradient-to-b from-white via-slate-100 to-slate-300 bg-clip-text text-transparent drop-shadow-sm">
-              {displayYears}
+        {/*
+          The whole figure is one polite live region. Without this the numbers
+          would change silently for a screen reader user, since nothing here
+          receives focus when a select changes.
+        */}
+        <div aria-live="polite" aria-atomic="true">
+          <p className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <AnimatedValue
+              value={years}
+              className="font-display font-semibold text-white text-5xl sm:text-6xl leading-none tabular-nums"
+            />
+            <span className="font-display font-semibold text-white text-xl sm:text-2xl">
+              years old
             </span>
-            <span className="text-2xl sm:text-3xl font-bold text-comelec-gold-400 tracking-normal font-sans">
-              Years Old
+          </p>
+
+          <p className="mt-3 text-sm text-navy-100">
+            Exactly <AnimatedValue value={plural(years, "year")} />,{" "}
+            <AnimatedValue value={plural(months, "month")} /> and{" "}
+            <AnimatedValue value={plural(days, "day")} />.
+            <span className="block mt-0.5 text-navy-200">
+              That is <AnimatedValue value={totalDays.toLocaleString("en-PH")} /> days from
+              your date of birth.
             </span>
-          </div>
-
-          <div className="text-xs sm:text-sm text-slate-300 font-normal">
-            Computed Statutory Age: <strong className="text-white font-mono font-semibold">{years} years, {months} months, {days} days</strong>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 max-w-md mx-auto pt-1 font-mono text-xs">
-          <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-center">
-            <span className="text-xs text-slate-400 uppercase tracking-wider block font-sans">Years</span>
-            <span className="text-base sm:text-lg font-bold text-comelec-gold-300">{years}</span>
-          </div>
-          <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-center">
-            <span className="text-xs text-slate-400 uppercase tracking-wider block font-sans">Months</span>
-            <span className="text-base sm:text-lg font-bold text-comelec-gold-300">{months}</span>
-          </div>
-          <div className="p-2.5 rounded-lg bg-white/5 border border-white/10 text-center">
-            <span className="text-xs text-slate-400 uppercase tracking-wider block font-sans">Days</span>
-            <span className="text-base sm:text-lg font-bold text-comelec-gold-300">{days}</span>
-          </div>
-        </div>
-
-        <div className="pt-2">
-          <Badge variant={getBadgeVariant(category)} size="lg">
-            {categoryLabel}
-          </Badge>
+          </p>
         </div>
       </div>
-    </div>
+
+      <dl className="grid grid-cols-3 divide-x divide-navy-800">
+        {parts.map((part) => (
+          <div key={part.label} className="px-4 sm:px-6 py-5">
+            <dt className="font-display text-2xs font-semibold uppercase tracking-[0.08em] text-navy-200">
+              {part.label}
+            </dt>
+            <dd className="mt-1.5">
+              <AnimatedValue
+                value={part.value}
+                className="font-display font-semibold text-white text-2xl tabular-nums"
+              />
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      <p className="px-6 sm:px-8 py-4 border-t border-navy-800 text-sm">
+        <span className="text-navy-200">Age bracket: </span>
+        <AnimatedValue
+          value={categoryLabel}
+          className="font-display font-semibold text-white"
+        />
+      </p>
+    </section>
   );
 }
