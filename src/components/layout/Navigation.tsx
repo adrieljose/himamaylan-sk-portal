@@ -125,110 +125,139 @@ export function Navigation() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden -mr-2 p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-800 hover:text-navy-700 hover:bg-surface-subtle rounded cursor-pointer transition-colors"
+              className="lg:hidden -mr-2 p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-800 hover:text-navy-700 hover:bg-surface-subtle rounded cursor-pointer transition-transform duration-200 active:scale-95"
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav"
             >
-              {mobileMenuOpen ? (
-                <X size={22} weight="bold" aria-hidden="true" />
-              ) : (
-                <List size={22} weight="bold" aria-hidden="true" />
-              )}
+              <div className="relative w-6 h-6 flex items-center justify-center">
+                <span
+                  className={clsx(
+                    "absolute transition-all duration-300 transform",
+                    mobileMenuOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-75 pointer-events-none"
+                  )}
+                >
+                  <X size={22} weight="bold" aria-hidden="true" />
+                </span>
+                <span
+                  className={clsx(
+                    "absolute transition-all duration-300 transform",
+                    mobileMenuOpen ? "opacity-0 rotate-90 scale-75 pointer-events-none" : "opacity-100 rotate-0 scale-100"
+                  )}
+                >
+                  <List size={22} weight="bold" aria-hidden="true" />
+                </span>
+              </div>
             </button>
           </div>
         </nav>
 
         <div className="h-[3px] w-full bg-orange-500" aria-hidden="true" />
 
-        {mobileMenuOpen && (
-          <div
-            id="mobile-nav"
-            className="lg:hidden bg-white border-b border-line shadow-menu max-h-[calc(100dvh-6rem)] overflow-y-auto"
-          >
-            <ul className="px-5 sm:px-6">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <li key={link.href} className="border-b border-line last:border-0">
-                    <Link
-                      href={link.href}
-                      prefetch
-                      aria-current={isActive ? "page" : undefined}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={clsx(
-                        "flex items-center justify-between gap-3 py-3.5 min-h-[44px] font-display text-[0.9375rem] transition-colors",
-                        isActive
-                          ? "text-navy-800 font-semibold"
-                          : "text-ink-800 hover:text-navy-700"
-                      )}
-                    >
-                      <span className="flex items-center gap-3">
-                        <span
-                          className={clsx(
-                            "w-[3px] h-5 shrink-0",
-                            isActive ? "bg-orange-500" : "bg-transparent"
-                          )}
-                          aria-hidden="true"
-                        />
-                        {link.label}
-                      </span>
-                      <CaretRight size={15} weight="bold" aria-hidden="true" className="text-ink-400" />
-                    </Link>
-                  </li>
-                );
-              })}
+        <div
+          id="mobile-nav"
+          className={clsx(
+            "lg:hidden grid transition-all duration-300 ease-out border-line overflow-hidden",
+            mobileMenuOpen
+              ? "grid-rows-[1fr] opacity-100 border-b shadow-menu visible"
+              : "grid-rows-[0fr] opacity-0 border-b-0 invisible"
+          )}
+          aria-hidden={!mobileMenuOpen}
+        >
+          <div className="min-h-0 bg-white">
+            <div
+              className={clsx(
+                "transition-transform duration-300 ease-out max-h-[calc(100dvh-6rem)] overflow-y-auto",
+                mobileMenuOpen ? "translate-y-0" : "-translate-y-3"
+              )}
+            >
+              <ul className="px-5 sm:px-6">
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <li key={link.href} className="border-b border-line last:border-0">
+                      <Link
+                        href={link.href}
+                        prefetch
+                        tabIndex={mobileMenuOpen ? 0 : -1}
+                        aria-current={isActive ? "page" : undefined}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={clsx(
+                          "flex items-center justify-between gap-3 py-3.5 min-h-[44px] font-display text-[0.9375rem] transition-colors",
+                          isActive
+                            ? "text-navy-800 font-semibold"
+                            : "text-ink-800 hover:text-navy-700"
+                        )}
+                      >
+                        <span className="flex items-center gap-3">
+                          <span
+                            className={clsx(
+                              "w-[3px] h-5 shrink-0",
+                              isActive ? "bg-orange-500" : "bg-transparent"
+                            )}
+                            aria-hidden="true"
+                          />
+                          {link.label}
+                        </span>
+                        <CaretRight size={15} weight="bold" aria-hidden="true" className="text-ink-400" />
+                      </Link>
+                    </li>
+                  );
+                })}
 
-              <li className="border-b border-line last:border-0">
-                <Link
-                  href="/contact"
-                  prefetch
-                  aria-current={pathname === "/contact" ? "page" : undefined}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={clsx(
-                    "flex items-center justify-between gap-3 py-3.5 min-h-[44px] font-display text-[0.9375rem] transition-colors",
-                    pathname === "/contact"
-                      ? "text-navy-800 font-semibold"
-                      : "text-ink-800 hover:text-navy-700"
-                  )}
-                >
-                  <span className="flex items-center gap-3">
-                    <span
-                      className={clsx(
-                        "w-[3px] h-5 shrink-0",
-                        pathname === "/contact" ? "bg-orange-500" : "bg-transparent"
-                      )}
-                      aria-hidden="true"
-                    />
-                    Contact the Office
+                <li className="border-b border-line last:border-0">
+                  <Link
+                    href="/contact"
+                    prefetch
+                    tabIndex={mobileMenuOpen ? 0 : -1}
+                    aria-current={pathname === "/contact" ? "page" : undefined}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={clsx(
+                      "flex items-center justify-between gap-3 py-3.5 min-h-[44px] font-display text-[0.9375rem] transition-colors",
+                      pathname === "/contact"
+                        ? "text-navy-800 font-semibold"
+                        : "text-ink-800 hover:text-navy-700"
+                    )}
+                  >
+                    <span className="flex items-center gap-3">
+                      <span
+                        className={clsx(
+                          "w-[3px] h-5 shrink-0",
+                          pathname === "/contact" ? "bg-orange-500" : "bg-transparent"
+                        )}
+                        aria-hidden="true"
+                      />
+                      Contact the Office
+                    </span>
+                    <CaretRight size={15} weight="bold" aria-hidden="true" className="text-ink-400" />
+                  </Link>
+                </li>
+              </ul>
+
+              <div className="p-4 mx-5 sm:mx-6 my-4 rounded-lg bg-navy-950 text-navy-100 space-y-2.5 shadow-sm">
+                <div className="text-xs">
+                  <span className="text-orange-400 font-semibold block text-2xs uppercase tracking-wider">
+                    Official Statutory Cutoff
                   </span>
-                  <CaretRight size={15} weight="bold" aria-hidden="true" className="text-ink-400" />
-                </Link>
-              </li>
-            </ul>
-
-            <div className="p-4 mx-5 sm:mx-6 my-4 rounded-lg bg-navy-950 text-navy-100 space-y-2.5">
-              <div className="text-xs">
-                <span className="text-orange-400 font-semibold block text-2xs uppercase tracking-wider">
-                  Official Statutory Cutoff
-                </span>
-                <span className="text-navy-100 text-xs">
-                  Election Day: <strong className="text-white font-semibold">{electionConfig.electionDateDisplay}</strong>
-                </span>
-              </div>
-              <div className="pt-2 border-t border-navy-800 flex items-center justify-between text-2xs text-navy-300">
-                <span>Himamaylan City COMELEC</span>
-                <Link
-                  href="/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="font-semibold text-orange-400 hover:text-orange-300 underline underline-offset-2"
-                >
-                  Contact Office &rarr;
-                </Link>
+                  <span className="text-navy-100 text-xs">
+                    Election Day: <strong className="text-white font-semibold">{electionConfig.electionDateDisplay}</strong>
+                  </span>
+                </div>
+                <div className="pt-2 border-t border-navy-800 flex items-center justify-between text-2xs text-navy-300">
+                  <span>Himamaylan City COMELEC</span>
+                  <Link
+                    href="/contact"
+                    tabIndex={mobileMenuOpen ? 0 : -1}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="font-semibold text-orange-400 hover:text-orange-300 underline underline-offset-2"
+                  >
+                    Contact Office &rarr;
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </header>
     </>
   );
