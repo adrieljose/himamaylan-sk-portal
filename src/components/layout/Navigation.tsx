@@ -48,7 +48,7 @@ export function Navigation() {
 
           <div className="flex items-center gap-4 text-2xs sm:text-xs">
             <span>
-              Election Day{" "}
+              Election Day:{" "}
               <strong className="font-semibold text-white">
                 {electionConfig.electionDateDisplay}
               </strong>
