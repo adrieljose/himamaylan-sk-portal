@@ -261,7 +261,7 @@ export function QuickCheckerEmbed() {
                             >
                               {o.eligible ? "Eligible" : "Not eligible"}
                             </strong>
-                            {" — "}
+                            {": "}
                             {o.headline}
                           </dd>
                         </div>

@@ -193,7 +193,7 @@ export function ExpandedQuestionnaire({ calculatedAge }: ExpandedQuestionnairePr
                     >
                       {row.passed ? "Met" : "Not met"}
                     </strong>
-                    {" — "}
+                    {": "}
                     {row.passed ? row.yes : row.no}
                   </dd>
                 </div>

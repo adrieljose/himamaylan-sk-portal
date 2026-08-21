@@ -38,7 +38,7 @@ export function PrintResult({
 
       <div className="hidden print:block print-container p-6 bg-white text-black">
         <div className="print-certificate-warning">
-          Age guide result — this is not an official COMELEC certificate
+          Age guide result. This is not an official COMELEC certificate
         </div>
 
         <div className="text-center pb-4 border-b-2 border-black">

@@ -165,15 +165,20 @@ export function getAgeCategory(years: number, months: number = 0, days: number =
 export function getCategoryLabel(category: AgeCategory): string {
   switch (category) {
     case "BELOW_SK":
-      return "Underage for Sangguniang Kabataan";
+      return "Below the SK age range";
     case "VOTER_ONLY":
-      return "Eligible SK Youth Voter (15–17)";
+      return "SK voter, ages 15 to 17";
     case "BOTH":
-      return "Eligible for Both SK Voter & SK Candidate (18–24)";
+      return "SK voter and candidate, ages 18 to 24";
     case "VOTER_ABOVE_CANDIDATE":
-      return "Eligible SK Voter (25–30 Youth Bracket)";
+      /*
+       * Deliberately not "ages 25 to 30". This category starts the day after a
+       * person turns 24, because the candidate ceiling is exact, so it also
+       * covers anyone who is 24 years and at least one day old.
+       */
+      return "SK voter, above the candidate age";
     case "ABOVE_SK":
-      return "Above Statutory SK Age (31+ Regular Barangay Voter)";
+      return "Barangay voter, above the SK age range";
   }
 }
 
@@ -215,7 +220,7 @@ export function checkSKVoterEligibility(years: number) {
     eligible: true,
     status: "within" as const,
     label: "Within Statutory Voting Age Range",
-    description: "Meets the age criteria (15–30 years old on Election Day).",
+    description: "Meets the age criteria (15-30 years old on Election Day).",
     minAge: 15,
     maxAge: 30,
   };
@@ -246,7 +251,7 @@ export function checkSKCandidateEligibility(years: number, months: number = 0, d
     eligible: true,
     status: "within" as const,
     label: "Within Statutory Candidate Age Range",
-    description: "Meets the candidate age criteria (strictly 18–24 years old on Election Day).",
+    description: "Meets the candidate age criteria (strictly 18-24 years old on Election Day).",
     minAge: 18,
     maxAge: 24,
   };
@@ -266,26 +271,26 @@ export function checkEligibility(month: number, day: number, year: number): Elig
   if (years < 15) {
     voterEligibility = {
       status: "ineligible",
-      headline: "Ineligible for SK Voting (Underage)",
-      reason: `You will be ${years} years old on November 2, 2026. The minimum statutory age to vote in SK elections is 15 years old.`,
-      legalCitation: "RA 10742 Section 7 (Katipunan ng Kabataan Membership)",
+      headline: "Not yet old enough to vote",
+      reason: `You will be ${years} years old on 2 November 2026. You must be at least 15 to join the Katipunan ng Kabataan and vote in the SK election.`,
+      legalCitation: "RA 10742 Section 7",
     };
   } else if (years > 30) {
     voterEligibility = {
       status: "ineligible",
-      headline: "Ineligible for SK Voting (Over Statutory Age)",
-      reason: `You will be ${years} years old on November 2, 2026. The maximum age for SK voting is 30 years old. You remain eligible to vote in the regular Barangay council elections if registered.`,
-      legalCitation: "RA 10742 Section 7 & RA 11768 Section 2",
+      headline: "Above the SK voting age",
+      reason: `You will be ${years} years old on 2 November 2026. The Katipunan ng Kabataan covers ages 15 to 30. You can still vote in the barangay election if you are registered.`,
+      legalCitation: "RA 10742 Section 7 and RA 11768 Section 2",
     };
   } else {
     const isDualVoter = years >= 18 && years <= 30;
     voterEligibility = {
       status: "eligible",
-      headline: years === 30 ? "Qualified SK & Dual Voter (Age 30 - 2 Ballots)" : (isDualVoter ? "Qualified SK & Dual Voter (2 Ballots)" : "Qualified SK Youth Voter (1 Ballot)"),
+      headline: isDualVoter ? "You can vote, and you receive two ballots" : "You can vote for your SK council",
       reason: isDualVoter
-        ? `You will be ${years} years old on November 2, 2026. Since you are in the 18–30 bracket (including 30-year-olds on Election Day), you receive TWO (2) BALLOTS on Election Day: one (1) SK Youth Ballot and one (1) regular Barangay Council Ballot.`
-        : `You will be ${years} years old on November 2, 2026. As a youth voter aged 15–17, you will receive one (1) SK Youth Ballot.`,
-      legalCitation: "RA 10742 Section 7 & RA 11768 Section 2",
+        ? `You will be ${years} years old on 2 November 2026. Voters aged 18 to 30 on election day, including those who turn 30 that day, receive two ballots: one for the SK council and one for the barangay council.`
+        : `You will be ${years} years old on 2 November 2026. Voters aged 15 to 17 receive the SK ballot only, for SK Chairperson and Kagawad.`,
+      legalCitation: "RA 10742 Section 7 and RA 11768 Section 2",
     };
   }
 
@@ -293,31 +298,33 @@ export function checkEligibility(month: number, day: number, year: number): Elig
   if (years < 18) {
     candidateEligibility = {
       status: "ineligible",
-      headline: "Ineligible for SK Candidate (Below 18)",
-      reason: `You will be ${years} years old on November 2, 2026. Candidates for SK Chairperson and SK Kagawad must be at least 18 years of age.`,
-      legalCitation: "RA 10742 Section 10(b) (Qualifications of SK Officials)",
+      headline: "Too young to stand for office",
+      reason: `You will be ${years} years old on 2 November 2026. Candidates for SK Chairperson and Kagawad must be at least 18.`,
+      legalCitation: "RA 10742 Section 10(b)",
     };
   } else if (years === 24 && (months > 0 || days > 0)) {
     const excessDesc = months > 0 ? `${months} month${months > 1 ? "s" : ""} and ${days} day${days > 1 ? "s" : ""}` : `${days} day${days > 1 ? "s" : ""}`;
     candidateEligibility = {
       status: "ineligible",
-      headline: "Ineligible for SK Candidate (Exceeds 24 Years Old)",
-      reason: `On November 2, 2026, you will be 24 years and ${excessDesc} old. Under Section 10(b) of RA 10742, candidates must be strictly 'not more than 24 years of age' on Election Day. Exceeding 24 years (e.g. 24 and 1 day) disqualifies candidacy.`,
-      legalCitation: "RA 10742 Section 10(b) & RA 11768 Section 5",
+      headline: "Past the 24-year ceiling",
+      reason: `On 2 November 2026 you will be 24 years and ${excessDesc} old. RA 10742 requires a candidate to be not more than 24 years of age on election day, so a single day over the mark disqualifies.`,
+      legalCitation: "RA 10742 Section 10(b) and RA 11768 Section 5",
     };
   } else if (years > 24) {
     candidateEligibility = {
       status: "ineligible",
-      headline: "Ineligible for SK Candidate (25 or Older)",
-      reason: `You will be ${years} years old on November 2, 2026. Candidates must strictly be not more than 24 years of age on election day.`,
-      legalCitation: "RA 10742 Section 10(b) & RA 11768 Section 5",
+      headline: "Above the candidate age limit",
+      reason: `You will be ${years} years old on 2 November 2026. Candidates must be not more than 24 years of age on election day.`,
+      legalCitation: "RA 10742 Section 10(b) and RA 11768 Section 5",
     };
   } else {
     candidateEligibility = {
       status: "eligible",
-      headline: years === 24 ? "Age-Qualified for SK Official (Strict 24-Year Limit)" : "Age-Qualified for SK Official",
-      reason: `You will be ${years} years old on November 2, 2026, meeting the statutory 18–24 age window for SK Chairperson and SK Member.`,
-      legalCitation: "RA 10742 Section 10 & RA 11768 Section 5",
+      headline: "You can stand for SK office",
+      reason: years === 24
+        ? `You will be exactly 24 on 2 November 2026, which is the last day you qualify. Candidates must be not more than 24 years of age, so this is the edge of the window.`
+        : `You will be ${years} years old on 2 November 2026, inside the 18 to 24 window for SK Chairperson and Kagawad.`,
+      legalCitation: "RA 10742 Section 10 and RA 11768 Section 5",
     };
   }
 
@@ -334,7 +341,7 @@ export function getPersonalizedAdvice(category: AgeCategory, years: number): Per
   switch (category) {
     case "BELOW_SK":
       return {
-        headline: "You are currently below the SK voting age threshold.",
+        headline: "You are not yet old enough to take part.",
         explanation: `On November 2, 2026, you will be ${years} years old. Under Philippine law, youth must reach at least 15 years of age on election day to register and vote in the Sangguniang Kabataan.`,
         nextSteps: [
           "Wait for upcoming registration periods for succeeding election cycles.",
@@ -346,7 +353,7 @@ export function getPersonalizedAdvice(category: AgeCategory, years: number): Per
 
     case "VOTER_ONLY":
       return {
-        headline: "You are eligible to vote as an SK Youth elector (Age 15–17).",
+        headline: "You can vote for your SK council.",
         explanation: `On Election Day, you will be ${years} years old. You meet the age requirement to vote for your Barangay SK Chairperson and 7 SK Kagawads, but are not yet eligible to run for office (minimum candidate age is 18).`,
         nextSteps: [
           "Register during the COMELEC voter registration period at the Himamaylan City Election Office.",
@@ -358,7 +365,7 @@ export function getPersonalizedAdvice(category: AgeCategory, years: number): Per
 
     case "BOTH":
       return {
-        headline: "You are in the prime age bracket for BOTH SK voting and running for office (Age 18–24).",
+        headline: "You can both vote and stand for office.",
         explanation: `On Election Day, you will be ${years} years old. You are entitled to vote for SK officials AND you meet the age qualifications to run for SK Chairperson or SK Member (Kagawad).`,
         nextSteps: [
           "Ensure your active registration in both the Katipunan ng Kabataan and Regular Barangay voter registry.",
@@ -371,7 +378,7 @@ export function getPersonalizedAdvice(category: AgeCategory, years: number): Per
 
     case "VOTER_ABOVE_CANDIDATE":
       return {
-        headline: "You are eligible to vote in the SK election as a senior youth elector (Age 25–30).",
+        headline: "You can vote, but the candidate window has closed.",
         explanation: `On Election Day, you will be ${years} years old. While you have surpassed the statutory candidate age ceiling (not more than 24), you remain an active member of the Katipunan ng Kabataan and are entitled to vote for SK officials.`,
         nextSteps: [
           "Verify your active status in the COMELEC Precinct Finder or at the Himamaylan City Hall Election Office.",
@@ -383,8 +390,8 @@ export function getPersonalizedAdvice(category: AgeCategory, years: number): Per
 
     case "ABOVE_SK":
       return {
-        headline: "You have graduated from the youth sector (Age 31+).",
-        explanation: `On Election Day, you will be ${years} years old. You are above the statutory age limit for Sangguniang Kabataan electors (15–30). However, you remain fully eligible to vote in the regular Barangay council elections if you are a registered voter.`,
+        headline: "You are above the Katipunan ng Kabataan age range.",
+        explanation: `On Election Day, you will be ${years} years old. You are above the statutory age limit for Sangguniang Kabataan electors (15-30). However, you remain fully eligible to vote in the regular Barangay council elections if you are a registered voter.`,
         nextSteps: [
           "Verify your regular voter registration at the Himamaylan City Election Office.",
           "Vote for Punong Barangay and 7 Barangay Kagawads on November 2, 2026.",
@@ -400,15 +407,15 @@ export function getPersonalizedMessage(years: number): string {
     return "You are below the applicable SK youth age range for the 2026 elections. On Election Day, you must be at least 15 years old to vote in the Sangguniang Kabataan.";
   }
   if (years >= 15 && years < 18) {
-    return "You fall within the applicable SK voter age range (15–17 years old). You are below the statutory candidate age range (18–24).";
+    return "You fall within the applicable SK voter age range (15-17 years old). You are below the statutory candidate age range (18-24).";
   }
   if (years >= 18 && years <= 24) {
-    return "You fall within both the SK voter (15–30) and candidate (18–24) age ranges on Election Day, subject to all other statutory qualifications and COMELEC requirements.";
+    return "You fall within both the SK voter (15-30) and candidate (18-24) age ranges on Election Day, subject to all other statutory qualifications and COMELEC requirements.";
   }
   if (years >= 25 && years <= 30) {
-    return "You remain within the applicable SK voter age range (15–30 years old). You are above the candidate age range (18–24), but remain entitled to vote for SK officials.";
+    return "You remain within the applicable SK voter age range (15-30 years old). You are above the candidate age range (18-24), but remain entitled to vote for SK officials.";
   }
-  return "You are above the statutory SK youth age range (15–30) for the 2026 elections. If you are a registered regular voter, you remain fully eligible to vote in the regular Barangay council elections.";
+  return "You are above the statutory SK youth age range (15-30) for the 2026 elections. If you are a registered regular voter, you remain fully eligible to vote in the regular Barangay council elections.";
 }
 
 export interface EligibilityEvaluation {
@@ -464,11 +471,11 @@ export function evaluateEligibility(dobInput: Date | string): EligibilityEvaluat
   if (category === "BELOW_SK") {
     shortSummary = "Underage for SK (Under 15 on Election Day)";
   } else if (category === "VOTER_ONLY") {
-    shortSummary = "Eligible SK Voter (15–17 youth voter)";
+    shortSummary = "Eligible SK Voter (15-17 youth voter)";
   } else if (category === "BOTH") {
-    shortSummary = "Eligible for Both SK Voter & SK Candidate (18–24)";
+    shortSummary = "Eligible for Both SK Voter & SK Candidate (18-24)";
   } else if (category === "VOTER_ABOVE_CANDIDATE") {
-    shortSummary = "Eligible SK Voter (25–30 senior youth voter)";
+    shortSummary = "Eligible SK Voter (25-30 senior youth voter)";
   } else {
     shortSummary = "Over Youth Age Range (31+ Regular Voter only)";
   }
@@ -711,7 +718,7 @@ export function evaluateQuestionnaire(
   let candidateSummary = isEligibleCandidate
     ? "Fully Qualified for SK Chairperson & Kagawad"
     : calculatedAge < 18
-    ? "Below Candidate Age (Must be 18–24)"
+    ? "Below Candidate Age (Must be 18-24)"
     : calculatedAge > 24
     ? "Above Candidate Age (Max 24 on Election Day)"
     : answers.hasDynastyConflict === true

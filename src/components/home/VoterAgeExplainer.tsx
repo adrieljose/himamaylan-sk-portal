@@ -14,31 +14,31 @@ import { Reveal } from "../motion/Reveal";
 const brackets = [
   {
     bracket: "15 to 17",
-    born: "3 Nov 2008 – 2 Nov 2011",
+    born: "3 Nov 2008 - 2 Nov 2011",
     role: "Katipunan ng Kabataan voter",
-    entitlement: "One ballot — SK only",
+    entitlement: "One ballot, SK only",
     tone: "info" as const,
   },
   {
     bracket: "18 to 24",
-    born: "3 Nov 2001 – 2 Nov 2008",
+    born: "3 Nov 2001 - 2 Nov 2008",
     role: "Voter, and candidate if within the strict window",
-    entitlement: "Two ballots — may file a COC",
+    entitlement: "Two ballots, may file a COC",
     tone: "eligible" as const,
     emphasis: true,
   },
   {
     bracket: "25 to 30",
-    born: "3 Nov 1995 – 2 Nov 2001",
+    born: "3 Nov 1995 - 2 Nov 2001",
     role: "Katipunan ng Kabataan voter",
-    entitlement: "Two ballots — SK and barangay",
+    entitlement: "Two ballots, SK and barangay",
     tone: "info" as const,
   },
   {
     bracket: "31 and over",
     born: "On or before 2 Nov 1995",
     role: "Barangay voter only",
-    entitlement: "One ballot — barangay",
+    entitlement: "One ballot, barangay",
     tone: "neutral" as const,
   },
 ];

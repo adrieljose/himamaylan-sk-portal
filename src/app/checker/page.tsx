@@ -16,7 +16,7 @@ export default function CheckerPage() {
       <PageHeader
         eyebrow="Eligibility checker"
         title="Check your SK eligibility"
-        intro="Enter your date of birth to see your exact age on election day, 2 November 2026, and what it entitles you to. The calculation runs in your browser — nothing is submitted or stored."
+        intro="Enter your date of birth to see your exact age on election day, 2 November 2026, and what it entitles you to. The calculation runs in your browser. Nothing is submitted or stored."
         crumbs={[{ label: "Check eligibility" }]}
       />
 

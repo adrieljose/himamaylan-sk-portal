@@ -27,7 +27,7 @@ const COPY: Record<
 > = {
   BELOW_SK: {
     title: "You are not yet old enough for the 2026 SK elections",
-    body: "Registration with the Katipunan ng Kabataan opens at 15. You will be eligible for a future SK election cycle — the elections are held every three years.",
+    body: "Registration with the Katipunan ng Kabataan opens at 15. You will be eligible for a future SK election cycle. The elections are held every three years.",
     action: { label: "Read the age requirements", href: "/qualifications" },
   },
   VOTER_ONLY: {
@@ -42,7 +42,7 @@ const COPY: Record<
   },
   VOTER_ABOVE_CANDIDATE: {
     title: "You can vote, but not stand for office",
-    body: "You remain a member of the Katipunan ng Kabataan and will receive two ballots — one for the SK council and one for the barangay council. The candidate age window closes at 24.",
+    body: "You remain a member of the Katipunan ng Kabataan and will receive two ballots: one for the SK council and one for the barangay council. The candidate age window closes at 24.",
     action: { label: "See what to bring on election day", href: "/election-info" },
   },
   ABOVE_SK: {

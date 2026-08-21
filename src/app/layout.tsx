@@ -31,6 +31,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+
 export const metadata: Metadata = {
   metadataBase: new URL(electionConfig.siteUrl),
   title: {
@@ -43,6 +44,18 @@ export const metadata: Metadata = {
     apple: "/images/comelec-logo.svg",
   },
   description: electionConfig.siteDescription,
+  /**
+   * This service is dense with bare numerals: ages, RA numbers, section numbers
+   * and dates. Safari's data detectors linkify strings like "10742" and
+   * "November 2, 2026" into tel: and calendar links, which recolours them
+   * mid-sentence and makes statutory citations look like broken text.
+   */
+  formatDetection: {
+    telephone: false,
+    date: false,
+    address: false,
+    email: false,
+  },
   keywords: [
     "Himamaylan City COMELEC",
     "SK Age Checker 2026",
@@ -53,7 +66,7 @@ export const metadata: Metadata = {
     "Katipunan ng Kabataan",
     "COMELEC Region VI",
   ],
-  authors: [{ name: "Office of the Election Officer — Himamaylan City" }],
+  authors: [{ name: "Office of the Election Officer, Himamaylan City" }],
   creator: "Himamaylan City COMELEC",
   publisher: "Commission on Elections (COMELEC)",
   robots: {

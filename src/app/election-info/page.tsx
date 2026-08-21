@@ -156,8 +156,7 @@ export default function ElectionInfoPage() {
               </h2>
               <p className="mt-4 text-base text-ink-700 leading-relaxed">
                 An SK council is one Chairperson and seven Kagawad, elected for a three-year
-                term in every barangay. It is not a ceremonial body — it controls a real
-                budget.
+                term in every barangay. It is not a ceremonial body. It controls a real budget.
               </p>
               <Link
                 href="/references"

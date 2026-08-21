@@ -27,7 +27,7 @@ export default function NotFound() {
 
         <p className="mt-5 text-base sm:text-lg text-ink-700 leading-relaxed prose-civic">
           The address may have changed, or it may have been typed incorrectly. Nothing has
-          gone wrong with your eligibility check — try one of the pages below.
+          gone wrong with your eligibility check. Try one of the pages below.
         </p>
 
         <nav aria-label="Suggested pages" className="mt-10 border-t border-ink-950">

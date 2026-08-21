@@ -5,7 +5,7 @@ import { Reveal } from "../motion/Reveal";
 const steps = [
   {
     title: "Enter your date of birth",
-    desc: "Month, day and year. The calculation runs entirely in your browser — nothing is sent to a server and nothing is stored.",
+    desc: "Month, day and year. The calculation runs entirely in your browser. Nothing is sent to a server and nothing is stored.",
   },
   {
     title: "Your age on 2 November 2026 is computed",

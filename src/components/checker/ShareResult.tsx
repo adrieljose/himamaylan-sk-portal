@@ -22,7 +22,7 @@ export function ShareResult({
   const handleShare = async () => {
     const url = typeof window !== "undefined" ? window.location.href : "";
     const bgyText = barangay ? ` in Barangay ${barangay}` : "";
-    const title = "Himamaylan City COMELEC — 2026 SK age and eligibility checker";
+    const title = "Himamaylan City COMELEC, 2026 SK age and eligibility checker";
     const text =
       `On 2 November 2026 I will be ${calculatedAge} years old${bgyText}. ` +
       `SK voter: ${voterEligible ? "eligible" : "not eligible"}. ` +

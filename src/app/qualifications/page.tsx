@@ -92,7 +92,7 @@ const candidateRequirements: Requirement[] = [
     standard: "Not related within the second civil degree to an incumbent elected official",
     statute: "RA 10742 s.10(e)",
     details:
-      "You must not be related by consanguinity or affinity up to the second degree — spouse, parent, child, sibling, grandparent or grandchild — to any incumbent elected national, regional, provincial, city, municipal or barangay official in the locality.",
+      "You must not be related by consanguinity or affinity up to the second degree (spouse, parent, child, sibling, grandparent or grandchild) to any incumbent elected national, regional, provincial, city, municipal or barangay official in the locality.",
   },
   {
     title: "No conviction involving moral turpitude",
@@ -203,21 +203,26 @@ export default function QualificationsPage() {
             requirements={candidateRequirements}
           />
 
+          {/*
+            Reference material expanding requirement 5, not an alert. This was a
+            second amber warning band, which competed with the real warning at
+            the foot of the page and diluted both.
+          */}
           <Notice
-            tone="warning"
-            title="The anti-dynasty rule disqualifies more people than expected"
+            tone="statutory"
+            title="What the second civil degree covers"
             className="mt-8"
           >
-            The second civil degree covers your spouse, parents, children, siblings,
-            grandparents and grandchildren. If any of them currently holds elected office in
-            Himamaylan City — including as a barangay official — you cannot stand for SK
-            office in this election.
+            Your spouse, parents, children, siblings, grandparents and grandchildren. If
+            any of them currently holds elected office in Himamaylan City, including as a
+            barangay official, you cannot stand for SK office in this election.
           </Notice>
         </Container>
       </section>
 
       <section className="py-12 sm:py-16 lg:py-20">
         <Container>
+          {/* The single warning-tone item on this page. */}
           <DisclaimerBanner variant="prominent" />
           <div className="mt-10">
             <ContactPrompt />

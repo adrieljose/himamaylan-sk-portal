@@ -174,7 +174,7 @@ export function VoterInfographicSection() {
                 >
                   <option value="rank">Most voters first</option>
                   <option value="lowest">Fewest voters first</option>
-                  <option value="alpha">Barangay name (A–Z)</option>
+                  <option value="alpha">Barangay name (A-Z)</option>
                   <option value="youthPercent">Highest youth share</option>
                 </Select>
               </div>

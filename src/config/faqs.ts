@@ -46,14 +46,14 @@ export const FAQS: FAQItem[] = [
     category: "Age Calculation",
     question: "What if I turn 18 on or before Election Day?",
     answer:
-      "If you celebrate your 18th birthday on or before November 2, 2026, you will be eligible to run as an SK candidate (ages 18–24) and you will also be eligible to vote in both the SK election (ages 15–30) and the regular Barangay council election (ages 18+), provided you are duly registered with COMELEC.",
+      "If you celebrate your 18th birthday on or before November 2, 2026, you will be eligible to run as an SK candidate (ages 18-24) and you will also be eligible to vote in both the SK election (ages 15-30) and the regular Barangay council election (ages 18+), provided you are duly registered with COMELEC.",
   },
   {
     id: "turn-25-before-election",
     category: "Age Calculation",
     question: "What if I turn 25 on or before Election Day?",
     answer:
-      "If you reach the age of 25 on or before November 2, 2026, you are outside the statutory age limit for SK candidates (18–24). However, you remain fully eligible to vote as an SK voter because SK voting eligibility continues up to age 30 on Election Day.",
+      "If you reach the age of 25 on or before November 2, 2026, you are outside the statutory age limit for SK candidates (18-24). However, you remain fully eligible to vote as an SK voter because SK voting eligibility continues up to age 30 on Election Day.",
   },
   {
     id: "age-alone-eligibility",

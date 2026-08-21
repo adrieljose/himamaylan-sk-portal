@@ -19,8 +19,8 @@ export const LEGAL_REFERENCES: LegalReference[] = [
     summary:
       "The Sangguniang Kabataan Reform Act of 2015 establishes youth development mechanisms, Katipunan ng Kabataan assemblies, anti-dynasty prohibitions, and modern governance standards for SK officials across all Philippine barangays.",
     keyProvisions: [
-      "Section 3: Katipunan ng Kabataan (KK) composition — Filipino citizens, resident for at least 6 months, aged 15–30.",
-      "Section 10: SK Candidate Qualifications — 18 to 24 years old on election day, resident for 1 year, literate, no disqualifying relationship to incumbent officials within 2nd civil degree.",
+      "Section 3: Katipunan ng Kabataan (KK) composition: Filipino citizens, resident for at least 6 months, aged 15-30.",
+      "Section 10: SK Candidate Qualifications: 18 to 24 years old on election day, resident for 1 year, literate, no disqualifying relationship to incumbent officials within 2nd civil degree.",
       "Section 20: Mandatory Youth Development Plan and SK budget autonomy.",
     ],
     externalUrl: "https://www.officialgazette.gov.ph/2016/01/15/republic-act-no-10742/",

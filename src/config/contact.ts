@@ -36,7 +36,7 @@ export interface ElectionOfficeContact {
 }
 
 export const CONTACT_CONFIG: ElectionOfficeContact = {
-  officeName: "Office of the Election Officer — Himamaylan City",
+  officeName: "Office of the Election Officer, Himamaylan City",
   agencyName: "Commission on Elections (COMELEC)",
   jurisdiction: "City of Himamaylan, Negros Occidental (5th Congressional District)",
   address: {

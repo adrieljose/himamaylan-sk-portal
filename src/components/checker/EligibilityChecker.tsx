@@ -130,21 +130,29 @@ export function EligibilityChecker() {
             categoryLabel={ageResult.categoryLabel}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <EligibilityCard
-              type="voter"
-              status={eligibilityResult.voterEligibility.status}
-              headline={eligibilityResult.voterEligibility.headline}
-              reason={eligibilityResult.voterEligibility.reason}
-              legalCitation={eligibilityResult.voterEligibility.legalCitation}
-            />
-            <EligibilityCard
-              type="candidate"
-              status={eligibilityResult.candidateEligibility.status}
-              headline={eligibilityResult.candidateEligibility.headline}
-              reason={eligibilityResult.candidateEligibility.reason}
-              legalCitation={eligibilityResult.candidateEligibility.legalCitation}
-            />
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <EligibilityCard
+                type="voter"
+                status={eligibilityResult.voterEligibility.status}
+                headline={eligibilityResult.voterEligibility.headline}
+                reason={eligibilityResult.voterEligibility.reason}
+                legalCitation={eligibilityResult.voterEligibility.legalCitation}
+              />
+              <EligibilityCard
+                type="candidate"
+                status={eligibilityResult.candidateEligibility.status}
+                headline={eligibilityResult.candidateEligibility.headline}
+                reason={eligibilityResult.candidateEligibility.reason}
+                legalCitation={eligibilityResult.candidateEligibility.legalCitation}
+              />
+            </div>
+
+            {/* Applies to both results, so it is stated once rather than duplicated inside each card. */}
+            <p className="mt-4 text-sm text-ink-600 leading-relaxed">
+              Age is one criterion. Residency, registration and the anti-dynasty rule also
+              apply to both results above.
+            </p>
           </div>
 
           <PersonalizedMessage

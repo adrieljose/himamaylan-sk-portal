@@ -41,10 +41,10 @@ export function ElectionDateBanner() {
         { label: "Seconds", value: String(timeLeft.seconds).padStart(2, "0") },
       ]
     : [
-        { label: "Days", value: "—" },
-        { label: "Hours", value: "—" },
-        { label: "Minutes", value: "—" },
-        { label: "Seconds", value: "—" },
+        { label: "Days", value: "·" },
+        { label: "Hours", value: "·" },
+        { label: "Minutes", value: "·" },
+        { label: "Seconds", value: "·" },
       ];
 
   return (
