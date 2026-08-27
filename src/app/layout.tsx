@@ -3,6 +3,7 @@ import { Lexend, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
+import { EntryDisclaimer } from "@/components/layout/EntryDisclaimer";
 import { electionConfig } from "@/config/election";
 
 /**
@@ -130,6 +131,13 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+
+        {/*
+          Entry notice. Rendered last so it sits above the page in source order
+          as well as in stacking order, and so a screen reader reaching it does
+          not have to traverse the whole document first.
+        */}
+        <EntryDisclaimer />
       </body>
     </html>
   );
