@@ -118,9 +118,9 @@ export function EntryDisclaimer() {
         aria-modal="true"
         aria-labelledby="entry-disclaimer-title"
         aria-describedby="entry-disclaimer-body"
-        className="relative w-full sm:max-w-lg bg-white border-t-[4px] sm:border sm:border-l-[4px] border-orange-500 sm:border-t-line sm:border-r-line sm:border-b-line rounded-t sm:rounded-r shadow-overlay max-h-[92dvh] overflow-y-auto animate-fade-rise"
+        className="relative w-full sm:max-w-lg flex flex-col bg-white border-t-[4px] sm:border sm:border-l-[4px] border-orange-500 sm:border-t-line sm:border-r-line sm:border-b-line rounded-t sm:rounded-r shadow-overlay max-h-[92dvh] animate-fade-rise"
       >
-        <div className="px-6 sm:px-8 pt-6 pb-5 border-b border-line">
+        <div className="shrink-0 px-6 sm:px-8 pt-6 pb-5 border-b border-line">
           <p className="flex items-center gap-2.5 font-display text-2xs font-semibold uppercase tracking-[0.08em] text-orange-700">
             <Scales size={17} weight="fill" aria-hidden="true" className="shrink-0" />
             Please read before continuing
@@ -129,11 +129,25 @@ export function EntryDisclaimer() {
             id="entry-disclaimer-title"
             className="mt-3 font-display font-semibold text-ink-950 text-xl sm:text-2xl leading-snug"
           >
-            This is a guide, not an official ruling
+            This is a guide, not an official pronouncement
           </h2>
         </div>
 
-        <div id="entry-disclaimer-body" className="px-6 sm:px-8 py-6 space-y-4">
+        <div
+          id="entry-disclaimer-body"
+          className="flex-1 overflow-y-auto px-6 sm:px-8 py-6 space-y-4"
+        >
+          {/*
+            Framing first: what the visitor is looking at, and who made it,
+            before what it does and what it cannot decide.
+          */}
+          <p className="text-[0.9375rem] text-ink-800 leading-relaxed">
+            This is{" "}
+            <strong className="font-semibold text-ink-950">not an official page</strong>. It
+            is an initiative of the Office of the Election Officer (OEO), Himamaylan City, to
+            educate voters and keep them updated with news from the office.
+          </p>
+
           <p className="text-[0.9375rem] text-ink-800 leading-relaxed">
             This service works out your exact age on{" "}
             <strong className="font-semibold text-ink-950">2 November 2026</strong> and tells
@@ -158,7 +172,7 @@ export function EntryDisclaimer() {
           </p>
         </div>
 
-        <div className="px-6 sm:px-8 pb-6 sm:pb-7">
+        <div className="shrink-0 border-t border-line px-6 sm:px-8 pt-5 pb-6 sm:pb-7">
           <button
             ref={buttonRef}
             type="button"
