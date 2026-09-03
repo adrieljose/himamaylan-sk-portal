@@ -18,6 +18,7 @@ const sections = [
     heading: "The 2026 election",
     links: [
       { href: "/election-info", label: "Timetable and governing law" },
+      { href: "/coc-forms", label: "Certificate of Candidacy forms" },
       { href: "/barangays", label: "The 19 barangays of Himamaylan" },
       { href: "/voters", label: "Registered voter data" },
     ],

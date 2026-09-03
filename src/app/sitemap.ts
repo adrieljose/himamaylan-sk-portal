@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/checker",
     "/qualifications",
     "/election-info",
+    "/coc-forms",
     "/barangays",
     "/voters",
     "/faq",

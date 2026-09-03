@@ -20,6 +20,7 @@ const navLinks = [
   { href: "/election-info", label: "2026 Election" },
   { href: "/barangays", label: "Barangays" },
   { href: "/voters", label: "Voter Data" },
+  { href: "/coc-forms", label: "COC Forms" },
   { href: "/faq", label: "FAQs" },
 ];
 

@@ -23,6 +23,11 @@ const groups = [
         href: "/qualifications",
         desc: "Citizenship, residency, literacy and the anti-dynasty requirement, set out in detail.",
       },
+      {
+        title: "Certificate of Candidacy forms",
+        href: "/coc-forms",
+        desc: "Where the official COMELEC forms come from, and what to settle before you file.",
+      },
     ],
   },
   {
