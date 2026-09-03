@@ -9,8 +9,8 @@ import { Notice } from "@/components/ui/Notice";
 import { ContactPrompt } from "@/components/ui/ContactPrompt";
 import {
   COC_FORMS,
-  HAS_CURRENT_CYCLE_FORM,
   COMELEC_BSKE_2026_URL,
+  COMELEC_BSKE_SOURCE_URL,
   CURRENT_CYCLE,
   type CocForm,
 } from "@/config/cocForms";
@@ -107,28 +107,20 @@ export default function CocFormsPage() {
 
       <section className="py-12 sm:py-16 lg:py-20 border-b border-line">
         <Container>
-          {!HAS_CURRENT_CYCLE_FORM && (
-            <Notice
-              tone="warning"
-              title={`COMELEC has not yet released the ${CURRENT_CYCLE} forms`}
-              className="mb-10"
+          <Notice tone="statutory" title="Where these forms come from" className="mb-10">
+            Every PDF on this page is COMELEC&rsquo;s own file, linked directly from
+            their server at{" "}
+            <a
+              href={COMELEC_BSKE_SOURCE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-navy-700 font-semibold"
             >
-              The forms below are the most recently published versions, from the 2023
-              Barangay and SK Elections, the last time these positions were contested.
-              The underlying requirements set by RA 10742 have not changed, but treat
-              these as a preview rather than the final 2026 form. This page will switch
-              to the 2026 version the moment COMELEC publishes it. Check{" "}
-              <a
-                href={COMELEC_BSKE_2026_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-navy-700 font-semibold"
-              >
-                the official COMELEC 2026 BSKE page
-              </a>{" "}
-              or the Office of the Election Officer before filing.
-            </Notice>
-          )}
+              comelec.gov.ph
+            </a>
+            . Nothing is retyped or hosted here, so a download is always exactly what
+            COMELEC itself is serving.
+          </Notice>
 
           <div className="max-w-2xl mb-10">
             <p className="eyebrow">The forms</p>

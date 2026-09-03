@@ -42,8 +42,15 @@ export interface CocForm {
   formCycle: string | null;
 }
 
-/** The official COMELEC page for this election cycle. Verified to exist. */
+/** The official COMELEC page for the 2026 cycle. Verified to exist. */
 export const COMELEC_BSKE_2026_URL = "https://www.comelec.gov.ph/?r=2026BSKE";
+
+/**
+ * The actual COMELEC page the forms below were obtained from. Verified
+ * reachable (does not 404) before use, same as every PDF url in this file.
+ */
+export const COMELEC_BSKE_SOURCE_URL =
+  "https://www.comelec.gov.ph/?r=2023BSKE/CertificateOfCandidacy";
 
 export const CURRENT_CYCLE = "2026 BSKE";
 
