@@ -4,10 +4,8 @@ import { ElectionDateBanner } from "@/components/home/ElectionDateBanner";
 import { VoterAwarenessJingle } from "@/components/home/VoterAwarenessJingle";
 import { QuickCheckerEmbed } from "@/components/home/QuickCheckerEmbed";
 import { HowItWorks } from "@/components/home/HowItWorks";
-import { VoterAgeExplainer } from "@/components/home/VoterAgeExplainer";
 import { CandidateAgeExplainer } from "@/components/home/CandidateAgeExplainer";
 import { AnnouncementsBanner } from "@/components/home/AnnouncementsBanner";
-import { VoterInfographicSection } from "@/components/voters/VoterInfographicSection";
 import { QuickLinks } from "@/components/home/QuickLinks";
 
 export default function HomePage() {
@@ -24,13 +22,9 @@ export default function HomePage() {
 
       <HowItWorks />
 
-      <VoterAgeExplainer />
-
       <CandidateAgeExplainer />
 
       <AnnouncementsBanner />
-
-      <VoterInfographicSection />
 
       <QuickLinks />
     </div>
