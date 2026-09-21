@@ -30,7 +30,7 @@ export function VoterAwarenessJingle() {
             <p className="mt-4 text-lg leading-relaxed text-ink-700">
               The winning entry from Padayaw Cluster 4 in the{" "}
               <cite className="font-semibold not-italic text-ink-900">
-                Ara, Magkanta! Voter Awareness Jingle Contest
+                Tara, Magkanta! Voter Awareness Jingle Contest
               </cite>
               .
             </p>
@@ -83,7 +83,7 @@ export function VoterAwarenessJingle() {
                       Padayaw Cluster 4
                     </h3>
                     <p className="mt-1 text-sm text-navy-200">
-                      Ara, Magkanta! Voter Awareness Jingle Contest
+                      Tara, Magkanta! Voter Awareness Jingle Contest
                     </p>
                   </div>
                 </div>

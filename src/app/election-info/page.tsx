@@ -18,26 +18,54 @@ export const metadata: Metadata = {
 
 const electionMilestones = [
   {
-    date: "October 2026",
+    date: "September 28 to October 5, 2026",
     title: "Filing of certificates of candidacy",
     description:
-      "The filing window for youth candidates standing for SK Chairperson and SK Kagawad.",
-    status: "Scheduled",
+      "Candidates for barangay and Sangguniang Kabataan offices must file their Certificates of Candidacy during this official period.",
+    status: "Filing period",
   },
   {
-    date: "Late October 2026",
+    date: "September 28 to October 21, 2026",
+    title: "Campaigning is prohibited",
+    description:
+      "Campaigning is prohibited before the official campaign period begins.",
+    status: "Prohibited period",
+  },
+  {
+    date: "October 3 to November 9, 2026",
+    title: "Election period and gun ban",
+    description:
+      "The election period is in effect. Carrying firearms or other deadly weapons in public places is prohibited unless authorized in writing by COMELEC.",
+    status: "Election period",
+  },
+  {
+    date: "October 22 to 31, 2026",
     title: "Campaign period",
     description:
-      "A regulated campaign window under COMELEC guidelines, the Fair Election Act, and anti-vote-buying rules.",
-    status: "Scheduled",
+      "The official period for lawful campaigning, barangay assemblies and candidates' fora.",
+    status: "Campaign period",
+  },
+  {
+    date: "November 1, 2026",
+    title: "Eve of election day",
+    description:
+      "Campaigning and the selling, furnishing, offering, buying, serving or taking of intoxicating liquor are prohibited.",
+    status: "Election eve",
   },
   {
     date: "Monday, 2 November 2026",
     title: "Election day",
     description:
-      "Polling precincts open across all 19 Himamaylan City barangays. This is the date every age requirement is measured against.",
+      "Voting is from 7:00 AM to 3:00 PM, followed by the counting and canvassing of votes and proclamation of winning candidates.",
     status: "Election day",
     highlight: true,
+  },
+  {
+    date: "December 2, 2026",
+    title: "SOCE filing deadline",
+    description:
+      "Last day to file Statements of Contributions and Expenditures (SOCE).",
+    status: "Deadline",
   },
 ];
 
@@ -85,13 +113,22 @@ export default function ElectionInfoPage() {
       <section className="py-12 sm:py-16 lg:py-20 border-b border-line">
         <Container>
           <div className="max-w-2xl mb-10">
-            <p className="eyebrow">Key dates</p>
+            <p className="eyebrow">Calendar of activities</p>
             <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-display font-semibold text-ink-950">
-              What happens, and when
+              2026 BSKE calendar of activities
             </h2>
             <p className="mt-4 text-base text-ink-700 leading-relaxed prose-civic">
-              Dates before election day are indicative until COMELEC publishes the final
-              calendar for the 2026 cycle.
+              Official dates and periods beginning with the filing of Certificates of
+              Candidacy, based on{" "}
+              <a
+                href="https://www.comelec.gov.ph/php-tpls-attachments/2026BSKE/Resolutions/com_res_11191.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-navy-700 underline underline-offset-2 hover:text-navy-800"
+              >
+                COMELEC Resolution No. 11191
+              </a>
+              .
             </p>
           </div>
 
