@@ -1,6 +1,7 @@
 import React from "react";
 import { Hero } from "@/components/home/Hero";
 import { ElectionDateBanner } from "@/components/home/ElectionDateBanner";
+import { VoterAwarenessJingle } from "@/components/home/VoterAwarenessJingle";
 import { QuickCheckerEmbed } from "@/components/home/QuickCheckerEmbed";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { VoterAgeExplainer } from "@/components/home/VoterAgeExplainer";
@@ -16,6 +17,8 @@ export default function HomePage() {
       <Hero />
 
       <ElectionDateBanner />
+
+      <VoterAwarenessJingle />
 
       <QuickCheckerEmbed />
 
