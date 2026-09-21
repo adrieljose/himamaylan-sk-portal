@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import {
   Clock,
   DownloadSimple,
@@ -39,9 +40,26 @@ export function VoterAwarenessJingle() {
                 A BSKE Advocacy Jingle-Making Contest
               </p>
               <p className="mt-2 text-sm sm:text-base leading-relaxed text-ink-700">
-                An official Buwan ng Wika project of COMELEC Himamaylan City in
-                partnership with the Department of Education (DepEd).
+                An official Buwan ng Wika project of COMELEC Himamaylan City.
               </p>
+
+              <div className="mt-6 flex items-center gap-4 border-t border-line pt-6">
+                <Image
+                  src="/images/deped-himamaylan-seal.png"
+                  alt="DepEd Himamaylan City seal"
+                  width={58}
+                  height={58}
+                  className="h-[58px] w-[58px] shrink-0 object-contain"
+                />
+                <div>
+                  <p className="font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-600">
+                    Project partner
+                  </p>
+                  <p className="mt-1 font-display font-semibold text-ink-950">
+                    DepEd Himamaylan City
+                  </p>
+                </div>
+              </div>
             </div>
           </Reveal>
 
