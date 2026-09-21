@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     "Negros Occidental SK",
     "November 2 2026 Election Day",
     "Katipunan ng Kabataan",
-    "COMELEC Region VI",
+    "COMELEC Negros Island Region",
   ],
   authors: [{ name: "Office of the Election Officer, Himamaylan City" }],
   creator: "Himamaylan City COMELEC",

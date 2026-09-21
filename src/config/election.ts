@@ -1,7 +1,7 @@
 export const electionConfig = {
   city: "Himamaylan City",
   province: "Negros Occidental",
-  region: "Region VI (Western Visayas)",
+  region: "Negros Island Region (NIR)",
   electionName: "2026 Barangay and Sangguniang Kabataan Elections",
   electionShortName: "2026 BSKE",
   electionDate: "2026-11-02",

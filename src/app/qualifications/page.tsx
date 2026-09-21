@@ -213,9 +213,12 @@ export default function QualificationsPage() {
             title="What the second civil degree covers"
             className="mt-8"
           >
-            Your spouse, parents, children, siblings, grandparents and grandchildren. If
-            any of them currently holds elected office in Himamaylan City, including as a
-            barangay official, you cannot stand for SK office in this election.
+            This covers your spouse, parents, children, siblings, grandparents and
+            grandchildren. At the <strong>national</strong> level, you must not be related
+            to any incumbent elected national official. At the <strong>local</strong> and
+            <strong> barangay</strong> levels, you must not be related to an incumbent
+            elected regional, provincial, city, municipal or barangay official in the
+            locality where you seek election.
           </Notice>
         </Container>
       </section>

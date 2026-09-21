@@ -45,7 +45,7 @@ export const CONTACT_CONFIG: ElectionOfficeContact = {
     city: "Himamaylan City",
     province: "Negros Occidental",
     postalCode: "6108",
-    region: "Region VI (Western Visayas)",
+    region: "Negros Island Region (NIR)",
   },
   operatingHours: {
     days: "Monday through Friday",
@@ -89,13 +89,8 @@ export const CONTACT_CONFIG: ElectionOfficeContact = {
     },
     {
       label: "COMELEC Official Facebook Page",
-      url: "https://www.facebook.com/comelec.ph",
+      url: "https://www.facebook.com/profile.php?id=61556162241952",
       type: "facebook",
-    },
-    {
-      label: "Himamaylan City LGU Official Portal",
-      url: "https://himamaylancity.gov.ph",
-      type: "portal",
     },
   ],
   mapCoordinates: {

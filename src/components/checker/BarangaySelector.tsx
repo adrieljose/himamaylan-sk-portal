@@ -108,7 +108,7 @@ export function BarangaySelector({ selectedBarangay, onSelect }: BarangaySelecto
               Barangay {selectedBarangay}
             </span>
             <span className="block text-xs text-ink-700 mt-0.5">
-              Himamaylan City, Negros Occidental &middot; Region VI
+              Himamaylan City, Negros Occidental &middot; Negros Island Region (NIR)
             </span>
           </p>
           <Link
