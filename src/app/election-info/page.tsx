@@ -18,13 +18,6 @@ export const metadata: Metadata = {
 
 const electionMilestones = [
   {
-    date: "August to September 2026",
-    title: "Katipunan ng Kabataan voter registration",
-    description:
-      "The period to register, reactivate or transfer your voter record at the Office of the Election Officer in Himamaylan City Hall.",
-    status: "Upcoming",
-  },
-  {
     date: "October 2026",
     title: "Filing of certificates of candidacy",
     description:
