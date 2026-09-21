@@ -42,15 +42,6 @@ export function VoterInfographicSection() {
     { age15to17: 0, age18to30: 0, age31above: 0, skVoters: 0, regularVoters: 0, totalVoters: 0 }
   ), [processedBarangays]);
 
-  const headline = [
-    { label: "Registered voters", value: o.totalRegistered, note: "all age groups" },
-    { label: "Regular voters", value: o.regularRegistered, note: "ages 18 and above" },
-    { label: "Katipunan ng Kabataan", value: o.skRegistered, note: "ages 15 to 30" },
-    { label: "Aged 15 to 17", value: o.age15to17Total, note: "SK ballot only" },
-    { label: "Aged 18 to 30", value: o.age18to30Total, note: "two ballots" },
-    { label: "Aged 31 and above", value: o.age31aboveTotal, note: "regular ballot" },
-  ];
-
   const headingClass = "py-3.5 px-3 font-display text-2xs font-semibold uppercase tracking-[0.08em] text-ink-700 text-right";
   const cellClass = "py-4 px-3 text-sm text-ink-800 text-right";
   const totalClass = "py-4 px-3 font-display font-semibold text-ink-950 text-right";
@@ -69,17 +60,70 @@ export function VoterInfographicSection() {
         </Reveal>
 
         <Reveal as="div" delay={80}>
-          <dl className="grid grid-cols-2 lg:grid-cols-3 border-t border-ink-950">
-            {headline.map((stat) => (
-              <div key={stat.label} className="py-6 pr-4 sm:pr-6 border-b border-line lg:border-r lg:[&:nth-child(3n)]:border-r-0 lg:pl-6 lg:[&:nth-child(3n+1)]:pl-0">
-                <dt className="text-sm text-ink-700">{stat.label}</dt>
-                <dd>
-                  <span className="mt-2 block font-display font-semibold text-ink-950 text-2xl sm:text-3xl">{nf.format(stat.value)}</span>
-                  <span className="mt-1 block text-xs text-ink-600">{stat.note}</span>
+          <div className="border-y border-ink-950 divide-y divide-line">
+            <dl className="grid grid-cols-1 sm:grid-cols-[1.2fr_auto_1fr_auto_1fr] items-stretch bg-white">
+              <div className="p-5 sm:p-6 border-b sm:border-b-0 sm:border-r border-line">
+                <dt className="text-sm text-ink-700">Registered voters</dt>
+                <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
+                  {nf.format(o.totalRegistered)}
                 </dd>
+                <span className="mt-1 block text-xs text-ink-600">all age groups</span>
               </div>
-            ))}
-          </dl>
+              <div aria-hidden="true" className="px-3 sm:px-5 flex items-center justify-center font-display font-semibold text-xl text-ink-700">
+                =
+              </div>
+              <div className="p-5 sm:p-6 border-y sm:border-y-0 sm:border-l border-line">
+                <dt className="text-sm text-ink-700">Regular voters</dt>
+                <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
+                  {nf.format(o.regularRegistered)}
+                </dd>
+                <span className="mt-1 block text-xs text-ink-600">ages 18 and above</span>
+              </div>
+              <div aria-hidden="true" className="px-3 sm:px-5 flex items-center justify-center font-display font-semibold text-xl text-ink-700">
+                +
+              </div>
+              <div className="p-5 sm:p-6 border-t sm:border-t-0 sm:border-l border-line">
+                <dt className="text-sm text-ink-700">Aged 15 to 17</dt>
+                <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
+                  {nf.format(o.age15to17Total)}
+                </dd>
+                <span className="mt-1 block text-xs text-ink-600">SK ballot only</span>
+              </div>
+            </dl>
+
+            <dl className="grid grid-cols-1 sm:grid-cols-[1.2fr_auto_1fr_auto_1fr] items-stretch bg-white">
+              <div className="p-5 sm:p-6 border-b sm:border-b-0 sm:border-r border-line">
+                <dt className="text-sm text-ink-700">Katipunan ng Kabataan</dt>
+                <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
+                  {nf.format(o.skRegistered)}
+                </dd>
+                <span className="mt-1 block text-xs text-ink-600">ages 15 to 30</span>
+              </div>
+              <div aria-hidden="true" className="px-3 sm:px-5 flex items-center justify-center font-display font-semibold text-xl text-ink-700">
+                =
+              </div>
+              <div className="p-5 sm:p-6 border-y sm:border-y-0 sm:border-l border-line">
+                <dt className="text-sm text-ink-700">Aged 18 to 30</dt>
+                <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
+                  {nf.format(o.age18to30Total)}
+                </dd>
+                <span className="mt-1 block text-xs text-ink-600">two ballots</span>
+              </div>
+              <div aria-hidden="true" className="px-3 sm:px-5 flex items-center justify-center font-display font-semibold text-xl text-ink-700">
+                +
+              </div>
+              <div className="p-5 sm:p-6 border-t sm:border-t-0 sm:border-l border-line">
+                <dt className="text-sm text-ink-700">Aged 15 to 17</dt>
+                <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
+                  {nf.format(o.age15to17Total)}
+                </dd>
+                <span className="mt-1 block text-xs text-ink-600">SK ballot only</span>
+              </div>
+            </dl>
+          </div>
+          <p className="sr-only">
+            {nf.format(o.totalRegistered)} registered voters equals {nf.format(o.regularRegistered)} regular voters plus {nf.format(o.age15to17Total)} voters aged 15 to 17. {nf.format(o.skRegistered)} Katipunan ng Kabataan voters equals {nf.format(o.age18to30Total)} voters aged 18 to 30 plus {nf.format(o.age15to17Total)} voters aged 15 to 17.
+          </p>
         </Reveal>
 
         <div className="mt-12">
