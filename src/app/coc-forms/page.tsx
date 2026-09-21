@@ -49,12 +49,6 @@ function FormRow({ form }: { form: CocForm }) {
 
         <div className="md:col-span-4">
           <p className="text-sm text-ink-700 leading-relaxed">{form.description}</p>
-          {available && !isCurrent && (
-            <p className="mt-2 text-xs text-status-warning leading-relaxed">
-              This is the {form.formCycle} version, the most recently published by
-              COMELEC. Confirm with the election office before filing.
-            </p>
-          )}
         </div>
 
         <div className="md:col-span-3 md:text-right">
@@ -93,7 +87,7 @@ export default function CocFormsPage() {
       <PageHeader
         eyebrow="Standing for office"
         title="Certificate of Candidacy forms"
-        intro="To stand for SK Chairperson or Kagawad you must file a Certificate of Candidacy with the Office of the Election Officer. Download the form for your position below."
+        intro="To stand for Punong Barangay, Sangguniang Barangay Member, SK Chairperson or SK Kagawad, you must file a Certificate of Candidacy with the Office of the Election Officer. Download the official 2026 form for your position below."
         crumbs={[{ label: "COC forms" }]}
       >
         <Link
