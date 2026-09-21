@@ -93,6 +93,36 @@ export function VoterInfographicSection() {
 
             <dl className="grid grid-cols-1 sm:grid-cols-[1.2fr_auto_1fr_auto_1fr] items-stretch bg-white">
               <div className="p-5 sm:p-6 border-b sm:border-b-0 sm:border-r border-line">
+                <dt className="text-sm text-ink-700">Regular voters</dt>
+                <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
+                  {nf.format(o.regularRegistered)}
+                </dd>
+                <span className="mt-1 block text-xs text-ink-600">ages 18 and above</span>
+              </div>
+              <div aria-hidden="true" className="px-3 sm:px-5 flex items-center justify-center font-display font-semibold text-xl text-ink-700">
+                =
+              </div>
+              <div className="p-5 sm:p-6 border-y sm:border-y-0 sm:border-l border-line">
+                <dt className="text-sm text-ink-700">Aged 18 to 30</dt>
+                <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
+                  {nf.format(o.age18to30Total)}
+                </dd>
+                <span className="mt-1 block text-xs text-ink-600">two ballots</span>
+              </div>
+              <div aria-hidden="true" className="px-3 sm:px-5 flex items-center justify-center font-display font-semibold text-xl text-ink-700">
+                +
+              </div>
+              <div className="p-5 sm:p-6 border-t sm:border-t-0 sm:border-l border-line">
+                <dt className="text-sm text-ink-700">Aged 31 and above</dt>
+                <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
+                  {nf.format(o.age31aboveTotal)}
+                </dd>
+                <span className="mt-1 block text-xs text-ink-600">regular ballot</span>
+              </div>
+            </dl>
+
+            <dl className="grid grid-cols-1 sm:grid-cols-[1.2fr_auto_1fr_auto_1fr] items-stretch bg-white">
+              <div className="p-5 sm:p-6 border-b sm:border-b-0 sm:border-r border-line">
                 <dt className="text-sm text-ink-700">Katipunan ng Kabataan</dt>
                 <dd className="mt-2 font-display font-semibold text-ink-950 text-2xl sm:text-3xl">
                   {nf.format(o.skRegistered)}
@@ -122,7 +152,7 @@ export function VoterInfographicSection() {
             </dl>
           </div>
           <p className="sr-only">
-            {nf.format(o.totalRegistered)} registered voters equals {nf.format(o.regularRegistered)} regular voters plus {nf.format(o.age15to17Total)} voters aged 15 to 17. {nf.format(o.skRegistered)} Katipunan ng Kabataan voters equals {nf.format(o.age18to30Total)} voters aged 18 to 30 plus {nf.format(o.age15to17Total)} voters aged 15 to 17.
+            {nf.format(o.totalRegistered)} registered voters equals {nf.format(o.regularRegistered)} regular voters plus {nf.format(o.age15to17Total)} voters aged 15 to 17. {nf.format(o.regularRegistered)} regular voters equals {nf.format(o.age18to30Total)} voters aged 18 to 30 plus {nf.format(o.age31aboveTotal)} voters aged 31 and above. {nf.format(o.skRegistered)} Katipunan ng Kabataan voters equals {nf.format(o.age18to30Total)} voters aged 18 to 30 plus {nf.format(o.age15to17Total)} voters aged 15 to 17.
           </p>
         </Reveal>
 
