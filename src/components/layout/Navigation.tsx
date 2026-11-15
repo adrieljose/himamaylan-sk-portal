@@ -17,10 +17,10 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/checker", label: "Check Eligibility", primary: true },
   { href: "/qualifications", label: "Qualifications" },
-  { href: "/election-info", label: "2026 Election" },
+  { href: "/election-info", label: "2028 Election" },
   { href: "/barangays", label: "Barangays" },
-  { href: "/voters", label: "Voter Data" },
-  { href: "/coc-forms", label: "COC Forms" },
+  { href: "/voters", label: "Registration" },
+  { href: "/coc-forms", label: "Candidacy" },
   { href: "/faq", label: "FAQs" },
 ];
 
@@ -39,13 +39,13 @@ export function Navigation() {
         away and gives the viewport back, with no scroll listener, no height
         animation and no layout shift.
       */}
-      <div className="on-dark bg-navy-900 text-navy-100 text-xs">
+      <div className="print:hidden on-dark bg-navy-900 text-navy-100 text-xs">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
           <div className="font-display tracking-[0.06em] uppercase text-2xs sm:text-xs">
             <span className="text-orange-400 font-semibold block sm:inline">Republic of the Philippines</span>
             <span className="text-navy-200/50 mx-2 hidden sm:inline">|</span>
             <span className="block sm:inline text-navy-200 sm:text-navy-100 text-[10px] sm:text-xs font-medium sm:font-normal mt-0.5 sm:mt-0">
-              Commission on Elections
+              2028 Election Information
             </span>
           </div>
 
@@ -87,7 +87,7 @@ export function Navigation() {
                   Himamaylan City
                 </span>
                 <span className="text-2xs sm:text-xs text-ink-600 mt-1">
-                  Office of the Election Officer
+                  NLE 2028 · Voter Information
                 </span>
               </span>
             </Link>

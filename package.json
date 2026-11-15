@@ -1,12 +1,13 @@
 {
-  "name": "himamaylan-sk-website",
+  "name": "himamaylan-nle-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --experimental-strip-types --test tests/eligibility.test.ts"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

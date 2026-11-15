@@ -3,7 +3,7 @@ import { electionConfig } from "@/config/election";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = electionConfig.siteUrl;
-  const lastModified = new Date("2026-08-18");
+  const lastModified = new Date("2026-11-15");
 
   const routes = [
     "",

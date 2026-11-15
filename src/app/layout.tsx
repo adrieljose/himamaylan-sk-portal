@@ -3,7 +3,7 @@ import { Lexend, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
-import { EntryDisclaimer } from "@/components/layout/EntryDisclaimer";
+
 import { electionConfig } from "@/config/election";
 
 /**
@@ -32,11 +32,10 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-
 export const metadata: Metadata = {
   metadataBase: new URL(electionConfig.siteUrl),
   title: {
-    default: "SK Age & Eligibility Checker | Himamaylan City COMELEC",
+    default: "NLE 2028 | Himamaylan Voter Information",
     template: "%s | Himamaylan City COMELEC",
   },
   icons: {
@@ -58,18 +57,11 @@ export const metadata: Metadata = {
     email: false,
   },
   keywords: [
-    "Himamaylan City COMELEC",
-    "SK Age Checker 2026",
-    "Sangguniang Kabataan Eligibility",
-    "Himamaylan SK Elections",
-    "Negros Occidental SK",
-    "November 2 2026 Election Day",
-    "Katipunan ng Kabataan",
-    "COMELEC Negros Island Region",
+    "Himamaylan NLE 2028",
+    "Philippine national elections",
+    "Voting age checker",
+    "May 8 2028",
   ],
-  authors: [{ name: "Office of the Election Officer, Himamaylan City" }],
-  creator: "Himamaylan City COMELEC",
-  publisher: "Commission on Elections (COMELEC)",
   robots: {
     index: true,
     follow: true,
@@ -85,13 +77,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_PH",
     url: electionConfig.siteUrl,
-    title: "Himamaylan City COMELEC | 2026 SK Age & Eligibility Checker",
+    title: "Himamaylan NLE 2028 | Voter Information & Age Checker",
     description: electionConfig.siteDescription,
     siteName: "Himamaylan City COMELEC Civic Portal",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Himamaylan City COMELEC | 2026 SK Age & Eligibility Checker",
+    title: "Himamaylan NLE 2028 | Voter Information & Age Checker",
     description: electionConfig.siteDescription,
   },
 };
@@ -137,7 +129,6 @@ export default function RootLayout({
           as well as in stacking order, and so a screen reader reaching it does
           not have to traverse the whole document first.
         */}
-        <EntryDisclaimer />
       </body>
     </html>
   );

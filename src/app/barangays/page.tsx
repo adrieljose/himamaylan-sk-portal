@@ -12,7 +12,8 @@ const TYPES = ["All", "Poblacion", "Rural", "Coastal", "Upland"] as const;
 
 export default function BarangaysPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedType, setSelectedType] = useState<(typeof TYPES)[number]>("All");
+  const [selectedType, setSelectedType] =
+    useState<(typeof TYPES)[number]>("All");
   const uid = useId();
 
   const filtered = HIMAMAYLAN_BARANGAYS.filter((b) => {
@@ -29,7 +30,7 @@ export default function BarangaysPage() {
       <PageHeader
         eyebrow="Directory"
         title="The 19 barangays of Himamaylan City"
-        intro="Every barangay elects its own SK Chairperson and seven SK Kagawad. You vote and stand for office in the barangay where you are registered."
+        intro="Find your local community. Confirm your registered address and precinct with COMELEC for the 2028 National and Local Elections."
         crumbs={[{ label: "Barangays" }]}
       />
 
@@ -53,7 +54,7 @@ export default function BarangaysPage() {
                       "px-4 py-2.5 min-h-[44px] rounded border font-display text-sm font-semibold transition-colors cursor-pointer",
                       active
                         ? "bg-navy-900 border-navy-900 text-white"
-                        : "bg-white border-line-strong text-ink-800 hover:border-ink-600 hover:bg-surface-subtle"
+                        : "bg-white border-line-strong text-ink-800 hover:border-ink-600 hover:bg-surface-subtle",
                     )}
                   >
                     {type}

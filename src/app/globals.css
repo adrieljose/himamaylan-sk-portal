@@ -247,3 +247,5 @@
     display: block !important;
   }
 }
+
+@media print { main .on-dark, main .on-dark * { background: white !important; color: black !important; } main section { break-inside: avoid; } }

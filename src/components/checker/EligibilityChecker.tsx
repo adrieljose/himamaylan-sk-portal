@@ -1,251 +1,184 @@
 "use client";
-
-import React, { useState, useEffect, useRef } from "react";
-import { useSearchParams } from "next/navigation";
-import { clsx } from "clsx";
-import { DateInput } from "./DateInput";
-import { AgeDisplay } from "./AgeDisplay";
-import { EligibilityCard } from "./EligibilityCard";
-import { AgeRangeTimeline } from "./AgeRangeTimeline";
-import { PersonalizedMessage } from "./PersonalizedMessage";
-import { EligibilitySummary } from "./EligibilitySummary";
-import { ExpandedQuestionnaire } from "./ExpandedQuestionnaire";
-import { BarangaySelector } from "./BarangaySelector";
-import { ShareResult } from "./ShareResult";
-import { CheckerNoticeBox } from "./CheckerNoticeBox";
+import { useState } from "react";
+import Link from "next/link";
 import {
-  calculateExactAge,
-  checkEligibility,
-  validateDateOfBirth,
-  parseDateString,
-  getPersonalizedAdvice,
+  calculateAgeOnElectionDay,
+  validateBirthDate,
+  assessVoterRequirements,
+  type Answer,
 } from "@/lib/eligibility";
-
-const TABS = [
-  { id: "summary", label: "All requirements" },
-  { id: "timeline", label: "Age spectrum" },
-  { id: "questionnaire", label: "Self-assessment" },
-  { id: "barangay", label: "Your barangay" },
-] as const;
-
-type TabId = (typeof TABS)[number]["id"];
-
+const QUESTIONS = [
+  "Are you a Filipino citizen?",
+  "Will you have resided in the Philippines for at least one year immediately before election day?",
+  "Will you have resided in the place where you intend to vote for at least six months immediately before election day?",
+  "Is your voter registration active in the correct locality?",
+  "Are you free from legal disqualifications to vote? (Ask COMELEC if unsure.)",
+];
 export function EligibilityChecker() {
-  const searchParams = useSearchParams();
-
-  const [month, setMonth] = useState<number>(11);
-  const [day, setDay] = useState<number>(2);
-  const [year, setYear] = useState<number>(2005);
-  const [selectedBarangay, setSelectedBarangay] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<TabId>("summary");
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  useEffect(() => {
-    const dobParam = searchParams.get("dob");
-    const bgyParam = searchParams.get("barangay");
-
-    if (dobParam) {
-      const parsed = parseDateString(dobParam);
-      if (parsed) {
-        setMonth(parsed.month);
-        setDay(parsed.day);
-        setYear(parsed.year);
-      }
-    }
-
-    if (bgyParam) setSelectedBarangay(bgyParam);
-  }, [searchParams]);
-
-  const validation = validateDateOfBirth(month, day, year);
-  const isValid = validation.isValid;
-
-  const ageResult = isValid
-    ? calculateExactAge(month, day, year)
-    : calculateExactAge(11, 2, 2005);
-
-  const eligibilityResult = isValid
-    ? checkEligibility(month, day, year)
-    : checkEligibility(11, 2, 2005);
-
-  const advice = getPersonalizedAdvice(ageResult.category, ageResult.years);
-  const dobIso = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-
-  /**
-   * Arrow-key navigation between tabs, per the WAI-ARIA tabs pattern. The old
-   * markup used plain buttons toggling `display: none`, which gave screen
-   * reader users no indication that a tab set existed at all.
-   */
-  const onTabKeyDown = (e: React.KeyboardEvent, index: number) => {
-    const last = TABS.length - 1;
-    let next = -1;
-
-    if (e.key === "ArrowRight") next = index === last ? 0 : index + 1;
-    else if (e.key === "ArrowLeft") next = index === 0 ? last : index - 1;
-    else if (e.key === "Home") next = 0;
-    else if (e.key === "End") next = last;
-    else return;
-
-    e.preventDefault();
-    setActiveTab(TABS[next].id);
-    tabRefs.current[next]?.focus();
-  };
-
+  const [dob, setDob] = useState("");
+  const [answers, setAnswers] = useState<Answer[]>(["", "", "", "", ""]);
+  const error = dob ? validateBirthDate(dob) : null;
+  const age = dob && !error ? calculateAgeOnElectionDay(dob) : null;
   return (
-    <div className="space-y-10 max-w-5xl mx-auto">
-      <CheckerNoticeBox />
-
-      <DateInput
-        month={month}
-        day={day}
-        year={year}
-        onChangeMonth={setMonth}
-        onChangeDay={setDay}
-        onChangeYear={setYear}
-        onSelectQuickPreset={(m, d, y) => {
-          setMonth(m);
-          setDay(d);
-          setYear(y);
-        }}
-        isValid={isValid}
-        errorMessage={validation.errorMessage}
-      />
-
-      {isValid && (
-        /*
-         * No `key` here, deliberately. Keying this wrapper on the date made
-         * React destroy and rebuild the whole results subtree on every select
-         * change: the box visibly flashed, and any local state inside it —
-         * notably the six questionnaire answers — was silently discarded.
-         *
-         * The results panel is now a stable element that simply re-renders with
-         * new props. Only the individual figures animate, via AnimatedValue.
-         */
-        <div className="space-y-8 pt-8 border-t border-line">
-          <AgeDisplay
-            years={ageResult.years}
-            months={ageResult.months}
-            days={ageResult.days}
-            totalDays={ageResult.totalDays}
-            category={ageResult.category}
-            categoryLabel={ageResult.categoryLabel}
-          />
-
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <EligibilityCard
-                type="voter"
-                status={eligibilityResult.voterEligibility.status}
-                headline={eligibilityResult.voterEligibility.headline}
-                reason={eligibilityResult.voterEligibility.reason}
-                legalCitation={eligibilityResult.voterEligibility.legalCitation}
-              />
-              <EligibilityCard
-                type="candidate"
-                status={eligibilityResult.candidateEligibility.status}
-                headline={eligibilityResult.candidateEligibility.headline}
-                reason={eligibilityResult.candidateEligibility.reason}
-                legalCitation={eligibilityResult.candidateEligibility.legalCitation}
-              />
-            </div>
-
-            {/* Applies to both results, so it is stated once rather than duplicated inside each card. */}
-            <p className="mt-4 text-sm text-ink-600 leading-relaxed">
-              Age is one criterion. Residency, registration and the anti-dynasty rule also
-              apply to both results above.
+    <div className="space-y-8">
+      <div className="bg-white border border-line rounded-lg p-6 sm:p-8">
+        <label
+          htmlFor="birth-date"
+          className="block text-lg font-semibold text-ink-950"
+        >
+          Your date of birth
+        </label>
+        <p id="dob-help" className="text-sm mt-2 mb-4">
+          Your age is calculated on May 8, 2028. Your birth date stays in this
+          browser and is not saved or included in shared links.
+        </p>
+        <input
+          id="birth-date"
+          type="date"
+          min="1900-01-01"
+          value={dob}
+          onChange={(e) => setDob(e.target.value)}
+          aria-describedby={error ? "dob-help dob-error" : "dob-help"}
+          aria-invalid={!!error}
+          className="border border-line-control rounded px-4 py-3 min-h-[48px] w-full sm:w-80 bg-white text-ink-950"
+        />
+        {error && (
+          <p id="dob-error" role="alert" className="text-red-700 mt-3">
+            {error}
+          </p>
+        )}
+      </div>
+      {age && (
+        <>
+          <div
+            aria-live="polite"
+            aria-atomic="true"
+            className="p-6 sm:p-8 bg-navy-900 on-dark rounded-lg text-white"
+          >
+            <p className="text-orange-300 uppercase tracking-wider text-sm">
+              Your age on election day
+            </p>
+            <p className="text-3xl sm:text-5xl font-display mt-3">
+              {age.years} years{" "}
+              <span className="text-xl sm:text-2xl">
+                {age.months} months · {age.days} days
+              </span>
+            </p>
+            <p className="mt-5 font-semibold">
+              {age.voterAgeMet
+                ? "You meet the minimum voting age."
+                : "You do not meet the minimum voting age for 2028."}
+            </p>
+            <p className="mt-2">
+              You must turn 18 on or before May 8, 2028 (born on or before May
+              8, 2010). There is no upper voting age limit.
             </p>
           </div>
-
-          <PersonalizedMessage
-            category={ageResult.category}
-            headline={advice.headline}
-            explanation={advice.explanation}
-            nextSteps={advice.nextSteps}
-            statutoryNote={advice.statutoryNote}
-          />
-
-          <div>
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line">
-              <div role="tablist" aria-label="More detail" className="flex flex-wrap -mb-px">
-                {TABS.map((tab, i) => {
-                  const selected = activeTab === tab.id;
-                  return (
-                    <button
-                      key={tab.id}
-                      ref={(el) => {
-                        tabRefs.current[i] = el;
-                      }}
-                      type="button"
-                      role="tab"
-                      id={`tab-${tab.id}`}
-                      aria-selected={selected}
-                      aria-controls={`panel-${tab.id}`}
-                      tabIndex={selected ? 0 : -1}
-                      onClick={() => setActiveTab(tab.id)}
-                      onKeyDown={(e) => onTabKeyDown(e, i)}
-                      className={clsx(
-                        "px-4 py-3 min-h-[44px] font-display text-sm font-semibold border-b-[3px] transition-colors cursor-pointer",
-                        selected
-                          ? "border-orange-500 text-ink-950"
-                          : "border-transparent text-ink-700 hover:text-navy-700"
-                      )}
-                    >
-                      {tab.label}
-                      {tab.id === "barangay" && selectedBarangay && (
-                        <span className="ml-1.5 font-normal text-ink-600">
-                          ({selectedBarangay})
-                        </span>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="pb-2">
-                <ShareResult
-                  dobString={dobIso}
-                  calculatedAge={ageResult.years}
-                  voterEligible={eligibilityResult.isVoterEligible}
-                  candidateEligible={eligibilityResult.isCandidateEligible}
-                  barangay={selectedBarangay}
-                />
-              </div>
-            </div>
-
-            <div className="pt-8">
-              {TABS.map((tab) => (
-                <div
-                  key={tab.id}
-                  role="tabpanel"
-                  id={`panel-${tab.id}`}
-                  aria-labelledby={`tab-${tab.id}`}
-                  tabIndex={0}
-                  hidden={activeTab !== tab.id}
-                >
-                  {tab.id === "summary" && (
-                    <EligibilitySummary
-                      years={ageResult.years}
-                      isVoterEligible={eligibilityResult.isVoterEligible}
-                      isCandidateEligible={eligibilityResult.isCandidateEligible}
-                    />
-                  )}
-                  {tab.id === "timeline" && (
-                    <AgeRangeTimeline currentAge={ageResult.years} />
-                  )}
-                  {tab.id === "questionnaire" && (
-                    <ExpandedQuestionnaire calculatedAge={ageResult.years} />
-                  )}
-                  {tab.id === "barangay" && (
-                    <BarangaySelector
-                      selectedBarangay={selectedBarangay}
-                      onSelect={setSelectedBarangay}
-                    />
-                  )}
+          <section>
+            <h2 className="text-2xl mb-4">
+              National candidate age requirements
+            </h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              {age.offices.map((o) => (
+                <div key={o.id} className="p-6 border border-line rounded-lg">
+                  <h3 className="text-lg">{o.label}</h3>
+                  <p className="text-3xl font-display my-3">{o.minAge}+</p>
+                  <p
+                    className={
+                      o.ageMet
+                        ? "text-green-800 font-semibold"
+                        : "text-red-700 font-semibold"
+                    }
+                  >
+                    {o.ageMet ? "Age requirement met" : "Below minimum age"}
+                  </p>
+                  <p className="text-sm mt-3">{o.requirements}</p>
+                  <p className="text-xs mt-4 text-ink-600">{o.citation}</p>
                 </div>
               ))}
             </div>
+            <p className="mt-4 text-sm">
+              These are age checks, not a finding of eligibility or approval of
+              candidacy. Local offices and party-list nominees have separate
+              rules.{" "}
+              <Link className="underline text-navy-700" href="/qualifications">
+                Read qualifications.
+              </Link>
+            </p>
+          </section>
+          <section className="border border-line p-6 sm:p-8 rounded-lg">
+            <h2 className="text-2xl">Domestic voter self-assessment</h2>
+            <p className="mt-3 mb-6">
+              For residents voting in the Philippines. Overseas voting follows
+              separate rules. Unanswered questions remain unconfirmed.
+            </p>
+            <div className="space-y-5">
+              {QUESTIONS.map((q, i) => (
+                <fieldset key={q}>
+                  <legend className="font-semibold mb-2">{q}</legend>
+                  <div className="flex flex-wrap gap-4">
+                    {(
+                      [
+                        ["", "Not sure"],
+                        ["yes", "Yes"],
+                        ["no", "No"],
+                      ] as const
+                    ).map(([v, label]) => (
+                      <label
+                        key={v}
+                        className="flex items-center gap-2 min-h-[44px] cursor-pointer"
+                      >
+                        <input
+                          type="radio"
+                          name={`question-${i}`}
+                          value={v}
+                          checked={answers[i] === v}
+                          onChange={() =>
+                            setAnswers((prev) =>
+                              prev.map((a, j) => (j === i ? v : a)),
+                            )
+                          }
+                        />
+                        {label}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+              ))}
+            </div>
+            <p
+              role="status"
+              className="mt-6 p-4 bg-surface-subtle font-semibold"
+            >
+              {assessVoterRequirements(age.voterAgeMet, answers)}
+            </p>
+          </section>
+          <div className="flex flex-wrap gap-4 print:hidden">
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="bg-navy-700 text-white rounded px-5 py-3"
+            >
+              Print result
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setDob("");
+                setAnswers(["", "", "", "", ""]);
+              }}
+              className="border border-line-control rounded px-5 py-3"
+            >
+              Clear information
+            </button>
           </div>
-        </div>
+        </>
       )}
+      <p className="text-sm">
+        Age alone does not entitle you to vote. COMELEC determines registration
+        and eligibility. This tool does not register you or look up your voter
+        record.
+      </p>
     </div>
   );
 }

@@ -1,253 +1,48 @@
-import React from "react";
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
-import { clsx } from "clsx";
-import { Container } from "@/components/ui/Container";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Badge } from "@/components/ui/Badge";
-import { Notice } from "@/components/ui/Notice";
-import { ContactPrompt } from "@/components/ui/ContactPrompt";
-import { electionConfig } from "@/config/election";
-
-export const metadata: Metadata = {
-  title: "2026 Barangay & SK Election Information",
-  description:
-    "Key dates, governing law and the role of SK officials for the 2026 synchronised Barangay and Sangguniang Kabataan Elections in Himamaylan City.",
-};
-
-const electionMilestones = [
-  {
-    date: "September 28 to October 5, 2026",
-    title: "Filing of certificates of candidacy",
-    description:
-      "Candidates for barangay and Sangguniang Kabataan offices must file their Certificates of Candidacy during this official period.",
-    status: "Filing period",
-  },
-  {
-    date: "September 28 to October 21, 2026",
-    title: "Campaigning is prohibited",
-    description:
-      "Campaigning is prohibited before the official campaign period begins.",
-    status: "Prohibited period",
-  },
-  {
-    date: "October 3 to November 9, 2026",
-    title: "Election period and gun ban",
-    description:
-      "The election period is in effect. Carrying firearms or other deadly weapons in public places is prohibited unless authorized in writing by COMELEC.",
-    status: "Election period",
-  },
-  {
-    date: "October 22 to 31, 2026",
-    title: "Campaign period",
-    description:
-      "The official period for lawful campaigning, barangay assemblies and candidates' fora.",
-    status: "Campaign period",
-  },
-  {
-    date: "November 1, 2026",
-    title: "Eve of election day",
-    description:
-      "Campaigning and the selling, furnishing, offering, buying, serving or taking of intoxicating liquor are prohibited.",
-    status: "Election eve",
-  },
-  {
-    date: "Monday, 2 November 2026",
-    title: "Election day",
-    description:
-      "Voting is from 7:00 AM to 3:00 PM, followed by the counting and canvassing of votes and proclamation of winning candidates.",
-    status: "Election day",
-    highlight: true,
-  },
-  {
-    date: "December 2, 2026",
-    title: "SOCE filing deadline",
-    description:
-      "Last day to file Statements of Contributions and Expenditures (SOCE).",
-    status: "Deadline",
-  },
-];
-
-const skDuties = [
-  {
-    title: "The Comprehensive Barangay Youth Development Plan",
-    description:
-      "Draws up and delivers the three-year youth development agenda, aligned with the Philippine Youth Development Plan.",
-  },
-  {
-    title: "Ten per cent of the barangay general fund",
-    description:
-      "Administers a tenth of the barangay general fund, reserved exclusively for youth development, scholarships and health programmes.",
-  },
-  {
-    title: "Convening the Katipunan ng Kabataan",
-    description:
-      "Calls the youth assembly at least twice a year to deliberate on issues facing the community.",
-  },
-  {
-    title: "Community programmes",
-    description:
-      "Runs grassroots sports leagues, disaster risk reduction training, environmental clean-ups and anti-drug education.",
-  },
-];
-
-export default function ElectionInfoPage() {
+import { Article, InfoSection, SourceList } from "@/components/Article";
+import { NATIONAL_OFFICES } from "@/lib/eligibility";
+export const metadata = { title: "The 2028 National and Local Elections" };
+export default function Page() {
   return (
-    <>
-      <PageHeader
-        eyebrow="The 2026 election"
-        title="The 2026 Barangay and Sangguniang Kabataan Elections"
-        intro={`Held on ${electionConfig.electionDateDisplay} across all 19 barangays of Himamaylan City. Two councils are elected on the same day: the barangay council and the youth council.`}
-        crumbs={[{ label: "2026 Election" }]}
-      >
-        <Link
-          href="/checker"
-          className="inline-flex items-center gap-2.5 px-5 py-3 min-h-[48px] bg-navy-700 hover:bg-navy-800 text-white font-display font-semibold text-sm rounded transition-colors active:translate-y-px"
+    <Article
+      title="The 2028 National and Local Elections"
+      intro="Monday, May 8, 2028 · Philippines"
+    >
+      <InfoSection title="What this election covers">
+        <p>
+          National positions include President, Vice President, senators and
+          members of the House of Representatives, including party-list
+          representation. Local contests are also part of NLE. This guide
+          focuses on national voting and national candidate age requirements.
+        </p>
+      </InfoSection>
+      <InfoSection title="Registration and election announcements">
+        <p>
+          COMELEC Resolution No. 11294 governs continuing voter registration for
+          this election. The regular domestic application period is November 10,
+          2026 through July 30, 2027 (Section 3), subject to COMELEC changes.
+          Confirm excluded days, office schedules and satellite activities
+          directly with COMELEC before visiting.
+        </p>
+        <p>
+          Refer to the 2028 resolutions for the official COC filing dates,
+          campaign periods and voting instructions as these are issued or
+          amended.
+        </p>
+        <a
+          className="text-navy-700 underline"
+          href="https://www.comelec.gov.ph/?r=2028NLE%2FResolutions"
         >
-          Check my eligibility
-          <ArrowRight size={16} weight="bold" aria-hidden="true" />
-        </Link>
-      </PageHeader>
-
-      <section className="py-12 sm:py-16 lg:py-20 border-b border-line">
-        <Container>
-          <div className="max-w-2xl mb-10">
-            <p className="eyebrow">Calendar of activities</p>
-            <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-display font-semibold text-ink-950">
-              2026 BSKE calendar of activities
-            </h2>
-            <p className="mt-4 text-base text-ink-700 leading-relaxed prose-civic">
-              Official dates and periods beginning with the filing of Certificates of
-              Candidacy, based on{" "}
-              <a
-                href="https://www.comelec.gov.ph/php-tpls-attachments/2026BSKE/Resolutions/com_res_11191.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-navy-700 underline underline-offset-2 hover:text-navy-800"
-              >
-                COMELEC Resolution No. 11191
-              </a>
-              .
-            </p>
-          </div>
-
-          <ol className="border-t border-ink-950">
-            {electionMilestones.map((m) => (
-              <li
-                key={m.title}
-                className={clsx(
-                  "border-b border-line",
-                  m.highlight && "bg-orange-50"
-                )}
-              >
-                <div className="py-6 grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-3">
-                  <div className="md:col-span-4">
-                    <p
-                      className={clsx(
-                        "font-display font-semibold",
-                        m.highlight ? "text-orange-800 text-lg" : "text-ink-950 text-[0.9375rem]"
-                      )}
-                    >
-                      {m.date}
-                    </p>
-                    <span className="mt-2 inline-block">
-                      <Badge
-                        variant={m.highlight ? "accent" : "neutral"}
-                        size="sm"
-                        showIcon={false}
-                      >
-                        {m.status}
-                      </Badge>
-                    </span>
-                  </div>
-                  <div className="md:col-span-8">
-                    <h3 className="font-display font-semibold text-ink-950 text-lg">
-                      {m.title}
-                    </h3>
-                    <p className="mt-2 text-sm sm:text-base text-ink-700 leading-relaxed prose-civic">
-                      {m.description}
-                    </p>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </section>
-
-      <section className="py-12 sm:py-16 lg:py-20 bg-surface-subtle border-b border-line">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-10">
-            <div className="lg:col-span-4">
-              <p className="eyebrow">The office</p>
-              <h2 className="mt-4 text-2xl sm:text-3xl font-display font-semibold text-ink-950">
-                What the SK actually does
-              </h2>
-              <p className="mt-4 text-base text-ink-700 leading-relaxed">
-                An SK council is one Chairperson and seven Kagawad, elected for a three-year
-                term in every barangay. It is not a ceremonial body. It controls a real budget.
-              </p>
-              <Link
-                href="/references"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-display font-semibold text-navy-700 hover:text-navy-800 group"
-              >
-                Read the governing law
-                <ArrowRight
-                  size={15}
-                  weight="bold"
-                  aria-hidden="true"
-                  className="group-hover:translate-x-0.5 transition-transform"
-                />
-              </Link>
-            </div>
-
-            <ol className="lg:col-span-8 lg:pl-4 border-t border-ink-950">
-              {skDuties.map((duty, i) => (
-                <li key={duty.title} className="py-6 border-b border-line flex gap-5">
-                  <span
-                    className="font-display font-semibold text-ink-600 text-sm shrink-0 w-6 pt-0.5"
-                    aria-hidden="true"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h3 className="font-display font-semibold text-ink-950 text-base">
-                      {duty.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-ink-700 leading-relaxed prose-civic">
-                      {duty.description}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-12 sm:py-16 lg:py-20">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            <Notice tone="info" title="Two ballots on the same day">
-              Voters aged 18 to 30 receive both the SK ballot and the barangay ballot.
-              Voters aged 15 to 17 receive the SK ballot only, and voters aged 31 and above
-              receive the barangay ballot only.
-            </Notice>
-            <Notice tone="statutory" title="Governing law">
-              {electionConfig.governingLaws.join("; ")}.{" "}
-              <Link href="/references" className="text-navy-700 font-semibold">
-                See full citations
-              </Link>
-              .
-            </Notice>
-          </div>
-
-          <div className="mt-10">
-            <ContactPrompt />
-          </div>
-        </Container>
-      </section>
-    </>
+          Open 2028 COMELEC resolutions ↗
+        </a>
+      </InfoSection>
+      <InfoSection title="Before election day">
+        <p>
+          Check your active registration, address and precinct assignment.
+          Prepare an accepted identification document and follow official ballot
+          and polling-place instructions. This site cannot confirm your precinct
+          or registration record.
+        </p>
+      </InfoSection>
+    </Article>
   );
 }
