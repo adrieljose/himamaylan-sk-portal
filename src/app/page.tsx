@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ModuleCard } from "@/components/learning/ModuleCard";
+import { learningModules } from "@/config/learning";
 import { SourceList } from "@/components/Article";
 export default function HomePage() {
   return (
@@ -102,6 +104,38 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
+      </section>
+      <section className="max-w-[1200px] mx-auto w-full px-5 sm:px-8 py-14 border-t border-line">
+        <p className="eyebrow">The Learning Hub</p>
+        <div className="flex flex-wrap items-end justify-between gap-5 mt-3 mb-7">
+          <div>
+            <h2 className="text-3xl">
+              Understand the offices. Make informed choices.
+            </h2>
+            <p className="mt-3 max-w-2xl leading-relaxed">
+              Explore eight short videos and readable module overviews about
+              government, leadership and civic participation. Start with the
+              national election focus below.
+            </p>
+          </div>
+          <Link
+            href="/learn"
+            className="inline-block rounded bg-navy-700 text-white font-semibold px-5 py-3"
+          >
+            Explore all 8 modules →
+          </Link>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          {learningModules
+            .filter((m) => m.number >= 7)
+            .map((m) => (
+              <ModuleCard key={m.number} module={m} />
+            ))}
+        </div>
+        <p className="text-xs mt-4 text-ink-600">
+          AI-generated presenters and illustrative scenes. Broader barangay/SK
+          topics are labeled separately in the hub.
+        </p>
       </section>
       <section className="bg-surface-subtle border-t border-line">
         <div className="max-w-5xl mx-auto px-5 py-14">

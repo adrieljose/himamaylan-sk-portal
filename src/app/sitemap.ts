@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { learningModules } from "@/config/learning";
 import { electionConfig } from "@/config/election";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -8,6 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/checker",
+    "/learn",
+    ...learningModules.map((m) => `/learn/${m.slug}`),
     "/qualifications",
     "/election-info",
     "/coc-forms",

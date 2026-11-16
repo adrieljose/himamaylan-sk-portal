@@ -13,6 +13,7 @@ export function Footer() {
           className="flex flex-wrap gap-x-6 gap-y-4 mt-7"
         >
           {[
+            ["/learn", "Learning Hub"],
             ["/references", "Official sources"],
             ["/contact", "Contact & assistance"],
             ["/disclaimer", "Disclaimer & privacy"],

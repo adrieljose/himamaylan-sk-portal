@@ -15,6 +15,7 @@ import { electionConfig } from "@/config/election";
  */
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/learn", label: "Learning Hub" },
   { href: "/checker", label: "Check Eligibility", primary: true },
   { href: "/qualifications", label: "Qualifications" },
   { href: "/election-info", label: "2028 Election" },
@@ -42,7 +43,9 @@ export function Navigation() {
       <div className="print:hidden on-dark bg-navy-900 text-navy-100 text-xs">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
           <div className="font-display tracking-[0.06em] uppercase text-2xs sm:text-xs">
-            <span className="text-orange-400 font-semibold block sm:inline">Republic of the Philippines</span>
+            <span className="text-orange-400 font-semibold block sm:inline">
+              Republic of the Philippines
+            </span>
             <span className="text-navy-200/50 mx-2 hidden sm:inline">|</span>
             <span className="block sm:inline text-navy-200 sm:text-navy-100 text-[10px] sm:text-xs font-medium sm:font-normal mt-0.5 sm:mt-0">
               2028 Election Information
@@ -67,7 +70,10 @@ export function Navigation() {
       </div>
 
       <header className="sticky top-0 z-50 bg-white border-b border-line">
-        <nav aria-label="Main" className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8">
+        <nav
+          aria-label="Main"
+          className="max-w-[1200px] mx-auto px-5 sm:px-6 lg:px-8"
+        >
           <div className="flex items-center justify-between gap-6 h-[68px]">
             <Link
               href="/"
@@ -92,7 +98,7 @@ export function Navigation() {
               </span>
             </Link>
 
-            <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1.5">
+            <ul className="hidden xl:flex items-center gap-0.5 xl:gap-1.5">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -106,14 +112,16 @@ export function Navigation() {
                         isActive
                           ? "text-navy-800 font-semibold"
                           : "text-ink-700 hover:text-navy-700",
-                        link.primary && !isActive && "font-semibold text-ink-900"
+                        link.primary &&
+                          !isActive &&
+                          "font-semibold text-ink-900",
                       )}
                     >
                       {link.label}
                       <span
                         className={clsx(
                           "absolute left-2.5 right-2.5 xl:left-3 xl:right-3 -bottom-px h-[3px] transition-opacity",
-                          isActive ? "bg-orange-500 opacity-100" : "opacity-0"
+                          isActive ? "bg-orange-500 opacity-100" : "opacity-0",
                         )}
                         aria-hidden="true"
                       />
@@ -126,8 +134,12 @@ export function Navigation() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden -mr-2 p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-800 hover:text-navy-700 hover:bg-surface-subtle rounded cursor-pointer transition-transform duration-200 active:scale-95"
-              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              className="xl:hidden -mr-2 p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-800 hover:text-navy-700 hover:bg-surface-subtle rounded cursor-pointer transition-transform duration-200 active:scale-95"
+              aria-label={
+                mobileMenuOpen
+                  ? "Close navigation menu"
+                  : "Open navigation menu"
+              }
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav"
             >
@@ -135,7 +147,9 @@ export function Navigation() {
                 <span
                   className={clsx(
                     "absolute transition-all duration-300 transform",
-                    mobileMenuOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-75 pointer-events-none"
+                    mobileMenuOpen
+                      ? "opacity-100 rotate-0 scale-100"
+                      : "opacity-0 -rotate-90 scale-75 pointer-events-none",
                   )}
                 >
                   <X size={22} weight="bold" aria-hidden="true" />
@@ -143,7 +157,9 @@ export function Navigation() {
                 <span
                   className={clsx(
                     "absolute transition-all duration-300 transform",
-                    mobileMenuOpen ? "opacity-0 rotate-90 scale-75 pointer-events-none" : "opacity-100 rotate-0 scale-100"
+                    mobileMenuOpen
+                      ? "opacity-0 rotate-90 scale-75 pointer-events-none"
+                      : "opacity-100 rotate-0 scale-100",
                   )}
                 >
                   <List size={22} weight="bold" aria-hidden="true" />
@@ -158,10 +174,10 @@ export function Navigation() {
         <div
           id="mobile-nav"
           className={clsx(
-            "lg:hidden grid transition-all duration-300 ease-out border-line overflow-hidden",
+            "xl:hidden grid transition-all duration-300 ease-out border-line overflow-hidden",
             mobileMenuOpen
               ? "grid-rows-[1fr] opacity-100 border-b shadow-menu visible"
-              : "grid-rows-[0fr] opacity-0 border-b-0 invisible"
+              : "grid-rows-[0fr] opacity-0 border-b-0 invisible",
           )}
           aria-hidden={!mobileMenuOpen}
         >
@@ -169,14 +185,17 @@ export function Navigation() {
             <div
               className={clsx(
                 "transition-transform duration-300 ease-out max-h-[calc(100dvh-6rem)] overflow-y-auto",
-                mobileMenuOpen ? "translate-y-0" : "-translate-y-3"
+                mobileMenuOpen ? "translate-y-0" : "-translate-y-3",
               )}
             >
               <ul className="px-5 sm:px-6">
                 {navLinks.map((link) => {
                   const isActive = pathname === link.href;
                   return (
-                    <li key={link.href} className="border-b border-line last:border-0">
+                    <li
+                      key={link.href}
+                      className="border-b border-line last:border-0"
+                    >
                       <Link
                         href={link.href}
                         prefetch
@@ -187,20 +206,25 @@ export function Navigation() {
                           "flex items-center justify-between gap-3 py-3.5 min-h-[44px] font-display text-[0.9375rem] transition-colors",
                           isActive
                             ? "text-navy-800 font-semibold"
-                            : "text-ink-800 hover:text-navy-700"
+                            : "text-ink-800 hover:text-navy-700",
                         )}
                       >
                         <span className="flex items-center gap-3">
                           <span
                             className={clsx(
                               "w-[3px] h-5 shrink-0",
-                              isActive ? "bg-orange-500" : "bg-transparent"
+                              isActive ? "bg-orange-500" : "bg-transparent",
                             )}
                             aria-hidden="true"
                           />
                           {link.label}
                         </span>
-                        <CaretRight size={15} weight="bold" aria-hidden="true" className="text-ink-400" />
+                        <CaretRight
+                          size={15}
+                          weight="bold"
+                          aria-hidden="true"
+                          className="text-ink-400"
+                        />
                       </Link>
                     </li>
                   );
@@ -217,20 +241,27 @@ export function Navigation() {
                       "flex items-center justify-between gap-3 py-3.5 min-h-[44px] font-display text-[0.9375rem] transition-colors",
                       pathname === "/contact"
                         ? "text-navy-800 font-semibold"
-                        : "text-ink-800 hover:text-navy-700"
+                        : "text-ink-800 hover:text-navy-700",
                     )}
                   >
                     <span className="flex items-center gap-3">
                       <span
                         className={clsx(
                           "w-[3px] h-5 shrink-0",
-                          pathname === "/contact" ? "bg-orange-500" : "bg-transparent"
+                          pathname === "/contact"
+                            ? "bg-orange-500"
+                            : "bg-transparent",
                         )}
                         aria-hidden="true"
                       />
                       Contact the Office
                     </span>
-                    <CaretRight size={15} weight="bold" aria-hidden="true" className="text-ink-400" />
+                    <CaretRight
+                      size={15}
+                      weight="bold"
+                      aria-hidden="true"
+                      className="text-ink-400"
+                    />
                   </Link>
                 </li>
               </ul>
@@ -241,7 +272,10 @@ export function Navigation() {
                     Official Statutory Cutoff
                   </span>
                   <span className="text-navy-100 text-xs">
-                    Election Day: <strong className="text-white font-semibold">{electionConfig.electionDateDisplay}</strong>
+                    Election Day:{" "}
+                    <strong className="text-white font-semibold">
+                      {electionConfig.electionDateDisplay}
+                    </strong>
                   </span>
                 </div>
                 <div className="pt-2 border-t border-navy-800 flex items-center justify-between text-2xs text-navy-300">
