@@ -1,27 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Lexend, Source_Sans_3 } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
 
 import { electionConfig } from "@/config/election";
 
-/**
- * Lexend is designed to reduce visual stress and improve reading proficiency —
- * a substantive choice for a youth portal serving mixed digital literacy,
- * not a stylistic one. Used for headings and UI labels.
- */
-const display = Lexend({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+// Bundled fonts keep builds independent of Google Fonts API responses.
+const display = localFont({
+  src: "./fonts/lexend-latin.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-display",
   display: "swap",
 });
-
-/** Source Sans 3 — civic workhorse, holds up at small sizes in dense statutory copy. */
-const sans = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
+const sans = localFont({
+  src: "./fonts/source-sans-3-latin.woff2",
+  weight: "200 900",
+  style: "normal",
   variable: "--font-sans",
   display: "swap",
 });
