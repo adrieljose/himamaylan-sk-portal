@@ -11,7 +11,7 @@ export const electionConfig = {
   siteTitle: "Himamaylan NLE 2028 | Voter Information & Age Checker",
   siteDescription:
     "Prepare for the May 8, 2028 Philippine National and Local Elections. Check your voting age, explore national candidate age requirements, and find registration guidance for Himamaylan City.",
-  siteUrl: "https://himamaylan-sk-portal.vercel.app",
+  siteUrl: "https://himamaylan-nle-portal.vercel.app",
   officialWebsite: "https://www.comelec.gov.ph",
 } as const;
 export const SOURCES = [
